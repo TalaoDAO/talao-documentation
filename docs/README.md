@@ -1,0 +1,7 @@
+- wallet startup = wallet_startup.md
+- wallet configuration = wallet_configuration.md 
+- Enterprise configuration = enterprise_configuration.md
+- SSI flows
+	- obtaining verifiable credentials
+	- presenting verifiable credentials
+- architecture overview

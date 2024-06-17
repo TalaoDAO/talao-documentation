@@ -1,4 +1,4 @@
-### Wallet Provider FAQ
+# FAQ for Wallet Provider
 
 #### What is the Wallet Provider?
 The Wallet Provider is a platform that allows organizations to customize and deploy their own digital wallet solutions. It offers a comprehensive set of tools and configurations to create secure, decentralized wallets tailored to specific needs, supporting various digital identity standards and blockchain technologies.

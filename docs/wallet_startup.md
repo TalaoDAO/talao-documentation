@@ -12,8 +12,7 @@ The Talao app allows users to manage digital identities and assets seamlessly. T
    - **Talao4EU Wallet**: Specifically tailored for compliance with European standards, this wallet is ideal for organizations and individuals operating within the EU, ensuring adherence to regulations like EBSI (European Blockchain Services Infrastructure).
 </details>
 
-<details>
-   <summary>Differentiated Journeys</summary>
+## Differentiated Journeys
 
    The user journey differs significantly between enterprise wallets (like Talao and Talao4EU) and personal wallets (like Altme):
    <details>
@@ -32,10 +31,8 @@ The Talao app allows users to manage digital identities and assets seamlessly. T
       **Configuration**: Simple setup process, suitable for non-technical users, and focuses on personal privacy and security.
 
    </details>
-</details>
 
-<details>
-    <summary>Download and Install the Talao App</summary>
+## Download and Install the Talao App
     
    <details>
       <summary>iOS Users</summary>
@@ -43,7 +40,6 @@ The Talao app allows users to manage digital identities and assets seamlessly. T
       1. Open the **App Store** on your iPhone.
       2. Search for **"Talao"**.
       3. Tap the **Download** button and install the app.
-
    </details>
 
    <details>
@@ -52,27 +48,21 @@ The Talao app allows users to manage digital identities and assets seamlessly. T
       1. Open the **Google Play Store** on your Android device.
       2. Search for **"Talao"**.
       3. Tap the **Install** button and install the app.
-
    </details>
 
-</details>
 
-<details>
-   <summary>Logging into the Talao App</summary>
+## Logging into the Talao App
     
    1. Open the **Talao** app on your device.
    2. If you already have an account
    - Tap your **passphrase** and **pin code** selection
-
-      or : 
-
    - On the login screen, enter your **email** and **password**.
    - Tap the **Login** button.
    3. If you don't have an account
    - Create an account
    - Select your security method ( PIN, thumb-unlocking, both )
    - Accept terms
-</details>
+
 
 
 ## Managing Digital Identities and Assets

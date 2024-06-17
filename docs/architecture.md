@@ -2,21 +2,17 @@
 
 This section provides a comprehensive overview of the architecture of the Talao and Talao4EU wallet solutions. It highlights the components, their interactions, and the underlying technologies that support the Self-Sovereign Identity (SSI) functionalities.
 
+## 1. High-Level Architecture
 
-<details>
-    <summary>1. High-Level Architecture</summary>
-    
-    The architecture of the Talao and Talao4EU wallets is designed to provide a secure, scalable, and user-friendly environment for managing digital identities and verifiable credentials. The architecture can be divided into the following layers:
+The architecture of the Talao and Talao4EU wallets is designed to provide a secure, scalable, and user-friendly environment for managing digital identities and verifiable credentials. The architecture can be divided into the following layers:
 
     1. **Client Layer**
     2. **Backend Layer**
     3. **Blockchain Layer**
     4. **Integration Layer**
-</details>
 
-<details>
-   <summary>2. Client Layer</summary>
 
+## 2. Client Layer
    <details>
       <summary>Mobile Wallet Applications</summary>
     
@@ -31,11 +27,8 @@ This section provides a comprehensive overview of the architecture of the Talao 
         - QR code scanning for easy credential sharing and verification.
         - Notifications for credential issuance, updates, and revocations.
    </details>
-</details>
 
-<details>
-   <summary>3. Backend Layer</summary>
-
+## 3. Backend Layer
    <details>
       <summary>Wallet Provider Service</summary>
     
@@ -54,12 +47,10 @@ This section provides a comprehensive overview of the architecture of the Talao 
         - **Credential Management Service**: Handles the issuance, storage, update, and revocation of credentials.
         - **Configuration Service**: Manages user and organizational configurations, enabling a customized wallet experience.
    </details>
-</details>
 
-<details>
-   <summary>4. Blockchain Layerr</summary>
 
-    The Blockchain Layer provides the decentralized infrastructure that ensures the security, transparency, and immutability of the digital identities and credentials.
+## 4. Blockchain Layer
+The Blockchain Layer provides the decentralized infrastructure that ensures the security, transparency, and immutability of the digital identities and credentials.
    <details>
       <summary>Supported Blockchains</summary>
     
@@ -75,10 +66,8 @@ This section provides a comprehensive overview of the architecture of the Talao 
         - **Verifiable Credentials (VCs)**: Credentials issued by trusted authorities, cryptographically signed and stored in a decentralized manner.
         - **Smart Contracts**: Automate the issuance, revocation, and verification processes of credentials.
    </details>
-</details>
 
-<details>
-   <summary>5. Integration Layer</summary>
+## 5. Integration Layer
 
     The Integration Layer ensures seamless interaction between the wallet provider service, external systems, and third-party services.
    <details>
@@ -94,4 +83,3 @@ This section provides a comprehensive overview of the architecture of the Talao 
         - **RESTful APIs**: Provide a standardized way for external systems to interact with the wallet provider service.
         - **SDKs**: Offer libraries and tools for developers to integrate wallet functionalities into their own applications.
    </details>
-</details>

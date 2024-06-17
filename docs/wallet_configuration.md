@@ -2,14 +2,13 @@
 
 This guide provides detailed instructions for setting up and configuring the Talao app using the Wallet Provider platform. Follow these steps to get your Talao app ready for deployment.
 
-<details>
-    <summary>Prerequisites</summary>
-    
+## Prerequisites
+
     Before you begin, ensure you have the following:
         - Access to the Wallet Provider platform
         - Necessary credentials for the Wallet Provider
         - Basic understanding of web development and deployment processes
-</details>
+
 
 
 <details>
@@ -181,8 +180,7 @@ This guide provides detailed instructions for setting up and configuring the Tal
 
 ## Purpose of Different Configurations
 
-<details>
-    <summary>Overview & Examples</summary>
+## Overview & Examples
     
     The Talao app supports multiple configurations to cater to different use cases and user needs. Below are the purposes of the different configurations available:
 
@@ -202,6 +200,5 @@ This guide provides detailed instructions for setting up and configuring the Tal
     - **Purpose**: Supports a wide range of open wallet standards for interoperability.
     - **Use Case**: Best for organizations requiring a flexible and interoperable wallet solution that adheres to open standards.
 
-</details>
 
 

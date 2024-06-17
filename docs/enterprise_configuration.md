@@ -95,8 +95,7 @@ The Talao and Talao4EU wallets are designed for enterprise use, focusing on corp
     - Configure settings for secure messaging and data sharing.
 </details>
 
-<details>
-    <summary>Using the Wallet</summary>
+## Using the Wallet
     
     1. **Managing Credentials**:
     - Access and manage employee credentials from the app.
@@ -109,4 +108,3 @@ The Talao and Talao4EU wallets are designed for enterprise use, focusing on corp
     3. **Monitoring and Reporting**:
     - Monitor wallet usage and security logs.
     - Generate reports for compliance and auditing purposes.
-</details>

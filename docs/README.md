@@ -1,8 +1,0 @@
-- wallet startup = wallet_startup.md
-- wallet configuration = wallet_configuration.md 
-- Use Talao App = Talao_app.md
-- Enterprise configuration = enterprise_configuration.md
-- SSI flows = SSI_flow.md
-	- obtaining verifiable credentials
-	- presenting verifiable credentials
-- architecture overview = architecture.md

@@ -50,19 +50,47 @@ The Talao app allows users to manage digital identities and assets seamlessly. T
       3. Tap the **Install** button and install the app.
    </details>
 
-
 ## Logging into the Talao App
     
-   1. Open the **Talao** app on your device.
-   2. If you already have an account
-   - Tap your **passphrase** and **pin code** selection
-   - On the login screen, enter your **email** and **password**.
-   - Tap the **Login** button.
-   3. If you don't have an account
-   - Create an account
-   - Select your security method ( PIN, thumb-unlocking, both )
-   - Accept terms
+1. Open the **Talao** app on your device.
+2. If you already have an account:
+    - Tap your **passphrase** and **pin code** selection.
+    - On the login screen, enter your **email** and **password**.
+    - Tap the **Login** button.
+3. If you don't have an account:
+    - Create an account.
+    - Select your security method ( PIN, thumb-unlocking, both ).
+    - Accept terms.
 
+### What is a Passphrase?
+
+A passphrase is a series of words, numbers, or other text used for user authentication. It is similar to a password but generally longer for increased security. It can be easier to remember than a complex password and offers enhanced protection against unauthorized access.
+
+#### How to Use a Passphrase:
+- When setting up your account, you will be prompted to create a passphrase.
+- Make sure your passphrase is long and includes a mix of words, numbers, and special characters.
+- Avoid using common phrases or easily guessable combinations.
+- Store your passphrase securely; do not share it with anyone.
+
+### Account Recovery
+
+If you need to recover your account, follow these steps:
+
+1. Open the **Talao** app on your device.
+2. On the login screen, tap **Forgot Password?**.
+3. Enter your **email** associated with the account.
+4. You will receive a recovery email with instructions.
+5. Follow the instructions in the email to reset your password.
+6. Log in with your new password.
+
+### Recovery with Passphrase and PIN Code
+
+If you have set up a passphrase and PIN code, you can recover your account as follows:
+
+1. Open the **Talao** app on your device.
+2. Tap **Recover Account**.
+3. Enter your **passphrase** and **PIN code**.
+4. Follow the prompts to regain access to your account.
 
 
 ## Managing Digital Identities and Assets

@@ -1,4 +1,4 @@
-# SSI Flows
+# SSI 
 
 ### Overview
 Self-Sovereign Identity (SSI) is a digital identity model that empowers individuals and organizations to manage their own identities and credentials. This documentation will guide you through the process of obtaining and presenting verifiable credentials using the Talao and Talao4EU wallets.

@@ -29,7 +29,6 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'FAQs',
       items: [
-        'FAQs_Talao',
         'FAQs_wallet_provider',
       ],
     },

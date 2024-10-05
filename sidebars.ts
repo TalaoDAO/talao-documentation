@@ -15,7 +15,6 @@ const sidebars: SidebarsConfig = {
   // But you can create a sidebar manually
   documentationSidebar: [
     'SSI_flow',
-    'wallet_startup',
     'Talao_app',
     {
       type: 'category',

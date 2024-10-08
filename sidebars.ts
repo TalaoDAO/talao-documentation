@@ -1,4 +1,4 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 /**
  * Creating a sidebar enables you to:
@@ -12,26 +12,49 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
  */
 const sidebars: SidebarsConfig = {
 
-  // But you can create a sidebar manually
+  // Manual sidebar creation
   documentationSidebar: [
-    'SSI_flow',
-    'Talao_app',
     {
       type: 'category',
-      label: 'Configuration',
+      label: 'Wallet',
       items: [
-        'enterprise_configuration',
-        'wallet_configuration',
+        'wallet/overview',
+        'wallet/setup-the-wallet',
+        'wallet/main-wallet-screens',
+        'wallet/settings-menu',
+        'wallet/wallet-profiles',
+        'wallet/wallet-security',
+        'wallet/self-sovereign-identity',
+        'wallet/developer-mode',
+        'wallet/help-center',
+        'wallet/about-and-activity-log',
+        'wallet/reset-wallet',
+        'wallet/altme-and-blockchain-support',
+        'wallet/wallet-with-wallet-provider-backend',
+        'wallet/issuer-configuration',
+        'wallet/verifier-configuration',
+        'wallet/wallet-technical-features',
+        'wallet/faq',
+        'wallet/beta-tester-program',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Wallet provider backend',
+      items: [
+        'wallet-provider-backend/overview',
+        'wallet-provider-backend/manage-organizations',
+        'wallet-provider-backend/manage-users',
+        'wallet-provider-backend/branding',
+        'wallet-provider-backend/settings',
+        'wallet-provider-backend/ssi-data',
+        'wallet-provider-backend/issuer-marketplace',
+        'wallet-provider-backend/blockchain',
+        'wallet-provider-backend/support',
+        'wallet-provider-backend/faq',
       ],
     },
     'architecture',
-    {
-      type: 'category',
-      label: 'FAQs',
-      items: [
-        'FAQs_wallet_provider',
-      ],
-    },
   ],
 };
 

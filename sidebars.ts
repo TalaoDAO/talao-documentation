@@ -55,6 +55,19 @@ const sidebars: SidebarsConfig = {
         'wallet-provider-backend/faq',
       ],
     },
+    {
+      type: 'category',
+      label: 'Settings menu',
+      items: [
+        'settings-menu/about-and-activity-log',
+        'settings-menu/developer-mode',
+        'settings-menu/help-center',
+        'settings-menu/reset-wallet',
+        'settings-menu/self-sovereign-identity',
+        'settings-menu/wallet-profiles',
+        'settings-menu/wallet-security',
+      ],
+    },
   ],
 };
 

@@ -11,8 +11,6 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
  Create as many sidebars as you want.
  */
 const sidebars: SidebarsConfig = {
-
-  // Manual sidebar creation
   documentationSidebar: [
     'welcome',
     {
@@ -22,21 +20,25 @@ const sidebars: SidebarsConfig = {
         'wallet/overview',
         'wallet/setup_wallet',
         'wallet/main-wallet-screens',
-        'wallet/settings-menu',
-        'wallet/wallet-profiles',
-        'wallet/wallet-security',
-        'wallet/self-sovereign-identity',
-        'wallet/developer-mode',
-        'wallet/help-center',
-        'wallet/about-and-activity-log',
-        'wallet/reset-wallet',
+        {
+          type: 'category',
+          label: 'Settings Menu',
+          items: [
+            'wallet/settings-menu/about-and-activity-log',
+            'wallet/settings-menu/developer-mode',
+            'wallet/settings-menu/help-center',
+            'wallet/settings-menu/reset-wallet',
+            'wallet/settings-menu/self-sovereign-identity',
+            'wallet/settings-menu/wallet-profiles',
+            'wallet/settings-menu/wallet-security',
+          ],
+        },
         'wallet/altme-and-blockchain-support',
         'wallet/wallet-with-wallet-provider-backend',
         'wallet/issuer_configuration',
         'wallet/verifier-configuration',
         'wallet/technical_features',
         'wallet/wallet-technical-features',
-        'wallet/wallet-metadata',
         'wallet/beta-tester-program',
       ],
     },
@@ -54,19 +56,6 @@ const sidebars: SidebarsConfig = {
         'wallet-provider-backend/blockchain',
         'wallet-provider-backend/support',
         'wallet-provider-backend/faq',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Settings menu',
-      items: [
-        'settings-menu/about-and-activity-log',
-        'settings-menu/developer-mode',
-        'settings-menu/help-center',
-        'settings-menu/reset-wallet',
-        'settings-menu/self-sovereign-identity',
-        'settings-menu/wallet-profiles',
-        'settings-menu/wallet-security',
       ],
     },
   ],

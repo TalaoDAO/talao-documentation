@@ -36,6 +36,7 @@ const sidebars: SidebarsConfig = {
         'wallet/verifier-configuration',
         'wallet/technical_features',
         'wallet/wallet-technical-features',
+        'wallet/wallet-metadata',
         'wallet/beta-tester-program',
       ],
     },

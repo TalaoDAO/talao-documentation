@@ -34,12 +34,11 @@ const config: Config = {
       'classic',
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/TalaoDAO/talao-documentation',
-        },
+        routeBasePath: '/', // This makes the docs the root of your website
+        path: 'docs',
+        sidebarPath: require.resolve('./sidebars.ts'),
+        editUrl: 'https://github.com/TalaoDAO/talao-documentation',
+      },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -78,7 +77,7 @@ const config: Config = {
           items: [
             {
               label: 'Documentation',
-              to: '/docs/SSI_flow',
+              to: 'welcome',
             },
           ],
         },

@@ -14,12 +14,13 @@ const sidebars: SidebarsConfig = {
 
   // Manual sidebar creation
   documentationSidebar: [
+    'welcome',
     {
       type: 'category',
       label: 'Wallet',
       items: [
         'wallet/overview',
-        'wallet/setup-the-wallet',
+        'wallet/setup_wallet',
         'wallet/main-wallet-screens',
         'wallet/settings-menu',
         'wallet/wallet-profiles',
@@ -31,10 +32,10 @@ const sidebars: SidebarsConfig = {
         'wallet/reset-wallet',
         'wallet/altme-and-blockchain-support',
         'wallet/wallet-with-wallet-provider-backend',
-        'wallet/issuer-configuration',
+        'wallet/issuer_configuration',
         'wallet/verifier-configuration',
+        'wallet/technical_features',
         'wallet/wallet-technical-features',
-        'wallet/faq',
         'wallet/beta-tester-program',
       ],
     },
@@ -54,7 +55,6 @@ const sidebars: SidebarsConfig = {
         'wallet-provider-backend/faq',
       ],
     },
-    'architecture',
   ],
 };
 

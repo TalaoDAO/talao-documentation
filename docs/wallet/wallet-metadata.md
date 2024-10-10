@@ -1,32 +1,50 @@
-# Wallet Metadata Configuration
+# Wallet Metadata
 
-Metadata in the context of digital wallets like Talao and Altme describe the specific configurations that define the wallet’s compatibility, supported formats, cryptographic algorithms, and available features. They are crucial for setting up and integrating wallets for credential issuance and verification.
+Metadata in the context of digital wallets like Talao and Altme describes the specific configurations that define the wallet’s compatibility, supported formats, cryptographic algorithms, and available features. They are crucial for setting up and integrating wallets for credential issuance and verification..
 
-## Why is Metadata Important?
+### Issuance : Wallet acts as a client
 
-Metadata ensures standardization in interactions between different systems, guaranteeing optimal compatibility and security. It specifies supported data formats, signature algorithms, user authentication types, and more. This allows communication systems (such as issuers and verifiers) to operate with consistent and secure configurations.
+Wallet endpoints start either with https://app.talao.co/xxxx for Talao wallet or with https://app.altme.io/xxx for Altme wallet.
 
-### Example Metadata for an Issuer
+Below metadata is for Altme wallet:
 
-The following metadata is used to configure an issuer in the Talao or Altme wallet thanks to wallet_metadata_for_issuer.json:
-
-```json
+```
 {
     "vp_formats_supported": {
         "jwt_vp": {
-            "alg": ["ES256", "ES256K", "EdDSA"]
+            "alg": [
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
         },
         "jwt_vc": {
-            "alg": ["ES256", "ES256K", "EdDSA"]
+            "alg": [
+                "ES256",
+                "ES256K",*
+                "EdDSA"
+            ]
         },
         "jwt_vp_json": {
-            "alg": ["ES256", "ES256K", "EdDSA"]
+            "alg": [
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
         },
         "jwt_vc_json": {
-            "alg": ["ES256", "ES256K", "EdDSA"]
+            "alg": [
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
         },
         "vc+sd-jwt": {
-            "alg": ["ES256", "ES256K", "EdDSA"]
+            "alg": [
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
         },
         "ldp_vp": {
             "proof_type": [
@@ -45,11 +63,21 @@ The following metadata is used to configure an issuer in the Talao or Altme wall
             ]
         }
     },
-    "grant_types": ["authorization code", "pre-authorized_code"],
-    "redirect_uris": ["https://app.altme.io/app/download/callback"],
-    "subject_syntax_types_supported": ["did:key", "did:jwk"],
-    "subject_syntax_types_discriminations": ["did:key:jwk_jcs-pub", "did:ebsi:v1"],
-    "response_types_supported": ["vp_token", "id_token"],
+    "grant_types": [
+        "authorization code",
+        "pre-authorized_code"
+    ],
+    "redirect_uris": [
+        "https://app.altme.io/app/download/callback"
+    ],
+    "subject_syntax_types_supported": [
+        "did:key",
+        "did:jwk"
+    ],
+    "subject_syntax_types_discriminations": [
+        "did:key:jwk_jcs-pub",
+        "did:ebsi:v1"
+    ],
     "token_endpoint_auth_method_supported": [
         "none", 
         "client_id", 
@@ -57,41 +85,52 @@ The following metadata is used to configure an issuer in the Talao or Altme wall
         "client_secret_basic", 
         "client_secret_jwt"
     ],
-    "credential_offer_endpoint_supported": [
+    "credential_offer_endpoint": [
         "openid-credential-offer://", 
         "haip://"
     ],
-    "contacts": ["contact@talao.io"]
+    "client_name": "Altme wallet",
+    "contacts": [
+        "contact@talao.io"
+    ]
 }
 ```
 
-#### Explanation:
-- **Supported Presentation Formats (vp_formats_supported):** Defines the supported formats for Verifiable Presentations (JWT, LDP).
-- **Cryptographic Algorithms (alg):** Specifies the cryptographic algorithms used for signing data (ES256, ES256K, EdDSA).
-- **Subject Types (subject_syntax_types_supported):** Indicates the supported types of identifiers, such as `did:key` and `did:jwk`.
-- **Authentication Methods (token_endpoint_auth_method_supported):** Lists the supported methods for authenticating requests to the token endpoint.
+### Verification: wallet acts as an Authorization Server
 
-### Example Metadata for a Verifier
+Wallet endpoints start either with https://app.talao.co/xxxx for Talao wallet or with https://app.altme.io/xxx for Altme wallet.
 
-The following metadata is used to configure a verifier in the wallet thanks to wallet_metadata_for_verifiers.json:
+Below metadata is for Altme wallet:
 
-```json
+```
 {
-    "wallet_name": "talao_wallet",
-    "key_type": "software",
-    "user_authentication": "system_biometry",
+    "client_name": "Altme_wallet",
     "authorization_endpoint": "https://app.altme.io/app/download/authorize",
-    "grant_types_supported": ["authorization_code", "pre-authorized_code"],
-    "response_types_supported": ["vp_token", "id_token"],
+    "response_types_supported": [
+        "vp_token",
+        "id_token"
+    ],
     "vp_formats_supported": {
         "jwt_vc_json": {
-            "alg_values_supported": ["ES256", "ES256K", "EdDSA"]
+            "alg_values_supported": [
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
         },
         "jwt_vp_json": {
-            "alg_values_supported": ["ES256", "ES256K", "EdDSA"]
+            "alg_values_supported": [
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
         },
         "vc+sd-jwt": {
-            "alg_values_supported": ["ES256", "ES256K", "EdDSA"]
+            "alg_values_supported": [
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
         },
         "ldp_vp": {
             "proof_type": [
@@ -116,17 +155,15 @@ The following metadata is used to configure a verifier in the wallet thanks to w
         "x509_san_dns", 
         "verifier_attestation"
     ],
-    "request_object_signing_alg_values_supported": ["ES256", "ES256K"],
+    "request_object_signing_alg_values_supported": [
+        "ES256",
+        "ES256K",
+        "EdDSA"
+    ],
     "presentation_definition_uri_supported": true,
-    "contacts": ["contact@talao.io"]
+    "contacts": [
+        "contact@talao.io"
+    ]
 }
 ```
 
-#### Explanation:
-- **Wallet Name (wallet_name):** The name of the configured wallet (`talao_wallet`).
-- **User Authentication (user_authentication):** Specifies the user authentication method, here using system biometrics.
-- **Supported Presentation Formats (vp_formats_supported):** The types of supported Verifiable Presentation formats.
-- **Supported Algorithms (alg_values_supported):** The cryptographic algorithms supported for signing presentation objects.
-
-These metadata configurations enable wallets and credential exchange systems to function smoothly and securely.
-```

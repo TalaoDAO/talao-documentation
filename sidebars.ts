@@ -17,20 +17,25 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Wallet',
       items: [
-        'wallet/overview',
         'wallet/setup_wallet',
+        'wallet/getting_started',
         'wallet/main-wallet-screens',
         {
           type: 'category',
           label: 'Settings Menu',
           items: [
-            'wallet/settings-menu/about-and-activity-log',
-            'wallet/settings-menu/developer-mode',
-            'wallet/settings-menu/help-center',
-            'wallet/settings-menu/reset-wallet',
-            'wallet/settings-menu/self-sovereign-identity',
             'wallet/settings-menu/wallet-profiles',
             'wallet/settings-menu/wallet-security',
+            // wallet settings
+            // blockchain settings
+            'wallet/settings-menu/self-sovereign-identity',
+            'wallet/settings-menu/developer-mode',
+            'wallet/settings-menu/help-center',
+            'wallet/settings-menu/about-and-activity-log',
+            'wallet/settings-menu/reset-wallet',
+            
+            
+            
           ],
         },
         'wallet/altme-and-blockchain-support',

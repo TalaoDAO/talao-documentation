@@ -36,4 +36,6 @@ We also use specifications of ecosystems or technical profiles as:
 
 ## Notice
 
+Talao and Altme wallets are **advanced SSI wallets**. They support different ecosystems, different VC formats, different protocol versions. They are useful tools for issuer and verifier developers. At first glance these wallets may seem complex but on the other hand their customization parameters allow to simplify their appearance for all use cases of production projects.
+
 The Altme and Talao wallets are available in open source code on the [Talao github repository](https://github.com/TalaoDAO/AltMe), the wallet provider backend is offered in the form of a license agreement. The Talao and Altme wallets are autonomous and do not require access to the backend, however the latter is useful for a complex configuration of the wallet or for the deployment of projects in companies.

@@ -1,4 +1,4 @@
-# Wallet the setup
+# Wallet setup
 
 The wallets Talao and Altme can be directly downloaded from the Google or Apple stores but they can also be installed and configured in different ways for extended services.
 
@@ -33,14 +33,14 @@ In this case users must first download the wallet from the store then scan the Q
 * standard users : they have a login/password and they are managed through the wallet provider backend. They can be suspended or even revoked if needed. They also have a personal access to the wallet provider backend to manage their own account,
 * guest: they have no login/password, it is a public access to your onboard unknown users
 
-**It is the best solution to deploy your wallet to employees or to a limited and known group of people.**
+**It is the best solution to deploy your wallet to a group of known people.**
 
 ### Download and configure the wallet in one step with an installation link
 
 In this case the link allowed your users to install the wallet to their device with a specific configuration defined in the wallet provider backend. The installation link is in the form of:
 
-* https://app.talao.co/install?password=guest&login=guest@identinet&wallet-provider=https://wallet-provider.talao.co or
-* https://app.altme.io/install?password=guest&login=guest@identinet&wallet-provider=https://wallet-provider.talao.co
+* `https://app.talao.co/install?password=guest&login=guest@identinet&wallet-provider=https://wallet-provider.talao.co `or
+* `https://app.altme.io/install?password=guest&login=guest@identinet&wallet-provider=https://wallet-provider.talao.co``
 
 The installation link is only available for guests.
 
@@ -51,7 +51,7 @@ The installation link is only available for guests.
 Like any other smartphone app, user must initialize their wallet first. 2 options are proposed:
 
 * import an account : users have previously saved their private keys through a passphrase in this app or in another wallet. they can recover their private keys,
-* create an account: for new users
+* create an account: for new users.
 
 They will be then asked to choose their mean of authentication as a PIN code, a biometric or both to get a more secure 2 factors authentication. If a PIN code is chosen, confirmation will be requested.
 

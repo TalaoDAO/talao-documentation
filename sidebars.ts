@@ -42,7 +42,6 @@ const sidebars: SidebarsConfig = {
         'wallet/wallet-with-wallet-provider-backend',
         'wallet/issuer_configuration',
         'wallet/verifier-configuration',
-        'wallet/technical_features',
         'wallet/wallet-technical-features',
         'wallet/wallet-metadata',
         'wallet/beta-tester-program',

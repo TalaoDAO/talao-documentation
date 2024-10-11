@@ -33,18 +33,13 @@ const sidebars: SidebarsConfig = {
             'wallet/settings-menu/help-center',
             'wallet/settings-menu/about-and-activity-log',
             'wallet/settings-menu/reset-wallet',
-            
-            
-            
           ],
         },
         'wallet/altme-and-blockchain-support',
         'wallet/wallet-with-wallet-provider-backend',
         'wallet/issuer_configuration',
         'wallet/verifier-configuration',
-        'wallet/wallet-technical-features',
         'wallet/wallet-metadata',
-        'wallet/beta-tester-program',
       ],
     },
     {
@@ -60,7 +55,6 @@ const sidebars: SidebarsConfig = {
         'wallet-provider-backend/issuer-marketplace',
         'wallet-provider-backend/blockchain',
         'wallet-provider-backend/support',
-        'wallet-provider-backend/faq',
       ],
     },
   ],

@@ -1,5 +1,7 @@
 # Issuer configuration
 
+Updated the 14th of October 2024.
+
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
 ## OIDC4VCI Specifications Drafts
@@ -10,11 +12,11 @@ OIDC4VCI has evolved rapidly between 2022 (Draft 10/11) and 2024 (Draft >= 13). 
 
 Specifications of the different Drafts are available here:
 
-* [Draft 10](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-10.html)
-* [Draft 11](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-11.html) very close to 10
-* [Draft 12](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html) Almost not used
-* [Draft 13](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-13.html) current official specs
-* [Draft 14](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-14.html) soon supported by wallets (Oct 2024)
+* [Draft 10](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-10.html) supported
+* [Draft 11](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-11.html) supported
+* [Draft 12](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html) not supported
+* [Draft 13](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-13.html) supported
+* [Draft 14](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-14.html) soon supported
 
 ## OIDC4VCI flow and features
 
@@ -24,22 +26,23 @@ Wallets support:
 * pre authorized code (by default), authorized code flow, push authorization request, PKCE,
 * [Attestation based client authentication](https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/),
 * `tx_code` with`input_mode` `text`or`numeric`, `lenght`and`description`,
-* `authorization_details` (by default) and `scope`. Tune with OIDCVC settings or wallet provider backend to use `scope`.,
+* `authorization_details` and `scope`. Tune with OIDCVC settings or wallet provider backend to use `scope`.,
 * authorization server as a standalone server associated to one VC type,
 * dynamic credential request,
-* client secret post, client secret basic and public client authentication
-* bearer credential (no crypto binding)
-* proof types as `jwt` or `ldp_vc`
-* proof of possession header with `kid` or `jwk`
-* deferred endpoint
-* wallet id scheme as cnf of DID
+* client secret post, client secret basic and public client authentication,
+* bearer credential (no crypto binding),
+* proof types as `jwt` or `ldp_vc`,
+* proof of possession header with `kid` or `jwk`,
+* deferred endpoint,
+* key identifiers as jwk thumbprint of DID,
+* keys as EdDSA, P-256, seckp256k1.
 
 Wallets do not support:
 
 * notification endpoint,
-* batch endpoint (Draft 13)
-* DPoP for code and token (soon available)
-* encrypted credentials
+* batch endpoint (Draft 13),
+* DPoP for code and token (soon available),
+* encrypted credentials.
 
 ## Invocation schemes for issuance
 
@@ -86,7 +89,61 @@ If `display` is not provided wallets use a fallback blue card with white text co
 
 ### Attribute of a claim
 
-Only claims defined with a `display` attribute are displayed in the card detail screen of the wallets. The reason is that some issuers do not want to display claims which do not make sense (a hash, an identifier, ...) so it is the only way to let them manage that option.
+Wallets show only but all claims that are in the issuer metadata, rules are:
+
+* if there is a` display` attribute in the claim, wallet displays the label in bold with the claim value on the same line. Otherwise wallet displays the claim value alone,
+* if the claim is a json object (nested claims) without `display` -> it goes to the line and indent,
+* if the claim is a json object with a `display` -> it displays the label in bold and goes to the line and indent.
+
+With this issuer metadata:
+
+```
+"claims": {
+    "given_name": {
+        "display": [
+            {
+                "name": "Given Name",
+                "locale": "en-US"
+            }
+        ]
+    },
+    "family_name": {
+        "display": [
+            {
+                "name": "Surname",
+                "locale": "en-US"
+            }
+        ]
+    },
+    "email": {},
+    "phone_number": {},
+    "address": {
+        "street_address": {},
+        "locality": {},
+        "region": {},
+        "country": {}
+    },
+    "birthdate": {},
+    "is_over_18": {},
+    "is_over_21": {},
+    "is_over_65": {}
+}
+```
+
+wallets rendering will be:
+
+**Given name:** John
+**Surname:** DOE
+john.doe@gmail.com
++33678876876
+   13 rue de Paris
+   Paris 
+   Paris
+   France
+12/09/1990
+True
+True
+False
 
 Wallets support all attributes of the display :
 
@@ -107,42 +164,6 @@ Wallets support all attributes of the display :
 `order` is supported,`mandatory` in not supported.
 
 `locale` is supported. Locale language is chosen depending on the smartphone language. If the smartphone language translation is not provided with the claim, wallet will use english or locale.
-
-### Nested claims
-
-Wallets display nested claims with an indent. Nested json in VC must be defined with nested display json in the issuer metadata. Example with PID `address` description in the issuer metadata:
-
-```
-"address": {
-    "mandatory": true,
-    "value_type": "string",
-    "display": [
-        {
-            "name": "Address",
-            "locale": "en-US"
-        },
-        {
-            "name": "Adresse",
-            "locale": "fr-FR"
-        }
-    ],
-    "formatted": {
-        "mandatory": true,
-        "value_type": "string",
-        "display": [
-            {
-                "name": "Formatted",
-                "locale": "en-US"
-            },
-            {
-                "name": "Complete",
-                "locale": "fr-FR"
-            }
-        ]
-    },
-   
-}
-```
 
 ### Pictures
 

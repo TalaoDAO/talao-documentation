@@ -19,24 +19,12 @@ const sidebars: SidebarsConfig = {
       items: [
         'wallet/setup_wallet',
         'wallet/getting_started',
-        'wallet/main-wallet-screens',
-        {
-          type: 'category',
-          label: 'Settings Menu',
-          items: [
-            'wallet/settings-menu/wallet-profiles',
-            'wallet/settings-menu/wallet-security',
-            'wallet/settings-menu/oidc4vc_settings',
-            // wallet settings
-            // blockchain settings
-            'wallet/settings-menu/self-sovereign-identity',
-            'wallet/settings-menu/developer-mode',
-            'wallet/settings-menu/help-center',
-            'wallet/settings-menu/about-and-activity-log',
-            'wallet/settings-menu/reset-wallet',
-          ],
-        },
-        'wallet/altme-and-blockchain-support',
+        // 'wallet/main-wallet-screens',
+        'wallet/oidc4vc_settings',
+        'wallet/self-sovereign-identity',
+        'wallet/wallet-profiles',
+        'wallet/developer-mode',
+        // 'wallet/altme-and-blockchain-support',
         'wallet/wallet-with-wallet-provider-backend',
         'wallet/issuer_configuration',
         'wallet/technical_features',
@@ -50,8 +38,8 @@ const sidebars: SidebarsConfig = {
       items: [
         'wallet-provider-backend/manage-organizations',
         'wallet-provider-backend/manage-users',
-        'wallet-provider-backend/branding',
-        'wallet-provider-backend/settings',
+        // 'wallet-provider-backend/branding',
+        // 'wallet-provider-backend/settings',
         'wallet-provider-backend/ssi-data',
         'wallet-provider-backend/issuer-marketplace',
         'wallet-provider-backend/support',

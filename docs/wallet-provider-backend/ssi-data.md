@@ -1,5 +1,7 @@
 # SSI parameters
 
+Updated the 14th of October 2024.
+
 This section allows an advanced user (admin) to specify the SSI profile of the wallets.
 
 ## Choose an SSI Profile or configure your own
@@ -21,24 +23,24 @@ If admin chooses to define its own SSI profile, he must select set the following
 
 it can be any one of the DID methods of the list ([did:key](https://w3c-ccg.github.io/did-method-key/), [did:jwk](https://github.com/quartzjer/did-jwk/blob/main/spec.md)) associated to one of the types of keys available (EdDSA, P-256 or seck256k1). For EBSI the did:key method is specific, see specification [here](https://hub.ebsi.eu/vc-framework/did/natural-person).
 
-* cnf,
+* jwt thumbprint,
 * did:key with EdDSA key,
 * did:key with EBSI encoding and P-256 key,
 * did:key with secp256k1 key,
 * did:key with P-256 key,
 * did:jwk with P-256 key
 
-In case of the EUDI Architecture Reference Framework - ARF, choose the `cnf` option as the wallet identifier.
+In case of the EUDI Architecture Reference Framework - ARF, choose the `jwt thumbprint` option as the wallet identifier.
 
 ### OID4VCI Client Type
 
 The client type affects how the wallet authenticates and interacts with the authorization server during credential issuance.
 
 * **did:** Decentralized Identifier, typically used for secure, decentralized identity interactions,
-* **urn:ietf:params:oauth:** Used when the subject is identified via a JWK thumbprint,
+* **jwk thumbprint** Used when the subject is identified via a JWK thumbprint,
 * **confidential:** For confidential clients that require secure and private interaction with the authorization server.
 
-In case of the EUDI Architecture Reference Framework - ARF, choose the `**urn:ietf:params:oauth` option.
+In case of the EUDI Architecture Reference Framework - ARF, choose the `jwk thumbprint` option.
 
 ### Cryptographic Holder Binding
 

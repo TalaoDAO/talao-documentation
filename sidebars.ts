@@ -38,6 +38,7 @@ const sidebars: SidebarsConfig = {
         'wallet/altme-and-blockchain-support',
         'wallet/wallet-with-wallet-provider-backend',
         'wallet/issuer_configuration',
+        'wallet/technical_features',
         'wallet/verifier-configuration',
         'wallet/wallet-metadata',
       ],

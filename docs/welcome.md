@@ -1,13 +1,27 @@
 # Welcome
 
-Updated the 9th of October 2024.
+[Talao website](https://talao.io)
+[Contact us](mailto:contact@talao.io)
+
+Updated the 14th of October 2024.
 
 Here you will find the documentation concerning the technical use and integration of the Talao and Altme wallets. You will also find information concerning the use of the Wallet Provider Backend associated with these wallets.
 
 ## Wallets
 
-The Talao and Altme wallets are mobile applications for collecting, storing and presenting certificates in the verifiable credentials format. These wallets store the data associated with these certificates, the cryptographic keys associated with these certificates and the exchange protocols between the different stakeholders of a Self Sovereign Identity architecture: the issuers (or attribute providers) and the verifiers (or Relying parties).
-In addition to these features, the Altme wallet also allows you to manage the active cryptos of different blockchains.
+The Talao and Altme wallets are mobile applications for collecting, storing and presenting certificates in the verifiable credentials format. These wallets store the data associated with these certificates, the cryptographic keys associated with these certificates and the exchange protocols between the different stakeholders of a Self Sovereign Identity (SSI) architecture: the issuers (or attribute providers) and the verifiers (or Relying parties).
+
+Talao supports 2 mobile wallets:
+
+* Talao wallet : it is a self sovereign identity(SSI) wallet to support verifiable credentials,
+* Altme wallet : it is a SSI and crypto wallet to support verifiable credentials and crypto assets (token, NFT) on blockchains.
+
+The links to download the wallets are:
+
+* [Altme Google store](https://play.google.com/store/apps/details?id=co.altme.alt.me.altme&hl=en-US&pli=1)
+* [Altme Apple store](https://apps.apple.com/fr/app/altme-wallet/id1633216869)
+* [Talao Google store](https://play.google.com/store/apps/details?id=co.talao.wallet&hl=fr)
+* [Talao Apple store](https://apps.apple.com/fr/app/talao-wallet/id1582183266?platform=iphone)
 
 ## Wallet Provider Backend
 
@@ -25,7 +39,7 @@ for the verifiable credential formats:
 for protocols:
 
 - [The OpenID for verifiable credential specifications](https://openid.net/sg/openid4vc/)
-- [The W3C draft of Verifibale Presentation Request 2024](https://w3c-ccg.github.io/vp-request-spec/)
+- [The W3C draft of Verifiable Presentation Request 2024](https://w3c-ccg.github.io/vp-request-spec/)
 
 We also use specifications of ecosystems or technical profiles as:
 
@@ -36,6 +50,6 @@ We also use specifications of ecosystems or technical profiles as:
 
 ## Notice
 
-Talao and Altme wallets are **advanced SSI wallets**. They support different ecosystems, different VC formats, different protocol versions. They are useful tools for issuer and verifier developers. At first glance these wallets may seem complex but on the other hand their customization parameters allow to simplify their appearance for all use cases of production projects.
+Talao and Altme wallets are **advanced SSI wallets**. They support different ecosystems, different VC formats, different protocol versions. They are useful tools for issuer and verifier developers but their customization also allows to simplify their appearance for all production project use cases.
 
-The Altme and Talao wallets are available in open source code on the [Talao github repository](https://github.com/TalaoDAO/AltMe), the wallet provider backend is offered in the form of a license agreement. The Talao and Altme wallets are autonomous and do not require access to the backend, however the latter is useful for a complex configuration of the wallet or for the deployment of projects in companies.
+The Altme and Talao wallets are available in open source code on the [Talao github repository](https://github.com/TalaoDAO/AltMe), the Wallet Provider Backend is offered in the form of a commercial license. The Talao and Altme wallets are autonomous and do not require access to the backend, however the latter is useful for a complex configuration of the wallet or for the deployment of projects in companies.

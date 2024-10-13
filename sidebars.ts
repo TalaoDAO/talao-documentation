@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'wallet/settings-menu/wallet-profiles',
             'wallet/settings-menu/wallet-security',
+            'wallet/settings-menu/oidc4vc_settings',
             // wallet settings
             // blockchain settings
             'wallet/settings-menu/self-sovereign-identity',

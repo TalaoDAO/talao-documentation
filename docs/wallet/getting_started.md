@@ -1,5 +1,7 @@
 # Getting Started
 
+Updated the 14th of October 2024.
+
 Download the Talao or Altme wallet from the Apple store or Google Play Store.
 
 The links to download the wallets are:
@@ -22,9 +24,9 @@ Let's get a proof of an email address:
 5. Choose the wallet installed Altme or Talao,
 6. **Allow** access to domain talao.io,
 7. **Select** the credential you consent to collect,
-8. Clic on **MY WALLET** in the bottom bar
+8. Clic on **MY WALLET** in the bottom bar to see the credential in the wallet.
 
-You have now your first verifiable credential, if you clic on the "card" you will get an access to the data of the credential. This credential has been issued by an issuer managed by Talao. The set of data has been signed by Talao after checking the value of the code. It is a proof of the ownership of an email address as a verifiable credential signed by Talao.
+You have now your first verifiable credential, if you clic on the "card" you will see the data of the credential. This credential has been issued by Talao. The set of data has been signed by Talao after checking the value of the secret code. It is a proof of the ownership of an email address as a verifiable credential.
 
 ## Get a proof of age (over 18)
 
@@ -36,13 +38,13 @@ Let's get a proof of age with an instant pictrure:
 4. follow the process,
 5. clic on **MY WALLET** in the bottom bar
 
-You have now a proof of age. The age verification has been provided by our partner [Yoti thanks to an AI](https://www.yoti.com/business/age-verification/). This credential has been issued by an issuer managed by Talao. It is a proof of age as a verifiable credntial signed by Talao.
+You have now a proof of age. The age verification has been provided by our partner [Yoti](https://www.yoti.com/business/age-verification/) thanks to an AI engine. This credential has been issued by Talao. It is a proof of age as a verifiable credential.
 
 ## Present a proof age
 
 Let's now present this proof of age to the age verification tool setup by our partner [Werify](https://werify.eu/):
 
-1. Click [here](https://staging.werify.eu/#/werify_point_kiosk/attempt+ideology+glamorous+varsity+spelling)
-2. Scan the QR code with the wallet scanner.
+1. Clic [here]([https://staging.werify.eu/#/werify_point_kiosk/attempt+ideology+glamorous+varsity+spelling](https://staging.werify.eu/#/werify_point_kiosk/attempt+ideology+glamorous+varsity+spelling)),
+2. scan the QR code with the wallet scanner.
 
 You have used your credential to prove your age. This tools is a verifier managed by Werify.

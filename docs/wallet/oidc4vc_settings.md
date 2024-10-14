@@ -9,19 +9,17 @@ To access the OIDC4VCI parameters:
 
 This section allows an advanced user to specify manually the SSI profile of his wallet.
 
-More parameters are available through the Wallet Provider Backend.
-
-This feature feature can be hidden in case of a specific wallet configuration through the Wallet Provider Backend.
+More parameters are available through the Wallet Provider Backend. This feature can be hidden in case of a specific wallet configuration defined with the Wallet Provider Backend.
 
 ## Wallet Level
 
-Wallet Security Level can be low by default or strict.
+Wallet Security Level can be low (default) or strict.
 
 If low security, wallet does not check the signature of the :
 
 * verifiable credentials,
-* status list,
-* authorization request object
+* status list credential,
+* authorization request object (OIDC4VP)
 
 ## Default DID
 

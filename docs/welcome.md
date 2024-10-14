@@ -12,21 +12,24 @@ Here you will find the documentation concerning the technical use and integratio
 
 The Talao and Altme wallets are mobile applications for collecting, storing and presenting certificates in the verifiable credentials format. These wallets store the data associated with these certificates, the cryptographic keys associated with these certificates and the exchange protocols between the different stakeholders of a Self Sovereign Identity (SSI) architecture: the issuers (or attribute providers) and the verifiers (or Relying parties).
 
-Talao supports 2 mobile wallets:
+Talao provides 2 mobile wallets:
 
 * Talao wallet : it is a self sovereign identity(SSI) wallet to support verifiable credentials,
-* Altme wallet : it is a SSI and crypto wallet to support verifiable credentials and crypto assets (token, NFT) on blockchains.
 
-The links to download the wallets are:
+  * [Talao Google store](https://play.google.com/store/apps/details?id=co.talao.wallet)
+  * [Talao Apple store](https://apps.apple.com/fr/app/talao-wallet/id1582183266?platform=iphone)
 
-* [Altme Google store](https://play.google.com/store/apps/details?id=co.altme.alt.me.altme&hl=en-US&pli=1)
-* [Altme Apple store](https://apps.apple.com/fr/app/altme-wallet/id1633216869)
-* [Talao Google store](https://play.google.com/store/apps/details?id=co.talao.wallet&hl=fr)
-* [Talao Apple store](https://apps.apple.com/fr/app/talao-wallet/id1582183266?platform=iphone)
+
+* Altme wallet : it is a Self Sovereign Identity and crypto wallet to support verifiable credentials and crypto assets (token, NFT) on blockchains.
+
+  * [Altme Google store](https://play.google.com/store/apps/details?id=co.altme.alt.me.altme&hl=en-US&pli=1)
+  * [Altme Apple store](https://apps.apple.com/fr/app/altme-wallet/id1633216869)
 
 ## Wallet Provider Backend
 
-The wallet provider backend is a web application that allows you to make the link between an organization, a project or a trusted environment (Trust framework) and the instance of a particular user's wallet. The essential role of the Wallet Provider Backend is to issue and sign a certificate to each instance of the wallet whose purpose is to prove that the instance complies with the security and quality policy of the ecosystem. Subsequently, taking advantage of this infrastructure, other roles have been assigned to the Wallet Provider Backend: activation and suspension of users, configuration of wallet instances, user support, etc.
+The wallet provider backend is a web application that allows you to make the link between an organization, a project or a trusted environment (Trust framework) and the instance of a particular user's wallet.
+
+The essential role of the Wallet Provider Backend is to issue and sign a certificate to each instance of the wallet whose purpose is to prove that the instance complies with the security and quality policy of the ecosystem. Subsequently, taking advantage of this infrastructure, other roles have been assigned to the Wallet Provider Backend: activation and suspension of users, configuration of wallet instances, user support, etc.
 
 ## Standards
 

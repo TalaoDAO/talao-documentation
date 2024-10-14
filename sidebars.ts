@@ -19,7 +19,15 @@ const sidebars: SidebarsConfig = {
       items: [
         'wallet/setup_wallet',
         'wallet/getting_started',
-        'wallet/main-wallet-screens',
+        {
+          type: 'category',
+          label: 'Wallet Screen',
+          items: [
+            'wallet/wallet-screen/wallet-screen',
+            'wallet/wallet-screen/display-screen',
+            'wallet/wallet-screen/settings-menu-screen',
+          ],
+        },
         'wallet/wallet-profiles',
         'wallet/oidc4vc_settings',
         'wallet/developer-mode',

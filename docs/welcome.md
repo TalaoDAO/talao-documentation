@@ -1,6 +1,7 @@
 # Welcome
 
 [Talao website](https://talao.io)
+
 [Contact us](mailto:contact@talao.io)
 
 Updated the 14th of October 2024.

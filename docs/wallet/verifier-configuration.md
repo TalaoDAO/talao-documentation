@@ -17,6 +17,7 @@ Wallets support:
 
 * client_id_scheme,
 * request in value and request_uri,
+* presentation_definition and presentation_definition_uri,
 * direct_post and direct_post.jwt,
 * id_token, vp_token, id_token vp_token response_type,
 * client_metadata
@@ -24,8 +25,9 @@ Wallets support:
 
 Wallets do not support:
 
-* request uri Method Post
-* encrypted response
+* request uri Method Post,
+* encrypted response,
+* openid federation 1.0.
 
 ## Invocation schemes for verification
 
@@ -48,3 +50,17 @@ Wallet supports the following [client_id_scheme](https://openid.net/specs/openid
 * x509_san_dns,
 * verifier_attestation,
 * redirect_uri
+
+## wallet metadata
+
+Wallet metadata are available "out of band", see [here](https://doc.wallet-provider.io/wallet/wallet-metadata).
+
+## sd-jwt presentation
+
+The presentation is done in two steps which are the choice of the credential then the selection of the data that will be presented. The credential contains 3 types of data:
+
+* The payload jwt attribute (iss, iat, vct,...) that is systematically presented and is not displayed to the user during the process,
+* The “disclosure” data that is displayed and selectable,
+* The data defined by a “claim” is displayed to the user. If this data is in the “disclosure” it is selectable.
+
+In the case of a presentation with the “limit disclosure” option, the user does not make a choice and the “disclosure” data targeted by the filters are selected automatically. User can only accept or refuse to send the verifiable credential.

@@ -26,6 +26,7 @@ Updated the 14th of October 2024.
     </ol>
   </div>
 </div>
+<br />
 
 <!-- Second image on the right, text on the left -->
 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', flexDirection: 'row-reverse' }}>
@@ -46,6 +47,7 @@ Updated the 14th of October 2024.
     <p>The issuer links depend on the configuration of the wallet.</p>
   </div>
 </div>
+<br />
 
 <!-- Third image on the left, text on the right -->
 <div style={{ display: 'flex', alignItems: 'center' }}>

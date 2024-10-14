@@ -22,7 +22,6 @@ const sidebars: SidebarsConfig = {
         'wallet/main-wallet-screens',
         'wallet/wallet-profiles',
         'wallet/oidc4vc_settings',
-        'wallet/self-sovereign-identity',
         'wallet/developer-mode',
         'wallet/wallet-with-wallet-provider-backend',
         'wallet/issuer_configuration',

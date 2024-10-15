@@ -1,4 +1,4 @@
-# Main Wallet Screen
+# My wallet
 
 Updated the 14th of October 2024.
 

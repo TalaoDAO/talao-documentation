@@ -21,7 +21,7 @@ const sidebars: SidebarsConfig = {
         'wallet/getting_started',
         {
           type: 'category',
-          label: 'Wallet Screen',
+          label: 'Wallet Screens',
           items: [
             'wallet/wallet-screen/wallet-screen',
             'wallet/wallet-screen/display-screen',

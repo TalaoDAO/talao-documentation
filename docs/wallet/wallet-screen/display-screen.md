@@ -1,4 +1,4 @@
-# Display Screen
+# Discover
 
 Updated the 14th of October 2024.
 

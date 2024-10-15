@@ -15,6 +15,11 @@ Updated the 14th of October 2024.
       <li>Buy coins: to access the <a href="https://wert.io">wert.io</a> exchange services to buy tokens and cryptos.</li>
       <li>Settings: to access the settings menu.</li>
       <li>Issuer links.</li>
+      <li>Issuer links.</li>
+      <li>Issuer links.</li>
+      <li>Issuer links.</li>
+      <li>Issuer links.</li>
+      <li>Settings: to access the settings menu.</li>
       <li>Active crypto account: to access the list of crypto accounts.</li>
     </ol>
     <p>The issuer links depend on the configuration of the wallet.</p>

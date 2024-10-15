@@ -22,7 +22,7 @@ Simple Wallet link: `https://app.talao.co/install?password=guest&login=guest@Sim
 
 EUDI wallet link: `https://app.talao.co/install?password=guest&login=guest@EUDI&wallet-provider=https://wallet-provider.talao.co`
 
-Copy the link. The link must be used with the smartphone inside an email, an SMS or on the smartphone browser. To test the link with your own smartphone, remove the wallet app from your smartphone. 
+Copy the link. The link must be used with the smartphone inside an email, an SMS or on the smartphone browser. To test the link with your own smartphone, remove the wallet app from your smartphone.
 
 For iphone users, you need to remove the wallet cache first as the removal of the app is not enough. The way to do it is :
 

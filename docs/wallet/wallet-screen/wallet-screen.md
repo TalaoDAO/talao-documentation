@@ -16,6 +16,7 @@ Updated the 14th of October 2024.
       <li>Chat: to access the chat screen and send/receive messages as text and images from company support.</li>
       <li>Verifiable credentials stored in the wallet.</li>
       <li>Add cards: to access the issuer marketplace.</li>
+      <li>Cards: to access the list of your cards</li>
       <li>NFT: to access the list of NFTs of the active crypto account.</li>
       <li>Coins: to access the list of cryptos and tokens of the active crypto account.</li>
       <li>Settings: to access the settings menu.</li>

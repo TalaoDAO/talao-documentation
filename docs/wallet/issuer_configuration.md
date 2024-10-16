@@ -1,6 +1,6 @@
 # Issuer configuration
 
-Updated the 14th of October 2024.
+Updated the 16th of October 2024.
 
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
@@ -40,7 +40,7 @@ Wallets support:
 Wallets do not support:
 
 * notification endpoint,
-* batch endpoint (Draft 13),
+* batch endpoint (Draft 13 and Draft 14),
 * DPoP for code and token (soon available),
 * encrypted credentials.
 
@@ -57,7 +57,7 @@ Those schemes can be displayed as QR code for wallet app scanner, smartphone cam
 
 ## Display credentials
 
-### Attribute of a VC
+### Attributes of a VC
 
 Wallet support all the attributes of the display.
 
@@ -87,7 +87,7 @@ The `uri` can be either a link or a data uri scheme. `text_color` and `backgroun
 
 If `display` is not provided wallets use a fallback blue card with white text color.
 
-### Attribute of a claim
+### Attributes of a claim
 
 Wallets show only but all claims that are in the issuer metadata, rules are:
 
@@ -132,18 +132,20 @@ With this issuer metadata:
 
 wallets rendering will be:
 
-**Given name:** John
-**Surname:** DOE
+```
+Given name: John
+Surname: DOE
 john.doe@gmail.com
 +33678876876
-   13 rue de Paris
-   Paris 
-   Paris
-   France
+13 rue de Paris
+Paris
+Paris
+France
 12/09/1990
 True
 True
 False
+```
 
 Wallets support all attributes of the display :
 
@@ -159,15 +161,50 @@ Wallets support all attributes of the display :
    
 ```
 
-`value_type` supported are `string`, `integer`, `email` and `uri` and `image/jpeg` . `email` and `uri` are active as you can launch the browser or open the smartphone email manager with a clic.
+`value_type` supported are:
 
-`order` is supported,`mandatory` in not supported.
+* `string`,
+* `integer`,
+* `bool`,
+* `email`,
+* `uri`,
+* `image/jpeg` , `image/png`
 
-`locale` is supported. Locale language is chosen depending on the smartphone language. If the smartphone language translation is not provided with the claim, wallet will use english or locale.
+`email` and `uri` are active as you can launch the browser or open the smartphone email manager with a clic.
 
-### Pictures
+`order` is supported
 
-Use the value_type `image/jpeg`
+`mandatory` in not supported.
+
+## Locale
+
+Locale language is chosen depending on the smartphone language. If the smartphone language translation is not provided with the claim, wallet will use locale. If locale is not provided in the issuer metadata, wallet will use english.
+
+```
+"issuing_country": {
+    "mandatory": true,
+    "value_type": "string",
+    "display": [
+        {
+            "name": "Issuing country",
+        },
+        {
+            "name": "Issuing country",
+            "locale": "en-US"
+        },
+        {
+            "name": "Pays d'emission",
+            "locale": "fr-FR"
+        }
+    ]
+}
+```
+
+### Images
+
+Use the value_type `image/jpeg` or `image/png`
+
+Image can be provided as value (data:uri) or reference https://...
 
 ```"
 picture": {

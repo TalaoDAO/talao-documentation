@@ -1,6 +1,6 @@
 # Verifier configuration
 
-Updated the 14th of October 2024.
+Updated the 16th of October 2024.
 
 ## OIDC4VP Specifications Drafts
 
@@ -46,21 +46,27 @@ Those schemes can be displayed as QR code for wallet app scanner, smartphone cam
 
 Wallet supports the following [client_id_scheme](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#name-verifier-metadata-managemen) of verifiers:
 
-* did,
-* x509_san_dns,
-* verifier_attestation,
-* redirect_uri
+* did : wallets resolve the DID Document to validate the request object signature, All standards DID methods are supported through an external instance of the DID resolver managed by Talao.
+* x509_san_dns : wallets get the public key from the last X509 certificate to validate the request object signature. Wallets use the dNSName Subject Alternative Name (SAN) to request consent from user to present the VC.
+* verifier_attestation: wallets validate the signature of the request object with the publick key in the cnf of the verifier attestation,
+* redirect_uri: there is no validation of the request as the request object must not be signed.
 
-## wallet metadata
+## Wallet metadata
 
 Wallet metadata are available "out of band", see [here](https://doc.wallet-provider.io/wallet/wallet-metadata).
 
-## sd-jwt presentation
+## sd-jwt presentation rules
 
 The presentation is done in two steps which are the choice of the credential then the selection of the data that will be presented. The credential contains 3 types of data:
 
-* The payload jwt attribute (iss, iat, vct,...) that is systematically presented and is not displayed to the user during the process,
-* The “disclosure” data that is displayed and selectable,
-* The data defined by a “claim” is displayed to the user. If this data is in the “disclosure” it is selectable.
+* The standards jwt attributes as iss, iat, vct,...that are systematically presented and not displayed to the user during the process,
+* The “disclosable” claims that are displayed and selectable (except for `limit_disclosure = required`),
+* Other claims defined in the jwt are displayed to the user and not selectable
 
-In the case of a presentation with the “limit disclosure” option, the user does not make a choice and the “disclosure” data targeted by the filters are selected automatically. User can only accept or refuse to send the verifiable credential.
+For data minimization purpose, in case of a presentation_definition including the `limit_disclosure = required` option, user can only accept or refuse to present the verifiable credential. The data set of the VC is limited to what is strictly required by the verifier.
+
+## Submission Requirement Features
+
+Learn more about tghis topic [here](https://identity.foundation/presentation-exchange/#submission-requirement-feature).
+
+To be done

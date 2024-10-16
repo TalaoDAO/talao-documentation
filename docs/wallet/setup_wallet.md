@@ -1,4 +1,4 @@
-# Wallet setup
+# Wallet Setup
 
 Updated the 14th of October 2024.
 

@@ -13,12 +13,12 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   documentationSidebar: [
     'welcome',
+    'getting_started',
     {
       type: 'category',
       label: 'Wallet',
       items: [
         'wallet/setup_wallet',
-        'wallet/getting_started',
         {
           type: 'category',
           label: 'Wallet Screens',
@@ -32,9 +32,9 @@ const sidebars: SidebarsConfig = {
         'wallet/oidc4vc_settings',
         'wallet/developer-mode',
         'wallet/issuer_configuration',
-        'wallet/technical_features',
         'wallet/verifier-configuration',
         'wallet/wallet-metadata',
+        'wallet/technical_features',
       ],
     },
     {

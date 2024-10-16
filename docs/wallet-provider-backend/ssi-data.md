@@ -1,4 +1,4 @@
-# SSI parameters
+# SSI Parameters
 
 Updated the 15th of October 2024.
 

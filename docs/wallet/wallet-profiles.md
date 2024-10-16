@@ -1,4 +1,4 @@
-# Wallet profiles
+# Wallet Profiles
 
 Updated the 14th of October 2024.
 

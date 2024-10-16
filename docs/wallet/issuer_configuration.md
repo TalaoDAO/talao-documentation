@@ -1,4 +1,4 @@
-# Issuer configuration
+# Issuer Configuration
 
 Updated the 16th of October 2024.
 

@@ -1,4 +1,4 @@
-# User support
+# User Support
 
 Updated the 14th of October 2024.
 

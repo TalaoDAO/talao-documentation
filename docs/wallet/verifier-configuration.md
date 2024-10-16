@@ -1,4 +1,4 @@
-# Verifier configuration
+# Verifier Configuration
 
 Updated the 16th of October 2024.
 

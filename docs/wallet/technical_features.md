@@ -1,4 +1,4 @@
-# Wallet features
+# Wallet Features
 
 Updated the 14th of October 2024.
 

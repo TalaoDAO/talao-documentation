@@ -1,4 +1,4 @@
-# Wallet configuration
+# Wallet Configuration
 
 Updated the 14th of October 2024.
 

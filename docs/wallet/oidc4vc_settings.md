@@ -1,4 +1,4 @@
-# OIDC4VC parameters
+# OIDC4VC Parameters
 
 Updated the 14th of October 2024.
 

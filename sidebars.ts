@@ -35,6 +35,7 @@ const sidebars: SidebarsConfig = {
         'wallet/technical_features',
         'wallet/verifier-configuration',
         'wallet/wallet-metadata',
+        'wallet/FAQ_wallet',
       ],
     },
     {
@@ -48,6 +49,7 @@ const sidebars: SidebarsConfig = {
         'wallet-provider-backend/issuer-marketplace',
         'wallet-provider-backend/support',
         'wallet-provider-backend/wallet-with-wallet-provider-backend',
+        'wallet-provider-backend/FAQ_provider_backend',
       ],
     },
   ],

@@ -1,6 +1,6 @@
-# Issuer Configuration
+# Issuer configuration
 
-Updated the 16th of October 2024.
+Updated the 18th of October 2024.
 
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
@@ -40,8 +40,8 @@ Wallets support:
 Wallets do not support:
 
 * notification endpoint,
-* batch endpoint (Draft 13 and Draft 14),
-* DPoP for code and token (soon available),
+* batch endpoint of Draft 13,
+* DPoP for code and token,
 * encrypted credentials.
 
 ## Invocation schemes for issuance
@@ -54,6 +54,21 @@ Wallet support different invocation schemes:
 * https://app.talao.co/app/download/oidc4vc
 
 Those schemes can be displayed as QR code for wallet app scanner, smartphone camera or as a deeplink/universal link (a button in a html page for the smartphone browser).
+
+# Support of Universal Links and App Links
+
+For security reasons Talao wallets use Universal Links and App Links to redirect to wallet authorization endpoints and callback endpoints. However those links are not supported by default by all browsers. We suggest to use Safari for IOS phones and Chrome for Android. You may need to setup browser options to allow Universal links with Firefox, Brave, Samsung explorer or even Chrome on IOS.
+
+## Dynamic Credential Request
+
+Right now, wallet supports the "EBSI V3.x implementation" with a `client_metadata` argument added to the authorization request and push authorization request.
+
+Furthermore wallet metadata are available "out of band":
+
+* Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
+* Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
+
+Learn more about [Dynamic Credential Request](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-dynamic-credential-request).
 
 ## Display credentials
 

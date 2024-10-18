@@ -1,6 +1,6 @@
-# Verifier Configuration
+# Verifier configuration
 
-Updated the 16th of October 2024.
+Updated the 18th of October 2024.
 
 ## OIDC4VP Specifications Drafts
 
@@ -42,6 +42,10 @@ Wallets support different invocation schemes:
 
 Those schemes can be displayed as QR code for wallet app scanner, smartphone camera or as a deeplink/universal link (a button in a html page for the smartphone browser).
 
+# Support of Universal Links and App Links
+
+For security reasons Talao wallets use Universal Links and App Links to redirect to wallet authorization endpoints and callback endpoints. However those links are not supported by default by all browsers. We suggest to use Safari for IOS phones and Chrome for Android. You may need to setup browser options to allow Universal links with Firefox, Brave, Samsung explorer or even Chrome on IOS.
+
 ## client_id_scheme
 
 Wallet supports the following [client_id_scheme](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#name-verifier-metadata-managemen) of verifiers:
@@ -53,7 +57,17 @@ Wallet supports the following [client_id_scheme](https://openid.net/specs/openid
 
 ## Wallet metadata
 
-Wallet metadata are available "out of band", see [here](https://doc.wallet-provider.io/wallet/wallet-metadata).
+Wallet metadata are available "out of band".
+
+Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
+
+Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
+
+Learn more about [Dynamic Credential Request](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-dynamic-credential-request).
+
+## Submission presentation
+
+Submission presentation seng by wallets support nested_path.
 
 ## sd-jwt presentation rules
 

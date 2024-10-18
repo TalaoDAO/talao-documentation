@@ -57,20 +57,50 @@ Those schemes can be displayed as QR code for wallet app scanner, smartphone cam
 
 # Support of Universal Links and App Links
 
-For security reasons Talao wallets use Universal Links and App Links to redirect to wallet authorization endpoints and callback endpoints. However those links are not supported by default by all browsers. We suggest to use Safari for IOS phones and Chrome for Android. You may need to setup browser options to allow Universal links with Firefox, Brave, Samsung explorer or even Chrome on IOS.
+For security reasons Talao wallets use Universal Links and App Links to redirect to wallet authorization endpoints and callback endpoints. However those links are not supported by default by all browsers. We suggest to use **Safari for IOS** phones and **Chrome for Android**. You may need to setup browser options manually to allow Universal links or App Links with Firefox, Brave, Samsung explorer or even Chrome on IOS.
 
 ## Dynamic Credential Request
 
-Right now, wallet supports the "EBSI V3.x implementation" with a `client_metadata` argument added to the authorization request and push authorization request.
+Dynamic Credential Requiest is an option to operate a VP presentation for user authentication inside an authorization code flow. In practice this approach provides a better UX than a VP presentation followed by a pre authorization code flow.
 
-Furthermore wallet metadata are available "out of band":
+In order to manage that combination wallet must provide its own authorization code flow to the issuer. Right now, our wallets support the "EBSI V3.x implementation" way with a `client_metadata` argument added to the authorization request and push authorization request.
+
+Example of client_metadata:
+
+```
+{
+    "authorization_endpoint":"https://app.altme.io/app/download/authorize",
+    "scopes_supported":[
+        "openid"
+    ],
+    "response_types_supported":[
+        "vp_token","id_token"
+    ],
+    "client_id_schemes_supported":[
+        "redirect_uri","did"
+    ],
+    "grant_types_supported":......
+}
+
+```
+
+Here is a script of the issuance of a VC in using anothere VC as a mean of authentication:
+
+1. Wallet makes an authorization request to the AS of the issuer through a QRcode or a deeplink. The `client_metadata` attribute (or wallet_issuer attribute) is added to the request aside the standard `redirect_uri` endpoint of the wallet. For this step the wallet opens a browser session and redirects the user agent to the AS authorization endpoint.
+2. To process the authentication step, the issuer fetches the wallet authorization endpoint from the `client_metadata` and prepares a VP request with its own `reponse_uri` endpoint like a verifier. The VP request is sent as a redirect to the wallet authorization endpoint. For implementtaion issuer can add the `state` attribute to the VP request to link the request to the original wallet request.
+3. Wallet selects the VP requested and transfers is through a POST to the `response_uri` endpoint provided in the VP request. The state is added to the `vp_token` and `presentation_submission`.
+4. Issuer acting as a verifier validates the VP data needed to prepare the VC and redirects the user agent to the `redirect_uri` endpoint of the wallet with the `code`. For implementation the `state` can be associated to the `code`.
+5. Wallet requests an `access_token` in exchange of the `code`. For implementation the `code` can be associated to the `access_token`.
+6. Wallet requests the credential with the access token.
+
+In case of the use of the `wallet_issuer` attribute, issuer must discover the wallet authorization endpoint through the standard `/.well-known/openid-configuration` endpoint:
 
 * Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
 * Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
 
 Learn more about [Dynamic Credential Request](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-dynamic-credential-request).
 
-## Display credentials
+## Wallet rendering - display credentials
 
 ### Attributes of a VC
 
@@ -98,7 +128,7 @@ Wallet support all the attributes of the display.
 
 The `uri` can be either a link or a data uri scheme. `text_color` and `background_color` are fallbacks options if links are not provided.
 
-`name` is used as the VC name if there is no background image.
+`name` is used as the VC name if there is no background image. 
 
 If `display` is not provided wallets use a fallback blue card with white text color.
 

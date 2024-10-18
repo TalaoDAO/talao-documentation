@@ -44,7 +44,7 @@ Those schemes can be displayed as QR code for wallet app scanner, smartphone cam
 
 # Support of Universal Links and App Links
 
-For security reasons Talao wallets use Universal Links and App Links to redirect to wallet authorization endpoints and callback endpoints. However those links are not supported by default by all browsers. We suggest to use Safari for IOS phones and Chrome for Android. You may need to setup browser options to allow Universal links with Firefox, Brave, Samsung explorer or even Chrome on IOS.
+For security reasons Talao wallets use Universal Links and App Links to redirect to wallet authorization endpoints and callback endpoints. However those links are not supported by default by all browsers. We suggest to use **Safari for IOS** phones and **Chrome for Android**. You may need to setup browser options manually to allow Universal links and App Links with Firefox, Brave, Samsung explorer or even Chrome on IOS.
 
 ## client_id_scheme
 
@@ -59,11 +59,8 @@ Wallet supports the following [client_id_scheme](https://openid.net/specs/openid
 
 Wallet metadata are available "out of band".
 
-Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
-
-Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
-
-Learn more about [Dynamic Credential Request](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-dynamic-credential-request).
+* Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
+* Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
 
 ## Submission presentation
 
@@ -71,7 +68,9 @@ Submission presentation seng by wallets support nested_path.
 
 ## sd-jwt presentation rules
 
-The presentation is done in two steps which are the choice of the credential then the selection of the data that will be presented. The credential contains 3 types of data:
+The presentation is done in two steps which are the choice of the credential then the selection of the data that will be presented. In case of only 1 credential that fits with the presentation_definition the choice step is by passed.
+
+The credential contains 3 types of data:
 
 * The standards jwt attributes as iss, iat, vct,...that are systematically presented and not displayed to the user during the process,
 * The “disclosable” claims that are displayed and selectable (except for `limit_disclosure = required`),

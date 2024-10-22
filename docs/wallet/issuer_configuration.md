@@ -1,6 +1,6 @@
 # Issuer configuration
 
-Updated the 18th of October 2024.
+Updated the 21st of October 2024.
 
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
@@ -12,48 +12,48 @@ OIDC4VCI has evolved rapidly between 2022 (Draft 10/11) and 2024 (Draft >= 13). 
 
 Specifications of the different Drafts are available here:
 
-* [Draft 10](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-10.html) supported
-* [Draft 11](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-11.html) supported
-* [Draft 12](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html) not supported
-* [Draft 13](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-13.html) supported
-* [Draft 14](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-14.html) soon supported
+- [Draft 10](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-10.html) supported
+- [Draft 11](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-11.html) supported
+- [Draft 12](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html) not supported
+- [Draft 13](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-13.html) supported
+- [Draft 14](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-14.html) soon supported
 
 ## OIDC4VCI flow and features
 
 Wallets support:
 
-* credential offer by value and by reference,
-* pre authorized code (by default), authorized code flow, push authorization request, PKCE,
-* [Attestation based client authentication](https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/),
-* `tx_code` with`input_mode` `text`or`numeric`, `lenght`and`description`,
-* `authorization_details` and `scope`. Tune with OIDCVC settings or wallet provider backend to use `scope`.,
-* authorization server as a standalone server associated to one VC type,
-* dynamic credential request,
-* client secret post, client secret basic and public client authentication,
-* bearer credential (no crypto binding),
-* proof types as `jwt` or `ldp_vc`,
-* proof of possession header with `kid` or `jwk`,
-* deferred endpoint,
-* key identifiers as jwk thumbprint of DID,
-* keys as EdDSA, P-256, seckp256k1.
+- credential offer by value and by reference,
+- pre authorized code (by default), authorized code flow, push authorization request, PKCE,
+- [Attestation based client authentication](https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/),
+- `tx_code` with`input_mode` `text`or`numeric`, `lenght`and`description`,
+- `authorization_details` and `scope`. Tune with OIDCVC settings or wallet provider backend to use `scope`.,
+- authorization server as a standalone server associated to one VC type,
+- dynamic credential request,
+- client secret post, client secret basic and public client authentication,
+- bearer credential (no crypto binding),
+- proof types as `jwt` or `ldp_vc`,
+- proof of possession header with `kid` or `jwk`,
+- deferred endpoint,
+- key identifiers as jwk thumbprint of DID,
+- keys as EdDSA, P-256, seckp256k1.
 
 Wallets do not support:
 
-* notification endpoint,
-* batch endpoint of Draft 13,
-* DPoP for code and token,
-* encrypted credentials.
+- notification endpoint,
+- batch endpoint of Draft 13,
+- DPoP for code and token,
+- encrypted credentials.
 
 ## Invocation schemes for issuance
 
 Wallet support different invocation schemes:
 
-* openid-credential-offer://,
-* haip://,
-* https://app.altme.io/app/download/oidc4vc,
-* https://app.talao.co/app/download/oidc4vc
+- openid-credential-offer://,
+- haip://,
+- https://app.altme.io/app/download/oidc4vc,
+- https://app.talao.co/app/download/oidc4vc
 
-Those schemes can be displayed as QR code for wallet app scanner, smartphone camera or as a deeplink/universal link (a button in a html page for the smartphone browser).
+Those schemes can be displayed as QR code for wallet app scanner, smartphone camera or as a deeplink / universal link (a button in a html page for the smartphone browser).
 
 # Support of Universal Links and App Links
 
@@ -61,9 +61,14 @@ For security reasons Talao wallets use Universal Links and App Links to redirect
 
 ## Dynamic Credential Request
 
-Dynamic Credential Requiest is an option to operate a VP presentation for user authentication inside an authorization code flow. In practice this approach provides a better UX than a VP presentation followed by a pre authorization code flow.
+Dynamic Credential Request is an option to operate a VP presentation for user authentication inside an authorization code flow.
 
-In order to manage that combination wallet must provide its own authorization code flow to the issuer. Right now, our wallets support the "EBSI V3.x implementation" way with a `client_metadata` argument added to the authorization request and push authorization request.
+The differences between this process and the use of a VP authentication step (OIDC4VP) followed by the issuance of a VC by pre authorized code flow (OIDC4VCI) are multiple:
+
+- the VP(s) requested from the user depend on the VC requested by the user,
+- the integration and the UX are simpler.
+
+In order to manage that combination wallet must provide its own authorization endpoint to the issuer. Right now, our wallets support the "EBSI V3.x implementation" way with a `client_metadata` argument added to the authorization request and push authorization request.
 
 Example of client_metadata:
 
@@ -84,10 +89,10 @@ Example of client_metadata:
 
 ```
 
-Here is a script of the issuance of a VC in using anothere VC as a mean of authentication:
+Here is a script of the issuance of a VC in using another VC as a mean of authentication:
 
 1. Wallet makes an authorization request to the AS of the issuer through a QRcode or a deeplink. The `client_metadata` attribute (or wallet_issuer attribute) is added to the request aside the standard `redirect_uri` endpoint of the wallet. For this step the wallet opens a browser session and redirects the user agent to the AS authorization endpoint.
-2. To process the authentication step, the issuer fetches the wallet authorization endpoint from the `client_metadata` and prepares a VP request with its own `reponse_uri` endpoint like a verifier. The VP request is sent as a redirect to the wallet authorization endpoint. For implementtaion issuer can add the `state` attribute to the VP request to link the request to the original wallet request.
+2. To process the authentication step, the issuer fetches the wallet authorization endpoint from the `client_metadata` and prepares a VP request with its own `reponse_uri` endpoint like a verifier. The VP request is sent as a redirect to the wallet authorization endpoint. For implementation issuer can add the `state` attribute to the VP request to link the request to the original wallet request.
 3. Wallet selects the VP requested and transfers is through a POST to the `response_uri` endpoint provided in the VP request. The state is added to the `vp_token` and `presentation_submission`.
 4. Issuer acting as a verifier validates the VP data needed to prepare the VC and redirects the user agent to the `redirect_uri` endpoint of the wallet with the `code`. For implementation the `state` can be associated to the `code`.
 5. Wallet requests an `access_token` in exchange of the `code`. For implementation the `code` can be associated to the `access_token`.
@@ -95,8 +100,8 @@ Here is a script of the issuance of a VC in using anothere VC as a mean of authe
 
 In case of the use of the `wallet_issuer` attribute, issuer must discover the wallet authorization endpoint through the standard `/.well-known/openid-configuration` endpoint:
 
-* Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
-* Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
+- Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
+- Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
 
 Learn more about [Dynamic Credential Request](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-dynamic-credential-request).
 
@@ -128,7 +133,7 @@ Wallet support all the attributes of the display.
 
 The `uri` can be either a link or a data uri scheme. `text_color` and `background_color` are fallbacks options if links are not provided.
 
-`name` is used as the VC name if there is no background image. 
+`name` is used as the VC name if there is no background image.
 
 If `display` is not provided wallets use a fallback blue card with white text color.
 
@@ -136,9 +141,9 @@ If `display` is not provided wallets use a fallback blue card with white text co
 
 Wallets show only but all claims that are in the issuer metadata, rules are:
 
-* if there is a` display` attribute in the claim, wallet displays the label in bold with the claim value on the same line. Otherwise wallet displays the claim value alone,
-* if the claim is a json object (nested claims) without `display` -> it goes to the line and indent,
-* if the claim is a json object with a `display` -> it displays the label in bold and goes to the line and indent.
+- if there is a` display` attribute in the claim, wallet displays the label in bold with the claim value on the same line. Otherwise wallet displays the claim value alone,
+- if the claim is a json object (nested claims) without `display` -> it goes to the line and indent,
+- if the claim is a json object with a `display` -> it displays the label in bold and goes to the line and indent.
 
 With this issuer metadata:
 
@@ -203,17 +208,17 @@ Wallets support all attributes of the display :
             "name": "First Name",
             "locale": "en-US"
         },
-   
+
 ```
 
 `value_type` supported are:
 
-* `string`,
-* `integer`,
-* `bool`,
-* `email`,
-* `uri`,
-* `image/jpeg` , `image/png`
+- `string`,
+- `integer`,
+- `bool`,
+- `email`,
+- `uri`,
+- `image/jpeg` , `image/png`
 
 `email` and `uri` are active as you can launch the browser or open the smartphone email manager with a clic.
 
@@ -274,7 +279,46 @@ Wallet does not support the [type metadata](https://www.ietf.org/archive/id/draf
 
 Wallets support the following specifications depending on the VC format:
 
-* ldp_vc, jwt_vc, jwt_vc_json, jwt_vc_json-l : [Bitstring Status List V1.0](https://www.w3.org/TR/vc-bitstring-status-list/)
-* sd-jwt-vc : [Token Status List](https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/)
+- ldp_vc, jwt_vc, jwt_vc_json, jwt_vc_json-l : [Bitstring Status List V1.0](https://www.w3.org/TR/vc-bitstring-status-list/)
+- sd-jwt-vc : [Token Status List](https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/)
 
 When the VC is received from the issuer or displayed, the wallet verifies the signature of the VC, the signature of the status list and the status of the VC. If any of these checked fails teh wallet display a red card status. These verification steps can by passed with an option in the wallet provider backed through a security low profile.
+
+## Waltid integration
+
+All `issuer.{..}`, `expirationDate`, `issuanceDate`and `credentialSubject.id` claims must be removed from the credential data as they are already provided in the json_jwt_vc as `iss`, `sub`, `iat`. Here is a correct configuration needed to make the waltid example running :
+
+```
+{
+    "issuerKey": {
+        "type": "jwk",
+        "jwk": {
+        "kty": "EC",
+        "d": "uTIT47GfSlRa0Da4CsyoIZpjjwQLFxmL2qmBuzZpEy0",
+        "crv": "P-256",
+        "kid": "FsHUZY4_tDJDvxdp5B6moS1kwpP7PBekw4KfK7m0LCU",
+        "x": "keR9l4u1SaZKMZ7wHvj_3z44vP0sa3nlzrnc8UjpQV0",
+        "y": "pmcaedg5dtc2R6ZPZfWCBY56_M_5fUZgsz4LWD0mG8U"
+    }
+    },
+    "credentialConfigurationId": "UniversityDegree_jwt_vc_json",
+    "credentialData":{
+        "@context": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://www.w3.org/2018/credentials/examples/v1"
+        ],
+        "type": [
+            "VerifiableCredential",
+            "UniversityDegreeCredential"
+        ],
+        "credentialSubject": {
+            "degree":{
+                "type": "BachelorDegree",
+                "name": "Bachelor of Science and Arts"
+            }
+        }
+    },
+    "authenticationMethod": "PRE_AUTHORIZED",
+    "issuerDid": "did:jwk:eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2Iiwia2lkIjoiRnNIVVpZNF90REpEdnhkcDVCNm1vUzFrd3BQN1BCZWt3NEtmSzdtMExDVSIsIngiOiJrZVI5bDR1MVNhWktNWjd3SHZqXzN6NDR2UDBzYTNubHpybmM4VWpwUVYwIiwieSI6InBtY2FlZGc1ZHRjMlI2WlBaZldDQlk1Nl9NXzVmVVpnc3o0TFdEMG1HOFUifQ"
+}
+```

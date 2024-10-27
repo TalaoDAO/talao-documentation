@@ -1,46 +1,48 @@
 # Wallet Metadata
 
+Updated the 28th of October 2024.
+
 Metadata in the context of digital wallets like Talao and Altme describes the specific configurations that define the wallet’s compatibility, supported formats, cryptographic algorithms, and available features. They are crucial for setting up and integrating wallets for credential issuance and verification..
 
-### Issuance : Wallet acts as a client
+### Issuance : Wallet acts as a client for an issuer
 
 Wallet endpoints start either with https://app.talao.co/xxxx for Talao wallet or with https://app.altme.io/xxx for Altme wallet.
 
-Below metadata is for Altme wallet:
+Below metadata is for Talao wallet:
 
-```
+```json
 {
-    "vp_formats_supported": {
-        "jwt_vp": {
-            "alg": [
+    "vp_formats_supported":{
+        "jwt_vp":{
+            "alg":[
                 "ES256",
                 "ES256K",
                 "EdDSA"
             ]
         },
-        "jwt_vc": {
-            "alg": [
-                "ES256",
-                "ES256K",*
-                "EdDSA"
-            ]
-        },
-        "jwt_vp_json": {
-            "alg": [
+        "jwt_vc":{
+            "alg":[
                 "ES256",
                 "ES256K",
                 "EdDSA"
             ]
         },
-        "jwt_vc_json": {
-            "alg": [
+        "jwt_vp_json":{
+            "alg":[
                 "ES256",
                 "ES256K",
                 "EdDSA"
             ]
         },
-        "vc+sd-jwt": {
-            "alg": [
+        "jwt_vc_json":{
+            "alg":[
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
+        },
+        "vc+sd-jwt":{
+            "alg":[
                 "ES256",
                 "ES256K",
                 "EdDSA"
@@ -67,8 +69,8 @@ Below metadata is for Altme wallet:
         "authorization code",
         "pre-authorized_code"
     ],
-    "redirect_uris": [
-        "https://app.altme.io/app/download/callback"
+    "redirect_uris" [
+        "https://app.talao.co/app/download/callback"
     ],
     "subject_syntax_types_supported": [
         "did:key",
@@ -78,37 +80,57 @@ Below metadata is for Altme wallet:
         "did:key:jwk_jcs-pub",
         "did:ebsi:v1"
     ],
+    "response_types_supported":[
+        "vp_token",
+        "id_token"
+    ],
     "token_endpoint_auth_method_supported": [
-        "none", 
-        "client_id", 
-        "client_secret_post", 
-        "client_secret_basic", 
+        "none",
+        "client_id",
+        "client_secret_post",
+        "client_secret_basic",
         "client_secret_jwt"
     ],
-    "credential_offer_endpoint": [
-        "openid-credential-offer://", 
-        "haip://"
+    "credential_offer_endpoint_supported": [
+        "openid-credential-offer://",
+        "haip://",
+        "https://app.talao.co/app/download/oidc4vc"
     ],
-    "client_name": "Altme wallet",
     "contacts": [
         "contact@talao.io"
     ]
 }
 ```
 
-### Verification: wallet acts as an Authorization Server
+### Verification: wallet acts as an Authorization Server for a verifier
 
 Wallet endpoints start either with https://app.talao.co/xxxx for Talao wallet or with https://app.altme.io/xxx for Altme wallet.
 
-Below metadata is for Altme wallet:
+Learn more about wallet metada [here](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#name-wallet-metadata-authorizati).
 
-```
+Below metadata is for Talao wallet:
+
+```json
 {
-    "client_name": "Altme_wallet",
-    "authorization_endpoint": "https://app.altme.io/app/download/authorize",
+    "issuer": "https://app.talao.co/wallet-issuer",
+    "wallet_name": "talao_wallet",
+    "key_type": "software",
+    "user_authentication": "system_biometry",
+    "authorization_endpoint": "https://app.talao.co/app/download/authorize",
+    "grant_types_supported": [
+        "authorization_code",
+        "pre-authorized_code"
+    ],
     "response_types_supported": [
         "vp_token",
         "id_token"
+    ],
+    "scope_supported":[
+        "openid"
+    ],
+    "subject_types_supported":[
+        "pairwise",
+        "public"
     ],
     "vp_formats_supported": {
         "jwt_vc_json": {
@@ -125,6 +147,20 @@ Below metadata is for Altme wallet:
                 "EdDSA"
             ]
         },
+        "jwt_vc_json-ld": {
+            "alg_values_supported": [
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
+        },
+        "jwt_vp_json-ld": {
+            "alg_values_supported": [
+                "ES256",
+                "ES256K",
+                "EdDSA"
+            ]
+        },
         "vc+sd-jwt": {
             "alg_values_supported": [
                 "ES256",
@@ -134,26 +170,35 @@ Below metadata is for Altme wallet:
         },
         "ldp_vp": {
             "proof_type": [
-                "JsonWebSignature2020",
                 "Ed25519Signature2018",
-                "EcdsaSecp256k1Signature2019",
-                "RsaSignature2018"
+                "EcdsaSecp256k1Signature2019"
             ]
         },
         "ldp_vc": {
             "proof_type": [
-                "JsonWebSignature2020",
                 "Ed25519Signature2018",
-                "EcdsaSecp256k1Signature2019",
-                "RsaSignature2018"
+                "EcdsaSecp256k1Signature2019"
             ]
         }
     },
-    "client_id_schemes_supported": [
-        "did", 
-        "redirect_uri", 
-        "x509_san_dns", 
+    "id_token_types_supported": [
+        "subject_signed_id_token"
+    ],
+    "client_id_schemes_supported":[
+        "did",
+        "redirect_uri",
+        "x509_san_dns",
         "verifier_attestation"
+    ],
+    "subject_syntax_types_supported":[
+        "urn:ietf:params:oauth:jwk-thumbprint",
+        "did:key",
+        "did:jwk"
+    ],
+    "id_token_signing_alg_values_supported": [
+        "ES256",
+        "ES256K",
+        "EdDSA"
     ],
     "request_object_signing_alg_values_supported": [
         "ES256",
@@ -165,5 +210,6 @@ Below metadata is for Altme wallet:
         "contact@talao.io"
     ]
 }
-```
 
+
+```

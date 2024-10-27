@@ -1,6 +1,6 @@
 # Issuer configuration
 
-Updated the 21st of October 2024.
+Updated the 28th of October 2024.
 
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
@@ -12,46 +12,46 @@ OIDC4VCI has evolved rapidly between 2022 (Draft 10/11) and 2024 (Draft >= 13). 
 
 Specifications of the different Drafts are available here:
 
-- [Draft 10](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-10.html) supported
-- [Draft 11](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-11.html) supported
-- [Draft 12](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html) not supported
-- [Draft 13](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-13.html) supported
-- [Draft 14](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-14.html) soon supported
+* [Draft 10](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-10.html) supported
+* [Draft 11](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-11.html) supported
+* [Draft 12](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html) not supported
+* [Draft 13](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-13.html) supported
+* [Draft 14](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-14.html) soon supported
 
 ## OIDC4VCI flow and features
 
 Wallets support:
 
-- credential offer by value and by reference,
-- pre authorized code (by default), authorized code flow, push authorization request, PKCE,
-- [Attestation based client authentication](https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/),
-- `tx_code` with`input_mode` `text`or`numeric`, `lenght`and`description`,
-- `authorization_details` and `scope`. Tune with OIDCVC settings or wallet provider backend to use `scope`.,
-- authorization server as a standalone server associated to one VC type,
-- dynamic credential request,
-- client secret post, client secret basic and public client authentication,
-- bearer credential (no crypto binding),
-- proof types as `jwt` or `ldp_vc`,
-- proof of possession header with `kid` or `jwk`,
-- deferred endpoint,
-- key identifiers as jwk thumbprint of DID,
-- keys as EdDSA, P-256, seckp256k1.
+* credential offer by value and by reference,
+* pre authorized code (by default), authorized code flow, push authorization request, PKCE,
+* [Attestation based client authentication](https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/),
+* `tx_code` with`input_mode` `text`or`numeric`, `lenght`and`description`,
+* `authorization_details` and `scope`. Tune with OIDCVC settings or wallet provider backend to use `scope`.,
+* authorization server as a standalone server associated to one VC type,
+* dynamic credential request,
+* client secret post, client secret basic and public client authentication,
+* bearer credential (no crypto binding),
+* proof types as `jwt` or `ldp_vc`,
+* proof of possession header with `kid` or `jwk`,
+* deferred endpoint,
+* key identifiers as jwk thumbprint of DID,
+* keys as EdDSA, P-256, seckp256k1.
 
 Wallets do not support:
 
-- notification endpoint,
-- batch endpoint of Draft 13,
-- DPoP for code and token,
-- encrypted credentials.
+* notification endpoint,
+* batch endpoint of Draft 13,
+* DPoP for code and token,
+* encrypted credentials.
 
 ## Invocation schemes for issuance
 
 Wallet support different invocation schemes:
 
-- openid-credential-offer://,
-- haip://,
-- https://app.altme.io/app/download/oidc4vc,
-- https://app.talao.co/app/download/oidc4vc
+* openid-credential-offer://,
+* haip://,
+* https://app.altme.io/app/download/oidc4vc,
+* https://app.talao.co/app/download/oidc4vc
 
 Those schemes can be displayed as QR code for wallet app scanner, smartphone camera or as a deeplink / universal link (a button in a html page for the smartphone browser).
 
@@ -72,7 +72,7 @@ In order to manage that combination wallet must provide its own authorization en
 
 Example of client_metadata:
 
-```
+```json
 {
     "authorization_endpoint":"https://app.altme.io/app/download/authorize",
     "scopes_supported":[
@@ -100,8 +100,8 @@ Here is a script of the issuance of a VC in using another VC as a mean of authen
 
 In case of the use of the `wallet_issuer` attribute, issuer must discover the wallet authorization endpoint through the standard `/.well-known/openid-configuration` endpoint:
 
-- Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
-- Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
+* Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
+* Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
 
 Learn more about [Dynamic Credential Request](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-dynamic-credential-request).
 
@@ -111,7 +111,7 @@ Learn more about [Dynamic Credential Request](https://openid.net/specs/openid-4-
 
 Wallet support all the attributes of the display.
 
-```
+```json
 "credential_configurations_supported": {
     "IBANLegalPerson": {
     "scope": "IBANLegalPerson_scope",
@@ -141,13 +141,13 @@ If `display` is not provided wallets use a fallback blue card with white text co
 
 Wallets show only but all claims that are in the issuer metadata, rules are:
 
-- if there is a` display` attribute in the claim, wallet displays the label in bold with the claim value on the same line. Otherwise wallet displays the claim value alone,
-- if the claim is a json object (nested claims) without `display` -> it goes to the line and indent,
-- if the claim is a json object with a `display` -> it displays the label in bold and goes to the line and indent.
+* if there is a` display` attribute in the claim, wallet displays the label in bold with the claim value on the same line. Otherwise wallet displays the claim value alone,
+* if the claim is a json object (nested claims) without `display` -> it goes to the line and indent,
+* if the claim is a json object with a `display` -> it displays the label in bold and goes to the line and indent.
 
 With this issuer metadata:
 
-```
+```json
 "claims": {
     "given_name": {
         "display": [
@@ -199,7 +199,7 @@ False
 
 Wallets support all attributes of the display :
 
-```
+```json
 "claims": {
     "given_name": {
     "value_type": "string",
@@ -208,17 +208,17 @@ Wallets support all attributes of the display :
             "name": "First Name",
             "locale": "en-US"
         },
-
+   
 ```
 
 `value_type` supported are:
 
-- `string`,
-- `integer`,
-- `bool`,
-- `email`,
-- `uri`,
-- `image/jpeg` , `image/png`
+* `string`,
+* `integer`,
+* `bool`,
+* `email`,
+* `uri`,
+* `image/jpeg` , `image/png`
 
 `email` and `uri` are active as you can launch the browser or open the smartphone email manager with a clic.
 
@@ -230,7 +230,7 @@ Wallets support all attributes of the display :
 
 Locale language is chosen depending on the smartphone language. If the smartphone language translation is not provided with the claim, wallet will use locale. If locale is not provided in the issuer metadata, wallet will use english.
 
-```
+```json
 "issuing_country": {
     "mandatory": true,
     "value_type": "string",
@@ -256,8 +256,8 @@ Use the value_type `image/jpeg` or `image/png`
 
 Image can be provided as value (data:uri) or reference https://...
 
-```"
-picture": {
+```json
+"picture": {
     "mandatory": True,
     "value_type": "image/jpeg",
     "display": [
@@ -279,8 +279,8 @@ Wallet does not support the [type metadata](https://www.ietf.org/archive/id/draf
 
 Wallets support the following specifications depending on the VC format:
 
-- ldp_vc, jwt_vc, jwt_vc_json, jwt_vc_json-l : [Bitstring Status List V1.0](https://www.w3.org/TR/vc-bitstring-status-list/)
-- sd-jwt-vc : [Token Status List](https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/)
+* ldp_vc, jwt_vc, jwt_vc_json, jwt_vc_json-l : [Bitstring Status List V1.0](https://www.w3.org/TR/vc-bitstring-status-list/)
+* sd-jwt-vc : [Token Status List](https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/)
 
 When the VC is received from the issuer or displayed, the wallet verifies the signature of the VC, the signature of the status list and the status of the VC. If any of these checked fails teh wallet display a red card status. These verification steps can by passed with an option in the wallet provider backed through a security low profile.
 
@@ -288,7 +288,7 @@ When the VC is received from the issuer or displayed, the wallet verifies the si
 
 All `issuer.{..}`, `expirationDate`, `issuanceDate`and `credentialSubject.id` claims must be removed from the credential data as they are already provided in the json_jwt_vc as `iss`, `sub`, `iat`. Here is a correct configuration needed to make the waltid example running :
 
-```
+```json
 {
     "issuerKey": {
         "type": "jwk",
@@ -322,3 +322,272 @@ All `issuer.{..}`, `expirationDate`, `issuanceDate`and `credentialSubject.id` cl
     "issuerDid": "did:jwk:eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2Iiwia2lkIjoiRnNIVVpZNF90REpEdnhkcDVCNm1vUzFrd3BQN1BCZWt3NEtmSzdtMExDVSIsIngiOiJrZVI5bDR1MVNhWktNWjd3SHZqXzN6NDR2UDBzYTNubHpybmM4VWpwUVYwIiwieSI6InBtY2FlZGc1ZHRjMlI2WlBaZldDQlk1Nl9NXzVmVVpnc3o0TFdEMG1HOFUifQ"
 }
 ```
+
+## Issuance flow example
+
+This example is based on the flow of [this issuer](https://talao.co/sandbox/issuer/test_2).
+
+Below the URL encoded credential offer which is read as a QR code by the wallet:
+
+```
+openid-credential-offer://?credential_offer_uri=https://talao.co/issuer/credential_offer_uri/ca0f1c7e-9426-11ef-b6e7-0a1628958560
+```
+
+First the wallet calls the credential_offer_uri endpoint:
+
+```https
+GET /issuer/credential_offer_uri/ca0f1c7e-9426-11ef-b6e7-0a1628958560
+Host: talao.co
+```
+
+The issuer responds with the credential offer which looks like this:
+
+```json
+{
+      "credential_offer": {
+            "credential_issuer": "https://talao.co/issuer/sobosgdtgd",
+            "credential_configuration_ids": [
+                  "InsuranceNaturalPerson"
+            ],
+            "grants": {
+                  "urn:ietf:params:oauth:grant-type:pre-authorized_code": {
+                        "pre-authorized_code": "dfc8ee59-9430-11ef-9e55-0a1628958560"
+                  }
+            }
+      }
+}
+```
+
+Then the wallet calls the issuer metadata endpoint:
+
+```https
+GET /issuer/sobosgdtgd/.well-known/openid-credential-issuer
+Host: talao.co
+```
+
+The issuer responds with the issuer matadata which looks like this:
+
+```json
+{
+    "credential_issuer": "https://talao.co/issuer/sobosgdtgd",
+    "pre-authorized_grant_anonymous_access_supported": true,
+    "display": [
+        {
+            "name": "Talao issuer",
+            "locale": "en-US",
+            "logo": {
+                "uri": "https://talao.co/static/img/talao.png",
+                "alt_text": "Talao logo"
+            }
+        },
+        {
+            "name": "Talao issuer",
+            "locale": "fr-FR",
+            "logo": {
+                "uri": "https://talao.co/static/img/talao.png",
+                "alt_text": "Talao logo"
+            }
+        }
+    ],
+    "credential_endpoint": "https://talao.co/issuer/sobosgdtgd/credential",
+    "deferred_credential_endpoint": "https://talao.co/issuer/sobosgdtgd/deferred",
+    "scopes_supported": [
+        "openid"
+    ],
+    "response_types_supported": [
+        "vp_token",
+        "id_token"
+    ],
+    "response_modes_supported": [
+        "query"
+    ],
+    "grant_types_supported": [
+        "authorization_code",
+        "urn:ietf:params:oauth:grant-type:pre-authorized_code"
+    ],
+    "subject_types_supported": [
+        "public",
+        "pairwise"
+    ],
+    "id_token_signing_alg_values_supported": [
+        "ES256",
+        "ES256K",
+        "EdDSA",
+        "RS256"
+    ],
+    "request_object_signing_alg_values_supported": [
+        "ES256",
+        "ES256K",
+        "EdDSA",
+        "RS256"
+    ],
+    "request_parameter_supported": true,
+    "request_uri_parameter_supported": true,
+    "token_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "client_secret_jwt",
+        "none"
+    ],
+    "request_authentication_methods_supported": {
+        "authorization_endpoint": [
+            "request_object"
+        ]
+    },
+    "subject_syntax_types_supported": [
+        "urn:ietf:params:oauth:jwk-thumbprint",
+        "did:key",
+        "did:ebsi",
+        "did:pkh",
+        "did:ethr",
+        "did:web",
+        "did:jwk"
+    ],
+    "subject_syntax_types_discriminations": [
+        "did:key:jwk_jcs-pub",
+        "did:ebsi:v1"
+    ],
+    "subject_trust_frameworks_supported": [
+        "ebsi"
+    ],
+    "id_token_types_supported": [
+        "subject_signed_id_token"
+    ],
+    "authorization_endpoint": "https://talao.co/issuer/sobosgdtgd/authorize",
+    "token_endpoint": "https://talao.co/issuer/sobosgdtgd/token",
+    "jwks_uri": "https://talao.co/issuer/sobosgdtgd/jwks",
+    "pushed_authorization_request_endpoint": "https://talao.co/issuer/sobosgdtgd/authorize/par",
+    "credential_configurations_supported": {
+        "InsuranceNaturalPerson": {
+            "scope": "InsuranceNaturalPerson_scope",
+            "display": [
+                {
+                    "locale": "en-US",
+                    "name": "Issurance attestation",
+                    "description": "Insurance for liability risks",
+                    "background_color": "#3B6F6D",
+                    "text_color": "#FFFFFF",
+                    "logo": {
+                        "uri": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
+                        "alt_text": "AXA International."
+                    },
+                    "background_image": {
+                        "uri": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
+                        "alt_text": "AXA International"
+                    }
+                }
+            ],
+            "id": "InsuranceNaturalPerson",
+            "credential_definition": {
+                "type": [
+                    "VerifiableCredential",
+                    "InsuranceNaturalPerson"
+                ],
+                "credentialSubject": {
+                    "insurerName": {
+                        "display": [
+                            {
+                                "name": "Insurer name",
+                                "locale": "en-US"
+                            }
+                        ]
+                    },
+                    "leiCodeInsurer": {
+                        "display": [
+                            {
+                                "name": "LEI code",
+                                "locale": "en-US"
+                            }
+                        ]
+                    },
+                    "contractId": {
+                        "display": [
+                            {
+                                "name": "Contract Identifier",
+                                "locale": "en-US"
+                            }
+                        ]
+                    },
+                    "insuredPerson": {}
+                }
+            },
+            "format": "jwt_vc_json",
+            "cryptographic_binding_methods_supported": [
+                "did:jwk",
+                "did:key"
+            ],
+            "proof_types_supported": {
+                "jwt": {
+                    "proof_signing_alg_values_supported": [
+                        "ES256"
+                    ]
+                }
+            },
+            "credential_signing_alg_values_supported": [
+                "ES256"
+            ]
+        }
+    }
+}
+
+```
+
+Then wallet calls the token endpoint with the pre authorized code and a client_id (optional):
+
+```https
+POST /issuer/sobosgdtgd/token HTTP/1.0
+Host: talao.co
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 321
+
+grant_type=urn:ietf:params:oauth:grant-type:pre-authorized_code
+&pre-authorized_code=dfc8ee59-9430-11ef-9e55-0a1628958560
+&client_id=did:jwk:eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6IkthY0xyeG1OMXhNNGlrZWY2bHJRM1F5d25PVEdrR05xV3hhM2Rsc1pReDgiLCJ5IjoiYXZWZWgzY3Z5SVl1Q0NUVDF5YnZKeFoyeXNvQ2FuaDFOOE9nTzFBT1M3WSJ9
+```
+
+The issuer responds with an access token and a c_nonce (optional):
+
+```json
+{
+    "access_token": "4fed3ac3-9431-11ef-b492-0a1628958560",
+    "c_nonce": "4fed3cc1-9431-11ef-beed-0a1628958560",
+    "token_type": "bearer",
+    "expires_in": 10000,
+    "c_nonce_expires_in": 1704466725,
+    "refresh_token": "4fed3c24-9431-11ef-b9f1-0a1628958560"
+}
+```
+
+Then the wallet calls the credential endpoint with the format and type of the credential and a proof of key ownership as a jwt:
+
+```https
+POST /issuer/sobosgdtgd/credential HTTP/1.0
+Host: talao.co
+Authorization: Bearer 4fed3ac3-9431-11ef-b492-0a1628958560
+Content-Type: application/json
+Content-Length: 932
+
+{
+    "format": "jwt_vc_json",
+    "credential_definition": {
+        "type": [
+            "VerifiableCredential",
+            "InsuranceNaturalPerson"
+        ]
+    },
+    "proof": {
+        "proof_type": "jwt",
+        "jwt": "eyJhbGciOiJFUzI1NiIsInR5cCI6Im9wZW5pZDR2Y2ktcHJvb2Yrand0Iiwia2lkIjoiZGlkOmp3azpleUpqY25ZaU9pSlFMVEkxTmlJc0ltdDBlU0k2SWtWRElpd2llQ0k2SWt0aFkweHllRzFPTVhoTk5HbHJaV1kyYkhKUk0xRjVkMjVQVkVkclIwNXhWM2hoTTJSc2MxcFJlRGdpTENKNUlqb2lZWFpXWldnelkzWjVTVmwxUTBOVVZERjVZblpLZUZveWVYTnZRMkZ1YURGT09FOW5UekZCVDFNM1dTSjkjMCJ9.eyJpc3MiOiJkaWQ6andrOmV5SmpjbllpT2lKUUxUSTFOaUlzSW10MGVTSTZJa1ZESWl3aWVDSTZJa3RoWTB4eWVHMU9NWGhOTkdsclpXWTJiSEpSTTFGNWQyNVBWRWRyUjA1eFYzaGhNMlJzYzFwUmVEZ2lMQ0o1SWpvaVlYWldaV2d6WTNaNVNWbDFRME5VVkRGNVluWktlRm95ZVhOdlEyRnVhREZPT0U5blR6RkJUMU0zV1NKOSIsImlhdCI6MTczMDAxMjQ3MCwiYXVkIjoiaHR0cHM6Ly90YWxhby5jby9pc3N1ZXIvc29ib3NnZHRnZCIsIm5vbmNlIjoiNGZlZDNjYzEtOTQzMS0xMWVmLWJlZWQtMGExNjI4OTU4NTYwIn0.2rQCQ8PJy5bu8wVUJ76C_qVXcdrj5ajyUFNwk3agvMbPMH40B8fu0Oq5dMiz7h2YGPgjI87wQBjFHToEhaN-5w"
+    }
+}
+```
+
+The issuer responds with the credential:
+
+```json
+{
+  "credential": "eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDp3ZWI6YXBwLmFsdG1lLmlvOmlzc3VlciNrZXktMSIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjE1NDg1MDAsImlhdCI6MTczMDAxMjUwMCwiaXNzIjoiZGlkOndlYjphcHAuYWx0bWUuaW86aXNzdWVyIiwianRpIjoidXJuOnV1aWQ6NTBjZmJmMzEtOTQzMS0xMWVmLTg1ZDUtMGExNjI4OTU4NTYwIiwibmJmIjoxNzMwMDEyNTAwLCJub25jZSI6IjRmZWQzY2MxLTk0MzEtMTFlZi1iZWVkLTBhMTYyODk1ODU2MCIsInN1YiI6ImRpZDpqd2s6ZXlKamNuWWlPaUpRTFRJMU5pSXNJbXQwZVNJNklrVkRJaXdpZUNJNklrdGhZMHh5ZUcxT01YaE5OR2xyWldZMmJISlJNMUY1ZDI1UFZFZHJSMDV4VjNoaE0yUnNjMXBSZURnaUxDSjVJam9pWVhaV1pXZ3pZM1o1U1ZsMVEwTlVWREY1WW5aS2VGb3llWE52UTJGdWFERk9PRTluVHpGQlQxTTNXU0o5IiwidmMiOnsiY3JlZGVudGlhbFN0YXR1cyI6W3siaWQiOiJodHRwczovL3RhbGFvLmNvL3NhbmRib3gvaXNzdWVyL2JpdHN0cmluZ3N0YXR1c2xpc3QvMSM2NTU1MiIsInN0YXR1c0xpc3RDcmVkZW50aWFsIjoiaHR0cHM6Ly90YWxhby5jby9zYW5kYm94L2lzc3Vlci9iaXRzdHJpbmdzdGF0dXNsaXN0LzEiLCJzdGF0dXNMaXN0SW5kZXgiOiI2NTU1MiIsInN0YXR1c1B1cnBvc2UiOiJyZXZvY2F0aW9uIiwidHlwZSI6IkJpdHN0cmluZ1N0YXR1c0xpc3RFbnRyeSJ9XSwiY3JlZGVudGlhbFN1YmplY3QiOnsiY29udHJhY3QiOnsiY29udHJhY3RBbW91bnQiOjEwMDAwMDAwLCJjb250cmFjdFR5cGUiOiJMaWFiaWxpdHkgcmlza3MiLCJjdXJyZW5jeSI6IkVVUiJ9LCJjb250cmFjdElkIjoiODk3ODk3NjUgOTc2OTY1IiwiaWQiOiIiLCJpbnN1cmVkUGVyc29uIjp7ImJpcnRoZGF0ZSI6IjIwMDAtMTItMDEiLCJmYW1pbHlfbmFtZSI6IkRvZSIsImdpdmVuX25hbWUiOiJKb2huIn0sImluc3VyZXJOYW1lIjoiQVhBIEludGVybmF0aW9uYWwiLCJsZWlDb2RlSW5zdXJlciI6IjAyMDk5ODc2RlI3NSJ9LCJleHBpcmF0aW9uRGF0ZSI6IjIwMjUtMTAtMjdUMDY6NTg6MzBaIiwiaWQiOiJ1cm46dXVpZDo0ZDQ3YTZiYS01MWNkLTQxZWYtOWJhYi1mYzQ5NjNiNWFmZjMiLCJpc3N1YW5jZURhdGUiOiIyMDI0LTEwLTI3VDA2OjU4OjMwWiIsInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiLCJJbnN1cmFuY2VOYXR1cmFsUGVyc29uIl19fQ.1DI8Fwe-uWXF3FyxksgNVb453XylOBL8CeQuf-sPI0_Soo_MXHYmwGsKiS6m-rOVCNu4DihclrtIG4NElWbnAg"
+}
+```
+
+The wallet stores the credential with the issuer metadata for correct rendering.

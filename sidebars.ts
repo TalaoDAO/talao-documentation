@@ -18,7 +18,6 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Wallet',
       items: [
-        'wallet/setup_wallet',
         {
           type: 'category',
           label: 'Wallet Screens',

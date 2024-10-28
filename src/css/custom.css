@@ -28,3 +28,146 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* Custom responsive styles for wallet screens */
+.responsive-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  /* flex-direction: row-reverse; */
+}
+
+/* DIsplay screen */
+
+.responsive-image-display {
+  flex: 0 0 30%;
+  margin-left: 20px;
+  margin-bottom: 80px;
+}
+
+.responsive-text-display {
+  flex: 0 0 70%;
+  margin-left: 20px;
+}
+
+/* Mobile: 50% image, 50% text */
+@media (max-width: 768px) {
+  .responsive-image-display {
+    flex: 0 0 60%;
+    margin-left: -5px;
+    margin-bottom: 900px;
+  }
+
+  .responsive-text-display {
+    flex: 0 0 40%;
+    margin-left: 10px;
+  }
+}
+
+/* Settings screen */
+
+.responsive-image-setting {
+  flex: 0 0 30%;
+  margin-left: 20px;
+  margin-bottom: -55px;
+}
+
+.responsive-text-setting {
+  flex: 0 0 70%;
+  margin-left: 20px;
+}
+
+/* Mobile: 50% image, 50% text */
+@media (max-width: 768px) {
+  .responsive-image-setting {
+    flex: 0 0 60%;
+    margin-left: -5px;
+    margin-bottom: 1340px;
+  }
+
+  .responsive-text-setting {
+    flex: 0 0 40%;
+    margin-left: 10px;
+  }
+}
+
+/* Wallet screen */
+
+.responsive-image-wallet {
+  flex: 0 0 30%;
+  /* margin-left: 20px; */
+  margin-bottom: 170px;
+}
+
+.responsive-text-wallet {
+  flex: 0 0 70%;
+  margin-left: 20px;
+}
+
+/* Mobile: 50% image, 50% text */
+@media (max-width: 768px) {
+  .responsive-image-wallet {
+    flex: 0 0 60%;
+    margin-left: -5px;
+    margin-bottom: 1600px;
+  }
+
+  .responsive-text-wallet {
+    flex: 0 0 40%;
+    margin-left: 7px;
+  }
+}
+
+/* Talao discover  */
+
+.responsive-image-display-talao {
+  flex: 0 0 30%;
+  margin-left: 20px;
+  margin-bottom: -20px;
+}
+
+.responsive-text-display-talao {
+  flex: 0 0 70%;
+  margin-left: 20px;
+}
+
+/* Mobile: 50% image, 50% text */
+@media (max-width: 768px) {
+  .responsive-image-display-talao {
+    flex: 0 0 60%;
+    margin-left: -5px;
+    margin-bottom: 650px;
+  }
+
+  .responsive-text-display-talao {
+    flex: 0 0 40%;
+    margin-left: 10px;
+  }
+}
+
+/* Talao wallet  */
+
+.responsive-image-wallet-talao {
+  flex: 0 0 30%;
+  margin-left: 20px;
+  margin-bottom: -20px;
+}
+
+.responsive-text-wallet-talao {
+  flex: 0 0 70%;
+  margin-left: 20px;
+}
+
+/* Mobile: 50% image, 50% text */
+@media (max-width: 768px) {
+  .responsive-image-wallet-talao {
+    flex: 0 0 60%;
+    margin-left: -5px;
+    margin-bottom: 750px;
+  }
+
+  .responsive-text-wallet-talao {
+    flex: 0 0 40%;
+    margin-left: 10px;
+  }
+}

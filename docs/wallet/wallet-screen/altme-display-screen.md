@@ -1,12 +1,12 @@
-# Discover
+# Altme - Discover
 
 Updated the 14th of October 2024.
 
-<div style={{ display: 'flex', alignItems: 'stretch', marginBottom: '20px' }}>
-  <div style={{ flex: '0 0 30%' }}>
-    <img src="/img/ssi_screen/talao_discover.png" alt="Talao Discover Screen" style={{ width: '100%', marginLeft: '50px', height: 'auto' }} />
+<div class="responsive-container">
+  <div class="responsive-image-display">
+    <img src="/img/ssi_screen/altme_discover.png" alt="Altme Discover Screen" style={{ width: '100%', height: 'auto' }} />
   </div>
-  <div style={{ flex: '0 0 70%', height: '100%', marginLeft: '150px' }}>
+  <div class="responsive-text-display">
     <p>This is the Discover screen of the wallet to access issuers.</p>
     <ol>
       <li>My Wallet: to access the main screen of the wallet with all verifiable credentials represented as cards.</li>

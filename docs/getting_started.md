@@ -71,7 +71,7 @@ You have now a proof of age. The age verification has been provided by our partn
 
 Let's now present this proof of age to the age verification tool setup by our partner [Werify](https://werify.eu/):
 
-1. Clic [here]([https://staging.werify.eu/#/werify_point_kiosk/attempt+ideology+glamorous+varsity+spelling](https://staging.werify.eu/#/werify_point_kiosk/attempt+ideology+glamorous+varsity+spelling)) to go to the verifier website,
+1. Clic [here](https://staging.werify.eu/#/werify_point_kiosk/attempt+ideology+glamorous+varsity+spelling) to go to the verifier website,
 2. scan the QR code with the wallet scanner.
 
 You have used your age credential to prove your age. This tools is a verifier managed by Werify.

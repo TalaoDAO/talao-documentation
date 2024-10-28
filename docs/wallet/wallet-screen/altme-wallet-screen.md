@@ -1,12 +1,12 @@
-# My wallet
+# Altme - My wallet
 
 Updated the 14th of October 2024.
 
-<div style={{ display: 'flex', alignItems: 'stretch', marginBottom: '20px' }}>
-  <div style={{ flex: '0 0 30%' }}>
-    <img src="/img/ssi_screen/altme_wallet.png" alt="Altme Wallet Main Screen" style={{ width: '100%', marginLeft: '50px', height: 'auto' }} />
+<div class="responsive-container">
+  <div class="responsive-image-wallet">
+    <img src="/img/ssi_screen/altme_wallet.png" alt="Altme Wallet Main Screen" style={{ width: '100%', height: 'auto' }} />
   </div>
-  <div style={{ flex: '0 0 70%', height: '100%', marginLeft: '150px' }}>
+  <div class="responsive-text-wallet">
     <p>This is the main screen of the wallet where all verifiable credentials stored in the wallet are displayed.</p>
     <ol>
       <li>My Wallet: to access the main screen of the wallet (this screen) with all verifiable credentials represented as cards.</li>

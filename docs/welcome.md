@@ -1,12 +1,16 @@
 # Welcome
 
-[Talao website](https://talao.io)
+Updated the 28th of October 2024.
 
-[Contact us](mailto:contact@talao.io)
+Here you will find the documentation concerning the use and integration of the Talao and Altme wallets. You will also find information concerning the use of the Wallet Provider Backend associated with these wallets.
 
-Updated the 14th of October 2024.
+If you encounter issues or have questions or if you want a demo do not hesitate to contact us.
 
-Here you will find the documentation concerning the technical use and integration of the Talao and Altme wallets. You will also find information concerning the use of the Wallet Provider Backend associated with these wallets.
+[Contact us by email](mailto:contact@talao.io)
+
+[Post a ticket on github](https://github.com/TalaoDAO/AltMe/issues)
+
+[Fill this form for a demo](https://qhf0siml406.typeform.com/to/PdULRDIV?typeform-source=talao.io)
 
 ## Wallets
 
@@ -18,8 +22,6 @@ Talao provides 2 mobile wallets:
 
   * [Talao Google store](https://play.google.com/store/apps/details?id=co.talao.wallet)
   * [Talao Apple store](https://apps.apple.com/fr/app/talao-wallet/id1582183266?platform=iphone)
-
-
 * Altme wallet : it is a Self Sovereign Identity and crypto wallet to support verifiable credentials and crypto assets (token, NFT) on blockchains.
 
   * [Altme Google store](https://play.google.com/store/apps/details?id=co.altme.alt.me.altme&hl=en-US&pli=1)

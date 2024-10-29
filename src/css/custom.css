@@ -48,6 +48,7 @@
 .responsive-text-display {
   flex: 0 0 70%;
   margin-left: 20px;
+  margin-bottom: 200px;
 }
 
 /* Mobile: 50% image, 50% text */
@@ -75,6 +76,7 @@
 .responsive-text-setting {
   flex: 0 0 70%;
   margin-left: 20px;
+  margin-bottom: 330px;
 }
 
 /* Mobile: 50% image, 50% text */
@@ -102,6 +104,7 @@
 .responsive-text-wallet {
   flex: 0 0 70%;
   margin-left: 20px;
+  margin-bottom: 220px;
 }
 
 /* Mobile: 50% image, 50% text */
@@ -129,6 +132,7 @@
 .responsive-text-display-talao {
   flex: 0 0 70%;
   margin-left: 20px;
+  
 }
 
 /* Mobile: 50% image, 50% text */
@@ -156,6 +160,7 @@
 .responsive-text-wallet-talao {
   flex: 0 0 70%;
   margin-left: 20px;
+  margin-bottom: 180px;
 }
 
 /* Mobile: 50% image, 50% text */

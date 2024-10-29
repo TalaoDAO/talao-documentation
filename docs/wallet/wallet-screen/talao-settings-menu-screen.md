@@ -1,7 +1,5 @@
 # Talao - Settings
 
-Updated the 14th of October 2024.
-
 <div class="responsive-container">
   <div class="responsive-image-setting">
     <img src="/img/ssi_screen/talao_settings.png" alt="Talao Settings Screen" style={{ width: '100%', height: 'auto' }} />

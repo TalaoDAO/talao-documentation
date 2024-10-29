@@ -1,7 +1,5 @@
 # Altme - My wallet
 
-Updated the 14th of October 2024.
-
 <div class="responsive-container">
   <div class="responsive-image-wallet">
     <img src="/img/ssi_screen/altme_wallet.png" alt="Altme Wallet Main Screen" style={{ width: '100%', height: 'auto' }} />

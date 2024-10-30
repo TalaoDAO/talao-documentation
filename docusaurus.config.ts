@@ -86,7 +86,7 @@ const config: Config = {
           items: [
             {
               label: 'Website',
-              to: 'https://altme.io/',
+              to: 'https://talao.io/',
             },
             {
               label: 'GitHub',

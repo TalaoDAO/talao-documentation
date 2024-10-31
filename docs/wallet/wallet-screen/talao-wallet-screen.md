@@ -14,6 +14,7 @@
       <li>Settings: to access the settings menu.</li>
       <li>Your contact information</li>
       <li>Add cards: to access the issuer marketplace.</li>
+      <li>Your Pending credentials</li>
       <li>Add cards: to access the issuer marketplace.</li>
       <li>Settings: to access the settings menu.</li>
     </ol>

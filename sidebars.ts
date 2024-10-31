@@ -22,12 +22,14 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Wallet Screens',
           items: [
-            'wallet/wallet-screen/altme-wallet-screen', // add nft + coins
-            'wallet/wallet-screen/altme-display-screen',
-            'wallet/wallet-screen/altme-settings-menu-screen', 
             'wallet/wallet-screen/talao-wallet-screen',
             'wallet/wallet-screen/talao-display-screen',
             'wallet/wallet-screen/talao-settings-menu-screen',
+            'wallet/wallet-screen/altme-wallet-screen-cards',
+            'wallet/wallet-screen/altme-wallet-screen-nft',
+            'wallet/wallet-screen/altme-wallet-screen-coins',
+            'wallet/wallet-screen/altme-display-screen',
+            'wallet/wallet-screen/altme-settings-menu-screen', 
           ],
         },
         'wallet/wallet-profiles',

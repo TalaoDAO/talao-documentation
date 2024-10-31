@@ -123,6 +123,62 @@
   }
 }
 
+/* Wallet screen Coins */
+
+.responsive-image-wallet-coins {
+  flex: 0 0 30%;
+  /* margin-left: 20px; */
+  margin-bottom: 50px;
+}
+
+.responsive-text-wallet-coins  {
+  flex: 0 0 70%;
+  margin-left: 20px;
+  margin-bottom: 220px;
+}
+
+/* Mobile: 50% image, 50% text */
+@media (max-width: 768px) {
+  .responsive-image-wallet-coins  {
+    flex: 0 0 60%;
+    margin-left: -5px;
+    margin-bottom: 1400px;
+  }
+
+  .responsive-text-wallet-coins  {
+    flex: 0 0 40%;
+    margin-left: 7px;
+  }
+}
+
+/* Wallet screen NFTs*/
+
+.responsive-image-wallet-nft {
+  flex: 0 0 30%;
+  /* margin-left: 20px; */
+  margin-bottom: 100px;
+}
+
+.responsive-text-wallet-nft  {
+  flex: 0 0 70%;
+  margin-left: 20px;
+  margin-bottom: 220px;
+}
+
+/* Mobile: 50% image, 50% text */
+@media (max-width: 768px) {
+  .responsive-image-wallet-nft  {
+    flex: 0 0 60%;
+    margin-left: -5px;
+    margin-bottom: 1350px;
+  }
+
+  .responsive-text-wallet-nft  {
+    flex: 0 0 40%;
+    margin-left: 7px;
+  }
+}
+
 /* Talao discover  */
 
 .responsive-image-display-talao {

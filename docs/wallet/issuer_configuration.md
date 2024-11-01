@@ -1,6 +1,6 @@
 # Issuer configuration
 
-Updated the 28th of October 2024.
+Updated the 31th of October 2024.
 
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
@@ -8,7 +8,7 @@ The wallets support most of the VC options of the OIDC4VCI standard for issuer c
 
 OIDC4VCI has evolved rapidly between 2022 (Draft 10/11) and 2024 (Draft >= 13). The issuer metadata has changed multiple times. Right now wallets support Draft 10/11 and Draft 13 of the specifications. The selection of one Draft or another can be done manually in the wallet with the custom profile and the OIDCVC settings screen or through the wallet provider backend.
 
-**EBSI V3.x is based on OIDC4VCI Draft 10**, DIIP V2.1, DIIP V3.0 and ARF uses Draft 13.
+**EBSI V3.x is based on OIDC4VCI Draft 10**, DIIP V2.1, DIIP V3.0 and ARF use Draft 13.
 
 Specifications of the different Drafts are available here:
 
@@ -68,7 +68,7 @@ The differences between this process and the use of a VP authentication step (OI
 - the VP(s) requested from the user depend on the VC requested by the user,
 - the integration and the UX are simpler.
 
-In order to manage that combination wallet must provide its own authorization endpoint to the issuer. Right now, our wallets support the "EBSI V3.x implementation" way with a `client_metadata` argument added to the authorization request and push authorization request.
+In order to manage that combination wallet must provide its own authorization endpoint to the issuer. Our wallets support the "EBSI V3.x implementation" way with a `client_metadata` argument when Draft is below or equal to 11 and the `wallet_issuer` attribute for more recent Draft, both added to the authorization request and push authorization request.
 
 Example of client_metadata:
 
@@ -114,21 +114,26 @@ Wallet support all the attributes of the display.
 ```json
 "credential_configurations_supported": {
     "IBANLegalPerson": {
-    "scope": "IBANLegalPerson_scope",
-    "display": [
-        {
-            "name": "Company IBAN",
-            "description": "IBAN",
-            "text_color": "#FBFBFB",
-            "text_color": "#FFFFFF",
-            "logo": {
-                "uri": "https://i.ibb.co/ZdVm5Bg/abn-logo.png",
-                "alt_text": "ABN Amro logo"
-            },
-            "background_image": {
-                "uri": "https://i.ibb.co/kcb9XQ4/abncard-iban-lp.png",
-                "alt_text": "ABN Amro Card"
+        "scope": "IBANLegalPerson_scope",
+        "display": [
+            {
+                "name": "Company IBAN",
+                "description": "IBAN",
+                "text_color": "#FBFBFB",
+                "text_color": "#FFFFFF",
+                "logo": {
+                    "uri": "https://i.ibb.co/ZdVm5Bg/abn-logo.png",
+                    "alt_text": "ABN Amro logo"
+                },
+                "background_image": {
+                    "uri": "https://i.ibb.co/kcb9XQ4/abncard-iban-lp.png",
+                    "alt_text": "ABN Amro Card"
+                }
             }
+        ],
+        ......
+    }
+}
 ```
 
 The `uri` can be either a link or a data uri scheme. `text_color` and `background_color` are fallbacks options if links are not provided.
@@ -284,7 +289,7 @@ Wallets support the following specifications depending on the VC format:
 
 When the VC is received from the issuer or displayed, the wallet verifies the signature of the VC, the signature of the status list and the status of the VC. If any of these checked fails teh wallet display a red card status. These verification steps can by passed with an option in the wallet provider backed through a security low profile.
 
-## Waltid integration
+## Waltid issuer integration
 
 All `issuer.{..}`, `expirationDate`, `issuanceDate`and `credentialSubject.id` claims must be removed from the credential data as they are already provided in the json_jwt_vc as `iss`, `sub`, `iat`. Here is a correct configuration needed to make the waltid example running :
 
@@ -321,6 +326,69 @@ All `issuer.{..}`, `expirationDate`, `issuanceDate`and `credentialSubject.id` cl
     "authenticationMethod": "PRE_AUTHORIZED",
     "issuerDid": "did:jwk:eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2Iiwia2lkIjoiRnNIVVpZNF90REpEdnhkcDVCNm1vUzFrd3BQN1BCZWt3NEtmSzdtMExDVSIsIngiOiJrZVI5bDR1MVNhWktNWjd3SHZqXzN6NDR2UDBzYTNubHpybmM4VWpwUVYwIiwieSI6InBtY2FlZGc1ZHRjMlI2WlBaZldDQlk1Nl9NXzVmVVpnc3o0TFdEMG1HOFUifQ"
 }
+```
+
+## Authlete issuer integration
+
+This is the configuration needed to run the Authlete [OIDC4VCI Demo](https://www.authlete.com/developers/oid4vci/#4-oid4vci-demo) in pre authorized code flow with a sd-jwt VC.
+
+The specific topics here are the client_id value to get the access token and the general use of jwk/cnf.
+
+You will need to have an access to the wallet provider backend to setup a custom profile and update the OIDC4VC options as follow:
+
+1. Go to the `SSI Data` page
+2. SSI profile (4.1) choose `custom profile`
+3. Key Identifier (4.5) choose  `jwk thumbprint with P-256`
+4. Client type (4.6) choose `confidential or other`
+5. Client Authentication Method (4.9) choose `client id` and enter the example value `218232426`
+6. OIDC4VCI Draft (4.10) select `Draft 13`
+7. VC Format (4.13) choose `vc+sd-jwt`
+8. Proof Type (4.14) select `jwt`
+9. Proof of Possession Header (4.15) select `jwk`
+10. Do not forget to save the configuration (bottom setup button)
+11. Download the configuration to the wallet by scan or update it from the wallet if you already use it.
+
+Go to the [issuer URL](https://trial.authlete.net/api/offer/issue), select the Pre Authorised Code Grant in the form, if needed you can add transaction code data. Submit the issuer form, scan the QR code, choose the IndentityCredential proposed in the wallet, follow the process and consent.
+
+Use the developer mode to display the VC decoded inside the wallet or download it and use this [tool](https://www.sdjwt.co/) to decode it with all disclosures.
+
+```json
+{
+  "kid": "J1FwJP87C6-QN_WSIOmJAQc6n5CQ_bZdaFJ5GDnW1Rk",
+  "typ": "vc+sd-jwt",
+  "alg": "ES256"
+}
+
+{
+  "_sd": [
+    "04le4bFu5-mavLr_ZiPP6cLyet2AoAEKN5SzbukwWi0",
+    "1VmLs3WfKoHcQb-MlrRWx0kKkC8lmpL164jeRV9aGOA",
+    "Mg5UREMN3elGQbOvcG9Mh6CaSTHyDgcMnzMLF21EEJw",
+    "Wx9xvfgee4AQ4a0fbWCwGyxr3LB7g1mQQx0Oq4hy8A4",
+    "eDlVzAalQrQavjMbSvGcppFhuFCuvZSy1RHliRy1xKs",
+    "jt0qxHtMYfLXYYm7rySaKXpBP1SMJk3vX0-FgFE-Oqk",
+    "k_r1tAt6TsnoqsNyrGOtyykCAFFD5pQCSNTuqFG9Xeg",
+    "lqre2R2Xrj8FEyTX_yauPS4KRUb5a4BZt9cIXwVmzqs",
+    "wrsr2ZuNmcy3-3l4-8pjQHMx7sq-sxbL0sVOiBT1tvY",
+    "xDRY5VC6STHnuAuHHc2j1pgX4pBKfX69yJEh1WpItl8"
+  ],
+  "vct": "https://credentials.example.com/identity_credential",
+  "_sd_alg": "sha-256",
+  "iss": "https://trial.authlete.net",
+  "cnf": {
+    "jwk": {
+      "kty": "EC",
+      "use": "sig",
+      "crv": "P-256",
+      "kid": "okKqec7q60xoZwwePMiEGaAXwvLCt-WqMaX2V3L1Lr4",
+      "x": "ptUUeO8I9lazDDBWKPTV-WZGedtQTt2gln2t0wKDjV8",
+      "y": "YklhBu0YC2p7OUKy2ZYSqzCcDvXVtH_qBMwGBf6NmTY",
+      "alg": "ES256"
+    }
+  },
+  "iat": 1730468137
+}
+
 ```
 
 ## Issuance flow example

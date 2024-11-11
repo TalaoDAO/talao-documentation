@@ -1,6 +1,6 @@
 # Verifier configuration
 
-Updated the 28th of October 2024.
+Updated the 11st of November 2024.
 
 ## OIDC4VP Specifications Drafts
 
@@ -8,7 +8,7 @@ Wallets support both OIDC4VP and SIOPV2 specifications.
 
 * [OIDC4VP Draft 18](https://openid.net/specs/openid-4-verifiable-presentations-1_0-18.html) supported
 * [OIDC4VP Draft 20](https://openid.net/specs/openid-4-verifiable-presentations-1_0-20.html) supported
-* [OIDC4VP Draft 21](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) coming soon
+* [OIDC4VP Draft 22](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) coming soon
 * [SIOPV2 Draft 13](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html) supported
 
 ## OIDC4VP and SIOPV2 features
@@ -293,7 +293,7 @@ Integration of the example provided by waltid documentation must be updated by:
 }
 ```
 
-## Verifier flow example
+## Full verifier flow example
 
 This example is based on the flow of [this verifier](https://talao.co/sandbox/verifier/test_2).
 

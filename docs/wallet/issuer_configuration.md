@@ -1,6 +1,6 @@
 # Issuer configuration
 
-Updated the 31th of October 2024.
+Updated the 11st of November 2024.
 
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
@@ -22,6 +22,8 @@ Specifications of the different Drafts are available here:
 
 Wallets support:
 
+* VC format ldp_vc, jwt_vc, jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt,
+* VCDM 1.1,
 * credential offer by value and by reference,
 * pre authorized code (by default), authorized code flow, push authorization request, PKCE,
 * [Attestation based client authentication](https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/),
@@ -35,14 +37,63 @@ Wallets support:
 * proof of possession header with `kid` or `jwk`,
 * deferred endpoint,
 * key identifiers as jwk thumbprint of DID,
-* keys as EdDSA, P-256, seckp256k1.
+* keys as EdDSA, P-256, seckp256k1,
 
 Wallets do not support:
 
 * notification endpoint,
 * batch endpoint of Draft 13,
 * DPoP for code and token,
-* encrypted credentials.
+* encrypted credentials,
+* VCDM 2.0.
+
+## Limitations due to VC formats
+
+### JSON-LD VC
+
+Wallets do not support remonte @context loading. Use embedded definition of json-ld attributes in the `@contex`t array.
+
+Example:
+
+```json
+{
+    "@context": ["https://www.w3.org/2018/credentials/v1",
+        {
+            "EmailPass" : {
+                "@id": "https://github.com/TalaoDAO/context#emailpass",
+                "@context": {
+                    "@version": 1.1,
+                    "@protected": true,
+                    "schema" : "https://schema.org/",
+                    "id": "@id",
+                    "type": "@type",
+                    "email": "schema:email"
+                }
+            }
+        }
+    ],
+    "id": "urn:uuid:123",
+    "type": [
+        "VerifiableCredential",
+        "EmailPass"
+    ],
+    "issuer": "did:web:talao.co",
+    "issuanceDate": "2024-03-27T15:42:10Z",
+    "credentialSubject" : {
+        "id": "did:key:zDnaeY6i6uVda46Vm8whCFQJPzTYBeZnkHvPCaBLfZoVYwqEP",
+        "type" : "EmailPass",
+        "email" : "john.doe@gmail.com"
+    },
+    "proof": {
+        "type": "Ed25519Signature2018",
+        "proofPurpose": "assertionMethod",
+        "verificationMethod": "did:key:z6MkftN6LL5DRTG8u5LjhQuwUconSp3wremHoMjcH1LP7Hxd#z6MkftN6LL5DRTG8u5LjhQuwUconSp3wremHoMjcH1LP7Hxd",
+        "created": "2024-03-27T14:42:10.447Z",
+        "jws": "eyJhbGciOiJFZERTQSIsImNyaXQiOlsiYjY0Il0sImI2NCI6ZmFsc2V9..uEc2nusfEihJKUY6Owulwrm0tQccazRt3mDI_5RKXWSFc9ZYOoTJ5hAUI7BZE1vH9S62J8NBIXEkIkz4kcMdCw"
+    },
+}
+
+```
 
 ## Invocation schemes for issuance
 
@@ -63,12 +114,9 @@ For security reasons Talao wallets use Universal Links and App Links to redirect
 
 Dynamic Credential Request is an option to operate a VP presentation for user authentication inside an authorization code flow.
 
-The differences between this process and the use of a VP authentication step (OIDC4VP) followed by the issuance of a VC by pre authorized code flow (OIDC4VCI) are multiple:
+The main difference between this process and the use of a VP authentication step (OIDC4VP) followed by the issuance of a VC by pre authorized code flow (OIDC4VCI) is that the VP(s) requested by the verifier for user authentication maybe adapted dynamically to the user identity and the VC requested,
 
-- the VP(s) requested from the user depend on the VC requested by the user,
-- the integration and the UX are simpler.
-
-In order to manage that combination wallet must provide its own authorization endpoint to the issuer. Our wallets support the "EBSI V3.x implementation" way with a `client_metadata` argument when Draft is below or equal to 11 and the `wallet_issuer` attribute for more recent Draft, both added to the authorization request and push authorization request.
+In order to manage that combination wallet must provide its own authorization endpoint to the issuer. Our wallets support the `client_metadata` attribute when OIDC4VCI Draft is below or equal to 11 and the `wallet_issuer` attribute for more recent Draft, both added to the authorization request and push authorization request.
 
 Example of client_metadata:
 
@@ -391,7 +439,7 @@ Use the developer mode to display the VC decoded inside the wallet or download i
 
 ```
 
-## Issuance flow example
+## Full issuance flow example
 
 This example is based on the flow of [this issuer](https://talao.co/sandbox/issuer/test_2).
 

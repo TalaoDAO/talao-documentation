@@ -1,6 +1,6 @@
 # Developer Mode
 
-Updated the 30th of October 2024.
+Updated the 11st of November 2024.
 
 The developer mode allow any technical users to get internal information about the wallet data and logic. It modifies the display of verifiable credentials and it includes breakpoint in the code flow for debugging purposes.
 
@@ -32,7 +32,7 @@ After scanning an OIDC4VC QR code a popup proposes to users to:
 * download this information as a text file,
 * skip to bypass.
 
-Within the OIDC4VCI flow, the wallet proposes to display or download the data received from:
+Within the OIDC4VCI flow, the wallet proposes to display or download the data sent and received from:
 
 - the token endpoint,
 - the credential endpoint.
@@ -46,6 +46,10 @@ After scanning an OIDC4VP or SIOPV2 QR code a popup proposes to users to:
   * the client metadata,
 * download this information as a text file,
 * skip to bypass.
+
+Within the OIDC4VP flow, the wallet proposes to display or download the data sent to:
+
+- the respone_uri endpoint.
 
 ## Display of errors details
 

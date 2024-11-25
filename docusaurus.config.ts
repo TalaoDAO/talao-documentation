@@ -60,7 +60,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'documentationSidebar',
           position: 'left',
-          label: 'Documentation v0.1.2',
+          label: 'Documentation v0.1.3',
         },
         {
           href: 'https://github.com/TalaoDAO',

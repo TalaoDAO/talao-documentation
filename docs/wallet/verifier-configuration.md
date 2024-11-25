@@ -1,6 +1,6 @@
 # Verifier configuration
 
-Updated the 11st of November 2024.
+Updated the 18th of November 2024.
 
 ## OIDC4VP Specifications Drafts
 
@@ -99,7 +99,7 @@ Example of a verifier which requests a VC with the type 'VerifiableId':
 }
 ```
 
-### Request a sd-jwt VC from one type
+### Request a SD-JWT VC from one type
 
 Example of a verifier which requests the EUDIW PID:
 
@@ -119,23 +119,46 @@ Example of a verifier which requests the EUDIW PID:
 }
 ```
 
+### Request a SD-JWT VC for age over
+
+Example of a verifier which requests an age over 18 proof with data minimmization:
+
+```json
+"constraints": {
+    "limit_disclosure": "required",
+    "fields": [
+        {
+            "path": [
+                "$.age_over_18"
+            ],
+            "filter": {
+              "type": "bool",
+              "const": true
+            }
+        }
+    ]
+}
+```
+
 ### Request a VC that contains one claim
 
-Example of a verifier which requests a VC with an email claim:
+Example of a verifier which requests a VC with an email claim what ever teh VC format:
 
 ```json
 "constraints": {
     "fields": [
         {
             "path": [
-                "$.email"
+                "$.email",
+                "$.credentialSubject.email",
+                "$.vc.credentialSubject.email"
             ]
         }
     ]
 }
 ```
 
-### Request a sd-jwt VC with only a limited list of claims
+### Request a SD-JWT VC with only a limited list of claims
 
 Example of a verifier which requests only the family_name and given_name of the user:
 

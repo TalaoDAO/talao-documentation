@@ -52,6 +52,7 @@ const sidebars: SidebarsConfig = {
         'wallet-provider-backend/issuer-marketplace',
         'wallet-provider-backend/support',
         'wallet-provider-backend/wallet-with-wallet-provider-backend',
+        'wallet-provider-backend/vc_type',
       ],
     },
   ],

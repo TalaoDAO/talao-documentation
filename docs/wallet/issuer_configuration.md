@@ -1,6 +1,6 @@
 # Issuer configuration
 
-Updated the 11st of November 2024.
+Updated the 22nd of November 2024.
 
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
@@ -12,8 +12,7 @@ OIDC4VCI has evolved rapidly between 2022 (Draft 10/11) and 2024 (Draft >= 13). 
 
 Specifications of the different Drafts are available here:
 
-* [Draft 10](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-10.html) supported
-* [Draft 11](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-11.html) supported
+* [Draft 10/11](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-10.html) supported for EBSI V 3.x
 * [Draft 12](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html) not supported
 * [Draft 13](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-13.html) supported
 * [Draft 14](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-14.html) soon supported
@@ -49,7 +48,9 @@ Wallets do not support:
 
 ## Limitations due to VC formats
 
-### JSON-LD VC
+### JSON-LD VC (ldp_vc)
+
+Only did:key DID method is supported.
 
 Wallets do not support remonte @context loading. Use embedded definition of json-ld attributes in the `@contex`t array.
 
@@ -378,16 +379,16 @@ All `issuer.{..}`, `expirationDate`, `issuanceDate`and `credentialSubject.id` cl
 
 ## Authlete issuer integration
 
-This is the configuration needed to run the Authlete [OIDC4VCI Demo](https://www.authlete.com/developers/oid4vci/#4-oid4vci-demo) in pre authorized code flow with a sd-jwt VC.
+This is the configuration needed to run the Authlete API [OIDC4VCI Demo](https://www.authlete.com/developers/oid4vci/#4-oid4vci-demo) in pre authorized code flow with a sd-jwt VC.
 
-The specific topics here are the client_id value to get the access token and the general use of jwk/cnf.
+The specific topics here are the client_id pre-registered value to get the access token and the general use of jwk/cnf as DID are not supported. You can sign VCs with a JWK and a kid equal to a verificationMethod published in your DID Document but the `iss` attribute will remain the issuer URL and not the issuer DID.
 
 You will need to have an access to the wallet provider backend to setup a custom profile and update the OIDC4VC options as follow:
 
 1. Go to the `SSI Data` page
 2. SSI profile (4.1) choose `custom profile`
 3. Key Identifier (4.5) choose  `jwk thumbprint with P-256`
-4. Client type (4.6) choose `confidential or other`
+4. Client_id type (4.6) choose `pre-registered`
 5. Client Authentication Method (4.9) choose `client id` and enter the example value `218232426`
 6. OIDC4VCI Draft (4.10) select `Draft 13`
 7. VC Format (4.13) choose `vc+sd-jwt`

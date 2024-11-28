@@ -1,8 +1,59 @@
 # Talao Verifiable Credentials
 
-Updated the 18th of November 2024.
+Updated the 25th of November 2024.
 
 This is the description of the Verifiable Credentials issued by Talao issuers and available through a link in the wallets (Discover screen).
+
+## EthereumAssociatedAddress
+
+This VC is issued to the user by the wallet itself but signed with the key of the crypto account. It is a proof of the ownership of the crypto account. With this VC the user can proove he is the owner of a blockchain account and he can build a trust link between another identity claim (given_name, fammily_name, age over, bank acciount number ...) and the crypto account.
+
+```json
+{
+	"@context": [ "https://www.w3.org/2018/credentials/v1", 
+		{
+			"@vocab": "https://schema.org",
+			"associatedAddress" : "https://w3id.org/security#blockchainAccountId",
+			"EthereumAssociatedAddress" : "https://doc.wallet-provider.io/vc_type/#ethereumassociatedadress"
+		}
+	],
+	"id" : "",
+	"type": [
+		"VerifiableCredential",
+		"EthereumAssociatedAddress"
+	],
+	"issuer" : {
+		"id": "",
+		"name": "My Wallet"
+	},
+	"credentialSubject" : {
+		"id" : "",
+		"type" : "EthereumAssociatedAddress",
+		"associatedAddress" : ""
+	}
+}
+
+```
+
+## EtherlinkAssociatedAddress
+
+Same as above with the Etherlink blockchain.
+
+## TezosAssociatedAddress
+
+Same as above with the Tezos blockchain.
+
+## PolygonAssociatedAddress
+
+Same as above with the Polygon blockchain.
+
+## BinanceAssociatedAddress
+
+Same as above with the BnB blockchain.
+
+## FantomAssociatedAddress
+
+Same as above with the Fantom blockchain.
 
 ## EmailPass
 

@@ -1,6 +1,6 @@
 # Wallet profiles
 
-Updated the 18th of November 2024.
+Updated the 12th of December 2024.
 
 Users can access to wallet profiles through Settings/Wallet Profiles. This feature feature can be hidden in case of a specific wallet configuration through the Wallet Provider Backend.
 
@@ -14,23 +14,24 @@ As any smartphone app users can download either Altme or Talao wallet for their 
 | Profiles  | VC format                                      | OIDC4VCI | OIDC4VP | key                   | DID                            | Embedded issuer links                                                  |
 | :---------- | ------------------------------------------------ | ---------- | --------- | ----------------------- | -------------------------------- | ------------------------------------------------------------------------ |
 | Default   | ldp_vc, jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt | 13       | 20      | EdDSA                 | did:key                        | VerifiableId (ldp_vc), EmailPass (ldp_vc), PhoneProof, Over18 (ldp_vc) |
-| EBSI V3.x | jwt_vc                                         | 11       | 18      | P-256                 | did:key(EBSI)                  |  IndividualVerifiableAttestation(jwt_vc)                                                              |
+| EBSI V3.x | jwt_vc                                         | 11       | 18      | P-256                 | did:key(EBSI)                  | IndividualVerifiableAttestation(jwt_vc)                                |
 | EBSI V4.0 | ldp_vc, jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt | 13       | 20      | P-256                 | did:key(EBSI)                  | VerifiableId (jwt_vc_json)                                             |
-| DIIP V3.0 | ldp_vc, jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt | 13       | 20      | P-256                 | did:jwk                        | Personal ID (vc+sd-jwt), Emailpass (vc+sd-jwt), Over18 (vc+sd-jwt)     |
+| DIIP V3.0 | jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt         | 13       | 20      | P-256                 | did:jwk                        | Personal ID (vc+sd-jwt), Emailpass (vc+sd-jwt), Over18 (vc+sd-jwt)     |
 | Custom    | Any                                            | 11/13    | 20      | EdDSA/P-256/seckp256k | did:key/did:jwk/JWK thumbprint | None                                                                   |
 
-All VC formats = JWT-VC (jwt_vc, jwt_vc_json, jwt_vc_json-ld), JSON-LD (ldp_vc), SD-JWT VC (vc+sd-jwt).
-
 Advanced users can switch between the different profiles and even create their own custom profile. The wallets propose a lots of technical options for advanced users and developers.
+
+At initialization the wallet profile is DIIP V3.0.
 
 ## Custom profile
 
 To define a custom profile of the wallet:
 
-1. Choose profile "Custom",
-2. Select  Settings/Self Sovereign Identity/OIDC4VCI settings
+1. Go to "Settings",
+2. Choose profile "Custom",
+3. Select the options you want to use.
 
-This section allows an advanced user to specify manually the SSI profile of his wallet. Custom profile can only support one VC format at a time.
+This section allows an advanced user to specify manually the ecosystem technical options of his wallet. Custom profile can only support one VC format at a time.
 
 ## Wallet setup with the wallet provider backend
 

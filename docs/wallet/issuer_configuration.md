@@ -1,6 +1,6 @@
 # Issuer configuration
 
-Updated the 22nd of November 2024.
+Updated the 12th of December 2024.
 
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
@@ -14,15 +14,16 @@ Specifications of the different Drafts are available here:
 
 * [Draft 10/11](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-10.html) supported for EBSI V 3.x
 * [Draft 12](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html) not supported
-* [Draft 13](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-13.html) supported
-* [Draft 14](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-14.html) soon supported
+* [Implementer Draft 1.0 (Draft 13)](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-ID1.html) supported
+* [Draft 14](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-14.html) partially supported
+* [Implementer Draft 2.0 (Draft 15)](https://openid.github.io/OpenID4VCI/openid-4-verifiable-credential-issuance-wg-draft.html) not supported
 
 ## OIDC4VCI flow and features
 
 Wallets support:
 
 * VC format ldp_vc, jwt_vc, jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt,
-* VCDM 1.1,
+* [VCDM 1.1](https://www.w3.org/TR/vc-data-model/),
 * credential offer by value and by reference,
 * pre authorized code (by default), authorized code flow, push authorization request, PKCE,
 * [Attestation based client authentication](https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/),
@@ -35,14 +36,17 @@ Wallets support:
 * proof types as `jwt` or `ldp_vc`,
 * proof of possession header with `kid` or `jwk`,
 * deferred endpoint,
+* [DPoP RFC 9449](https://datatracker.ietf.org/doc/html/rfc9449)
+* nonce endpoint (Draft 14),
 * key identifiers as jwk thumbprint of DID,
 * keys as EdDSA, P-256, seckp256k1,
+* [Bitstring Status List V1.0](https://www.w3.org/TR/vc-bitstring-status-list/),
+* [IETF Token Status List Draft 6](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-06.html)
 
 Wallets do not support:
 
 * notification endpoint,
 * batch endpoint of Draft 13,
-* DPoP for code and token,
 * encrypted credentials,
 * VCDM 2.0.
 
@@ -50,7 +54,7 @@ Wallets do not support:
 
 ### JSON-LD VC (ldp_vc)
 
-Only did:key DID method is supported.
+Only **did:key** DID method is supported.
 
 Wallets do not support remonte @context loading. Use embedded definition of json-ld attributes in the `@contex`t array.
 
@@ -508,49 +512,8 @@ The issuer responds with the issuer matadata which looks like this:
     ],
     "credential_endpoint": "https://talao.co/issuer/sobosgdtgd/credential",
     "deferred_credential_endpoint": "https://talao.co/issuer/sobosgdtgd/deferred",
-    "scopes_supported": [
-        "openid"
-    ],
-    "response_types_supported": [
-        "vp_token",
-        "id_token"
-    ],
-    "response_modes_supported": [
-        "query"
-    ],
-    "grant_types_supported": [
-        "authorization_code",
-        "urn:ietf:params:oauth:grant-type:pre-authorized_code"
-    ],
-    "subject_types_supported": [
-        "public",
-        "pairwise"
-    ],
-    "id_token_signing_alg_values_supported": [
-        "ES256",
-        "ES256K",
-        "EdDSA",
-        "RS256"
-    ],
-    "request_object_signing_alg_values_supported": [
-        "ES256",
-        "ES256K",
-        "EdDSA",
-        "RS256"
-    ],
     "request_parameter_supported": true,
     "request_uri_parameter_supported": true,
-    "token_endpoint_auth_methods_supported": [
-        "client_secret_basic",
-        "client_secret_post",
-        "client_secret_jwt",
-        "none"
-    ],
-    "request_authentication_methods_supported": {
-        "authorization_endpoint": [
-            "request_object"
-        ]
-    },
     "subject_syntax_types_supported": [
         "urn:ietf:params:oauth:jwk-thumbprint",
         "did:key",
@@ -570,10 +533,6 @@ The issuer responds with the issuer matadata which looks like this:
     "id_token_types_supported": [
         "subject_signed_id_token"
     ],
-    "authorization_endpoint": "https://talao.co/issuer/sobosgdtgd/authorize",
-    "token_endpoint": "https://talao.co/issuer/sobosgdtgd/token",
-    "jwks_uri": "https://talao.co/issuer/sobosgdtgd/jwks",
-    "pushed_authorization_request_endpoint": "https://talao.co/issuer/sobosgdtgd/authorize/par",
     "credential_configurations_supported": {
         "InsuranceNaturalPerson": {
             "scope": "InsuranceNaturalPerson_scope",
@@ -645,6 +604,89 @@ The issuer responds with the issuer matadata which looks like this:
             ]
         }
     }
+}
+
+```
+
+Then the wallet calls the authorization server metadata endpoint:
+
+```https
+GET /issuer/sobosgdtgd/.well-known/oauth-authorization-server
+Host: talao.co
+```
+
+The authorization server responds with the matadata which looks like this:
+
+```json
+
+{
+    "pre-authorized_grant_anonymous_access_supported": true,
+    "display": [
+        {
+            "name": "Talao issuer",
+            "locale": "en-US",
+            "logo": {
+                "uri": "https://talao.co/static/img/talao.png",
+                "alt_text": "Talao logo"
+            }
+        },
+        {
+            "name": "Talao issuer",
+            "locale": "fr-FR",
+            "logo": {
+                "uri": "https://talao.co/static/img/talao.png",
+                "alt_text": "Talao logo"
+            }
+        }
+    ],
+    "scopes_supported": [
+        "openid"
+    ],
+    "response_types_supported": [
+        "vp_token",
+        "id_token"
+    ],
+    "response_modes_supported": [
+        "query"
+    ],
+    "grant_types_supported": [
+        "authorization_code",
+        "urn:ietf:params:oauth:grant-type:pre-authorized_code"
+    ],
+    "subject_types_supported": [
+        "public",
+        "pairwise"
+    ],
+    "id_token_signing_alg_values_supported": [
+        "ES256",
+        "ES256K",
+        "EdDSA",
+        "RS256"
+    ],
+    "request_object_signing_alg_values_supported": [
+        "ES256",
+        "ES256K",
+        "EdDSA",
+        "RS256"
+    ],
+    "token_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "client_secret_jwt",
+        "none"
+    ],
+    "request_authentication_methods_supported": {
+        "authorization_endpoint": [
+            "request_object"
+        ]
+    },
+    "id_token_types_supported": [
+        "subject_signed_id_token"
+    ],
+    "authorization_endpoint": "https://talao.co/issuer/sobosgdtgd/authorize",
+    "token_endpoint": "https://talao.co/issuer/sobosgdtgd/token",
+    "jwks_uri": "https://talao.co/issuer/sobosgdtgd/jwks",
+    "pushed_authorization_request_endpoint": "https://talao.co/issuer/sobosgdtgd/authorize/par"
 }
 
 ```

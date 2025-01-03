@@ -1,13 +1,14 @@
-# OIDC4VC Parameters
+# OIDC4VC parameters
 
-Updated the 14th of October 2024.
+Updated the 12th of December 2024.
 
 To access the OIDC4VCI parameters:
 
-1. Choose profile "Custom",
-2. Select  Settings/Self Sovereign Identity/OIDC4VCI settings
+1. Go to "Settings"
+2. Choose profile "Custom",
+3. Select the options you want to setup
 
-This section allows an advanced user to specify manually the SSI profile of his wallet.
+This section allows an advanced user to specify manually the ecosystem technical options of his wallet.
 
 More parameters are available through the Wallet Provider Backend. This feature can be hidden in case of a specific wallet configuration defined with the Wallet Provider Backend.
 
@@ -34,6 +35,7 @@ it can be any one of the DID methods of the list ([did:key](https://w3c-ccg.gith
 ### OIDC4VCI
 
 The OIDC4VCI draft release. For EBSI V3.x must be Draft 11.
+Draft 14 is partially supported : nonce endpoint is supported for build 2.18.8 and above. In this case the wallet will call the nonce endpoint to get a nonce for the proof of key ownership and will not use the nonce provided by the token endpoint if any.
 
 ### Cryptographic Holder Binding
 
@@ -55,9 +57,9 @@ Select one authentication method among the following ones:
 * **none:** No authentication required,
 * **client_secret_basic:** Sends ID and secret in the HTTP header,
 * **client_secret_post:** Sends ID and secret in the request body,
-* **client_id:** Identifies the client with a unique ID,
+* **client_id:** Identifies the client with a unique ID.
 
-Learn more about authentication method [here](https://www.rfc-editor.org/rfc/rfc6749#section-2.3).
+Learn more about authentication method [here](https://www.rfc-editor.org/rfc/rfc6749#section-2.3). These client authentication methods allow pre-registered wallet. Choose "none" otherwise.
 
 ### Wallet Client_id scheme
 
@@ -65,7 +67,7 @@ The client type affects how the wallet authenticates and interacts with the auth
 
 * **DID:** Decentralized Identifier, typically used for secure, decentralized identity interactions,
 * **P-256 JWK Thumbprint** Used when the subject is identified via a jwk thumbprint,
-* **confidential Client:** For confidential clients that require secure and private interaction with the authorization server.
+* **Pre-registered client:** Used for secure or private interaction with the authorization server.
 
 ### VC Format
 
@@ -109,3 +111,7 @@ Learn more about PAR [here](https://datatracker.ietf.org/doc/html/rfc9126).
 ### StatusList caching
 
 The Status List cache duration controls how long the wallet stores status lists used to verify credentials (e.g., revoked or valid). Adjusting this duration can balance performance with up-to-date information.
+
+### Demonstrating Proof of Possession (DPoP)
+
+This is the IETF RFC 9449 : which "... describes a mechanism for sender-constraining OAuth 2.0 tokens via a proof-of-possession mechanism on the application level. This mechanism allows for the detection of replay attacks with access and refresh tokens.

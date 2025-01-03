@@ -4,18 +4,25 @@ Updated the 18th of November 2024.
 
 ## OIDC4VP Specifications Drafts
 
-Wallets support both OIDC4VP and SIOPV2 specifications.
+Wallets support OIDC4VP specifications.
 
-* [OIDC4VP Draft 18](https://openid.net/specs/openid-4-verifiable-presentations-1_0-18.html) supported
-* [OIDC4VP Draft 20](https://openid.net/specs/openid-4-verifiable-presentations-1_0-20.html) supported
-* [OIDC4VP Draft 22](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) coming soon
-* [SIOPV2 Draft 13](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html) supported
+* [Implementer Draft 1 (Draft 8)](https://openid.net/specs/openid-connect-4-verifiable-presentations-1_0-ID1.html) supported
+* [implementer Draft 2 (Draft 18)](https://openid.net/specs/openid-4-verifiable-presentations-1_0-ID2.html) supported
+* [Draft 20](https://openid.net/specs/openid-4-verifiable-presentations-1_0-20.html) supported
+* [Draft 21](https://openid.net/specs/openid-4-verifiable-presentations-1_0-21.html) partial support
+* [Implementer Draft 3 (Draft 22)](https://openid.net/specs/openid-4-verifiable-presentations-1_0-22.html) partial support
+* [Draft 23](https://openid.net/specs/openid-4-verifiable-presentations-1_0-23.html) not supported
+
+Wallets support SIOPV2 specifications.
+
+* [Implementer Draft 1 (Draft 7)](https://openid.net/specs/openid-connect-self-issued-v2-1_0-ID1.html) supported
+* [Draft 13](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html) supported
 
 ## OIDC4VP and SIOPV2 features
 
 Wallets support:
 
-* client_id_scheme,
+* client_id_scheme as an attribute or as a prefix of client_id (draft 22),
 * request in value and request_uri,
 * presentation_definition and presentation_definition_uri,
 * direct_post and direct_post.jwt,
@@ -25,6 +32,8 @@ Wallets support:
 
 Wallets do not support:
 
+* the Digital Credential Query Language (DCQL)
+* transaction data
 * request uri Method Post,
 * encrypted response,
 * openid federation 1.0.

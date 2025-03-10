@@ -1,6 +1,6 @@
 # Wallet Metadata
 
-Updated the 28th of October 2024.
+Updated the 8th of March 2025.
 
 Metadata in the context of digital wallets like Talao and Altme describes the specific configurations that define the wallet’s compatibility, supported formats, cryptographic algorithms, and available features. They are crucial for setting up and integrating wallets for credential issuance and verification..
 
@@ -52,6 +52,7 @@ Below metadata is for Talao wallet:
             "proof_type": [
                 "JsonWebSignature2020",
                 "Ed25519Signature2018",
+                "Ed25519Signature2020",
                 "EcdsaSecp256k1Signature2019",
                 "RsaSignature2018"
             ]
@@ -60,6 +61,7 @@ Below metadata is for Talao wallet:
             "proof_type": [
                 "JsonWebSignature2020",
                 "Ed25519Signature2018",
+                "Ed25519Signature2020",
                 "EcdsaSecp256k1Signature2019",
                 "RsaSignature2018"
             ]
@@ -93,6 +95,7 @@ Below metadata is for Talao wallet:
     ],
     "credential_offer_endpoint_supported": [
         "openid-credential-offer://",
+        "talao-openid-credential-offer://",
         "haip://",
         "https://app.talao.co/app/download/oidc4vc"
     ],
@@ -117,21 +120,6 @@ Below metadata is for Talao wallet:
     "key_type": "software",
     "user_authentication": "system_biometry",
     "authorization_endpoint": "https://app.talao.co/app/download/authorize",
-    "grant_types_supported": [
-        "authorization_code",
-        "pre-authorized_code"
-    ],
-    "response_types_supported": [
-        "vp_token",
-        "id_token"
-    ],
-    "scope_supported":[
-        "openid"
-    ],
-    "subject_types_supported":[
-        "pairwise",
-        "public"
-    ],
     "vp_formats_supported": {
         "jwt_vc_json": {
             "alg_values_supported": [
@@ -171,13 +159,17 @@ Below metadata is for Talao wallet:
         "ldp_vp": {
             "proof_type": [
                 "Ed25519Signature2018",
-                "EcdsaSecp256k1Signature2019"
+                "Ed25519Signature2020",
+                "EcdsaSecp256k1Signature2019",
+                "RsaSignature2018"
             ]
         },
         "ldp_vc": {
             "proof_type": [
                 "Ed25519Signature2018",
-                "EcdsaSecp256k1Signature2019"
+                "Ed25519Signature2020",
+                "EcdsaSecp256k1Signature2019",
+                "RsaSignature2018"
             ]
         }
     },
@@ -185,6 +177,7 @@ Below metadata is for Talao wallet:
         "subject_signed_id_token"
     ],
     "client_id_schemes_supported":[
+        "pre-registered",
         "did",
         "redirect_uri",
         "x509_san_dns",

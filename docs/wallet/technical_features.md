@@ -1,6 +1,6 @@
-# Wallet Features
+# Wallet features
 
-Updated the 14th of October 2024.
+Updated the 26th of February 2025.
 
 ## Protocols
 
@@ -19,7 +19,7 @@ Updated the 14th of October 2024.
 * credential_offer_uri,
 * issuer endpoints supported : credential, deferred,
 * wallet attestations, PKCE, scope and authorization details,
-* client authentication methode : none, client_id, client secret basic, client secret post, jwt,
+* client authentication methode : anonymous, client_id, client secret basic, client secret post, jwt,
 * identifier : jwk thumbprint, [did:key](https://w3c-ccg.github.io/did-method-key/), [did:jwk](https://github.com/quartzjer/did-jwk/blob/main/spec.md),
 * proof type : jwt, ldp_vp.
 
@@ -33,8 +33,8 @@ Updated the 14th of October 2024.
 
 ### Signature suites
 
-* Jose: ES256, ES256K, EdDSA,
-* linked data proof: Ed25519Signature2018, RsaSignature2018.
+* JWT: ES256, ES256K, EdDSA, RSA
+* linked data proof : Ed25519Signature2018, Ed25519Signature20, Secp256r1Signature2019, EcdsaSecp256r1Signature2019, RsaSignature2018.
 
 ### Other features
 

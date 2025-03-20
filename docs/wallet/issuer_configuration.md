@@ -1,6 +1,6 @@
 # Issuer configuration
 
-Updated the 12th of December 2024.
+Updated the 13th of March 2025.
 
 The wallets support most of the VC options of the OIDC4VCI standard for issuer configuration.
 
@@ -31,10 +31,10 @@ Wallets support:
 * `authorization_details` and `scope`. Tune with OIDCVC settings or wallet provider backend to use `scope`.,
 * authorization server as a standalone server associated to one VC type,
 * dynamic credential request,
-* client secret post, client secret basic and public client authentication,
+* client secret post, client secret basic and public client and anonymous authentication,
 * bearer credential (no crypto binding),
-* proof types as `jwt` or `ldp_vc`,
-* proof of possession header with `kid` or `jwk`,
+* proof types as `jwt` or `ldp_vp`,
+* proof of possession header with `kid` or `jwk,
 * deferred endpoint,
 * [DPoP RFC 9449](https://datatracker.ietf.org/doc/html/rfc9449)
 * nonce endpoint (Draft 14),
@@ -47,64 +47,22 @@ Wallets do not support:
 
 * notification endpoint,
 * batch endpoint of Draft 13,
-* encrypted credentials,
 * VCDM 2.0.
 
 ## Limitations due to VC formats
 
 ### JSON-LD VC (ldp_vc)
 
-Only **did:key** DID method is supported.
+Only **did:key** and **did:jwk** DID method are supported with P-256 and EdDSA keys for linked data proof
 
-Wallets do not support remonte @context loading. Use embedded definition of json-ld attributes in the `@contex`t array.
-
-Example:
-
-```json
-{
-    "@context": ["https://www.w3.org/2018/credentials/v1",
-        {
-            "EmailPass" : {
-                "@id": "https://github.com/TalaoDAO/context#emailpass",
-                "@context": {
-                    "@version": 1.1,
-                    "@protected": true,
-                    "schema" : "https://schema.org/",
-                    "id": "@id",
-                    "type": "@type",
-                    "email": "schema:email"
-                }
-            }
-        }
-    ],
-    "id": "urn:uuid:123",
-    "type": [
-        "VerifiableCredential",
-        "EmailPass"
-    ],
-    "issuer": "did:web:talao.co",
-    "issuanceDate": "2024-03-27T15:42:10Z",
-    "credentialSubject" : {
-        "id": "did:key:zDnaeY6i6uVda46Vm8whCFQJPzTYBeZnkHvPCaBLfZoVYwqEP",
-        "type" : "EmailPass",
-        "email" : "john.doe@gmail.com"
-    },
-    "proof": {
-        "type": "Ed25519Signature2018",
-        "proofPurpose": "assertionMethod",
-        "verificationMethod": "did:key:z6MkftN6LL5DRTG8u5LjhQuwUconSp3wremHoMjcH1LP7Hxd#z6MkftN6LL5DRTG8u5LjhQuwUconSp3wremHoMjcH1LP7Hxd",
-        "created": "2024-03-27T14:42:10.447Z",
-        "jws": "eyJhbGciOiJFZERTQSIsImNyaXQiOlsiYjY0Il0sImI2NCI6ZmFsc2V9..uEc2nusfEihJKUY6Owulwrm0tQccazRt3mDI_5RKXWSFc9ZYOoTJ5hAUI7BZE1vH9S62J8NBIXEkIkz4kcMdCw"
-    },
-}
-
-```
+Wallets supports remote @context loading.
 
 ## Invocation schemes for issuance
 
 Wallet support different invocation schemes:
 
 * openid-credential-offer://,
+* talao-openid-credential-offer:// or altme-openid-credential-offer://,
 * haip://,
 * https://app.altme.io/app/download/oidc4vc,
 * https://app.talao.co/app/download/oidc4vc
@@ -113,7 +71,11 @@ Those schemes can be displayed as QR code for wallet app scanner, smartphone cam
 
 # Support of Universal Links and App Links
 
-For security reasons Talao wallets use Universal Links and App Links to redirect to wallet authorization endpoints and callback endpoints. However those links are not supported by default by all browsers. We suggest to use **Safari for IOS** phones and **Chrome for Android**. You may need to setup browser options manually to allow Universal links or App Links with Firefox, Brave, Samsung explorer or even Chrome on IOS.
+For security reasons Talao wallets use Universal Links and App Links to redirect to wallet authorization endpoints and callback endpoints. However those links are not supported by default by all browsers.
+
+We suggest to use **Safari for IOS** phones and **Chrome for Android**. You may need to setup browser options manually to allow Universal links or App Links with Firefox, Brave, Samsung explorer or even Chrome on IOS.
+
+On Android phones last testing in Feb 2025 show that Firefox and Brave work correctly but Samsung Internet does not.
 
 ## Dynamic Credential Request
 
@@ -284,6 +246,40 @@ Wallets support all attributes of the display :
 
 `mandatory` in not supported.
 
+## Nested json
+
+Nested json can be implemented and each level displayed with its own label, language, etc.
+
+Example of the issuer metadata of an address claim:
+
+```json
+ "address": {
+    "mandatory": True,
+    "value_type": "string",
+    "display": [
+        {"name": "Address", "locale": "en-US"},
+        {"name": "Adresse", "locale": "fr-FR"}
+    ],
+    "formatted": {
+        "mandatory": True,
+        "value_type": "string",
+        "display": [
+            {"name": "Formatted", "locale": "en-US"},
+            {"name": "Complete", "locale": "fr-FR"}
+        ],
+    },
+    "street_address": {
+        "mandatory": True,
+        "value_type": "string",
+        "display": [
+            {"name": "Street address", "locale": "en-US"},
+            {"name": "Rue", "locale": "fr-FR"}
+        ],
+    }
+ }
+
+```
+
 ## Locale
 
 Locale language is chosen depending on the smartphone language. If the smartphone language translation is not provided with the claim, wallet will use locale. If locale is not provided in the issuer metadata, wallet will use english.
@@ -310,9 +306,20 @@ Locale language is chosen depending on the smartphone language. If the smartphon
 
 ### Images
 
-Use the value_type `image/jpeg` or `image/png`
+Use the value_type `image/jpeg` or `image/png`. If claim is `face` or `portrait` or `picture`, the image is displayed instead of the card.
 
-Image can be provided as value (data:uri) or reference https://...
+Image can be provided as value or reference in the VC.
+
+Example of VC image claim as value:
+
+```json
+{
+"picture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+}
+
+```
+
+Example in issuer metadata
 
 ```json
 "picture": {
@@ -341,6 +348,25 @@ Wallets support the following specifications depending on the VC format:
 * sd-jwt-vc : [Token Status List](https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/)
 
 When the VC is received from the issuer or displayed, the wallet verifies the signature of the VC, the signature of the status list and the status of the VC. If any of these checked fails teh wallet display a red card status. These verification steps can by passed with an option in the wallet provider backed through a security low profile.
+
+## Issuers integration
+
+Wallets have been tested through different project implementations and interoperability events with most of the APIs and libs providers of the market. See below compatibility list with the date of the last tests.
+
+* **Lissi** : OK on March 2025. The Lissi APIs support only sd-jwt VCs with JWK as wallet identifier and JWK in the proof of key. You will need to setup those parameters in the wallet through the custom profile or through the Wallet Provider backend. Contact us if needed.
+* **Procivis**: OK on March 2025
+
+* **Sphereon:** OK on Jan 2024
+* **Authlete**: OK on March 2025, see below details
+
+* **WaltId**: OK on March 2025, see below details
+* **Meeco**: OK on Jan 2024
+
+* **Gataca**: Not tested
+* **Paradygm**: Not tested
+
+* **SICPA**: OK on March 2025
+* **Netcetera**: OK on May 2024
 
 ## Waltid issuer integration
 

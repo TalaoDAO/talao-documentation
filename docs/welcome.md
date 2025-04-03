@@ -1,6 +1,6 @@
 # Welcome
 
-Updated the 28th of October 2024.
+Updated the 1st of April 2025.
 
 Here you will find the documentation concerning the use and integration of the Talao and Altme wallets. You will also find information concerning the use of the Wallet Provider Backend associated with these wallets.
 
@@ -16,16 +16,17 @@ If you encounter issues or have questions or if you want a demo do not hesitate 
 
 The Talao and Altme wallets are mobile applications for collecting, storing and presenting certificates in the verifiable credentials format. These wallets store the data associated with these certificates, the cryptographic keys associated with these certificates and the exchange protocols between the different stakeholders of a Self Sovereign Identity (SSI) architecture: the issuers (or attribute providers) and the verifiers (or Relying parties).
 
-Talao provides 2 mobile wallets:
+We provides 2 mobile wallets:
 
-* Talao wallet : it is a self sovereign identity(SSI) wallet to support verifiable credentials,
+- Talao wallet : it is a self sovereign identity(SSI) wallet to support verifiable credentials,
 
-  * [Talao Google store](https://play.google.com/store/apps/details?id=co.talao.wallet)
-  * [Talao Apple store](https://apps.apple.com/fr/app/talao-wallet/id1582183266?platform=iphone)
-* Altme wallet : it is a Self Sovereign Identity and crypto wallet to support verifiable credentials and crypto assets (token, NFT) on blockchains.
+  - [Talao Google store](https://play.google.com/store/apps/details?id=co.talao.wallet)
+  - [Talao Apple store](https://apps.apple.com/fr/app/talao-wallet/id1582183266?platform=iphone)
 
-  * [Altme Google store](https://play.google.com/store/apps/details?id=co.altme.alt.me.altme&hl=en-US&pli=1)
-  * [Altme Apple store](https://apps.apple.com/fr/app/altme-wallet/id1633216869)
+- Altme wallet : it is a Self Sovereign Identity and crypto wallet to support verifiable credentials and crypto assets (token, NFT) on blockchains.
+
+  - [Altme Google store](https://play.google.com/store/apps/details?id=co.altme.alt.me.altme&hl=en-US&pli=1)
+  - [Altme Apple store](https://apps.apple.com/fr/app/altme-wallet/id1633216869)
 
 ## Wallet Provider Backend
 
@@ -49,10 +50,10 @@ for protocols:
 
 We also use specifications of ecosystems or technical profiles as:
 
-* [EBSI](https://ec.europa.eu/digital-building-blocks/sites/display/EBSI/Home)
-* [EUDI wallet / ARF](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/1.1.0/arf/)
-* [The Decentralized Identity Interop Profile](https://dutchblockchaincoalition.org/en/bouwstenen-2/diip-2)
-* [The High Assurance Interoperability Profile](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-sd-jwt-vc-1_0.html)
+- [EBSI](https://ec.europa.eu/digital-building-blocks/sites/display/EBSI/Home)
+- [EUDI wallet / ARF](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/1.1.0/arf/)
+- [The Decentralized Identity Interop Profile](https://dutchblockchaincoalition.org/en/bouwstenen-2/diip-2)
+- [The High Assurance Interoperability Profile](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-sd-jwt-vc-1_0.html)
 
 ## Notice
 

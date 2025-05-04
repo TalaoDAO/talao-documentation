@@ -55,6 +55,7 @@ const sidebars: SidebarsConfig = {
       ],
     },
     'vc_type',
+    'api'
   ],
 };
 

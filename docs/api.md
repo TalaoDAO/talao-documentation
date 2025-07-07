@@ -1,6 +1,6 @@
 # APIs
 
-Updated the 3rd of May 2025.
+Updated the 2nd of June 2025.
 
 This is a list of APIs available to help developers. The server is available at https://talao.co.
 
@@ -24,8 +24,9 @@ This API is used to serve https://talao.co/ai/qrcode .
 ```json
 {
   "qrcode": "c29tZS1hc3NpZ24tdGV4dA==",       // Base64-encoded QR code content
-  "oidc4vciDraft": "15",                      // (optional) OIDC4VCI draft version
-  "oidc4vpDraft": "22"                        // (optional) OIDC4VP draft version
+  "oidc4vciDraft": "12",                      // (optional) OIDC4VCI draft version
+  "oidc4vpDraft": "18",                       // (optional) OIDC4VP draft version
+  "profil": "EBSI"                            // (optional) profil
 }
 ```
 
@@ -51,6 +52,21 @@ print(decoded)
 
 ---
 
+### Profil
+
+If profil is set to "custom" then OIDC4VC Drafts apply.
+
+| Parameter    | Ecosystem            |
+|-----------|---------------------|
+| EBSI   | EBSI v3.x |
+| INJI   | MOSIP Inji stack |
+| DIIP_V3   | FIDES DIIP V 3.0  |
+| DIIP_V4   | FIDES DIIP V 4.0  |
+| EWC   | LSP EWC |
+| custom   | Default value |
+
+---
+
 ### Error Responses
 
 | HTTP Code | Message                                 | Description                         |
@@ -68,8 +84,9 @@ print(decoded)
 ```bash
 curl -X POST https://talao.co/api/analyze-qrcode   -H "Content-Type: application/json"   -H "Api-Key: your-api-key"   -d '{
         "qrcode": "c29tZS1hc3NpZ24tdGV4dA==",
-        "oidc4vciDraft": "15",
-        "oidc4vpDraft": "22"
+        "oidc4vciDraft": "12",
+        "oidc4vpDraft": "18",
+        "profil": "EBSI"
       }'
 ```
 

@@ -1,54 +1,56 @@
 # Verifier configuration
 
-Updated the 1st of April 2025.
+Updated the 16th of June 2025.
 
 ## OIDC4VP Specifications Drafts
 
 Wallets support OIDC4VP specifications.
 
-- [Implementer Draft 1 (Draft 8)](https://openid.net/specs/openid-connect-4-verifiable-presentations-1_0-ID1.html) supported
-- [implementer Draft 2 (Draft 18)](https://openid.net/specs/openid-4-verifiable-presentations-1_0-ID2.html) supported
-- [Draft 20](https://openid.net/specs/openid-4-verifiable-presentations-1_0-20.html) supported
-- [Draft 21](https://openid.net/specs/openid-4-verifiable-presentations-1_0-21.html) partial support
-- [Implementer Draft 3 (Draft 22)](https://openid.net/specs/openid-4-verifiable-presentations-1_0-22.html) partial support
-- [Draft 23](https://openid.net/specs/openid-4-verifiable-presentations-1_0-23.html) not supported
+* [Implementer Draft 1 (Draft 8)](https://openid.net/specs/openid-connect-4-verifiable-presentations-1_0-ID1.html) supported
+* [implementer Draft 2 (Draft 18)](https://openid.net/specs/openid-4-verifiable-presentations-1_0-ID2.html) supported
+* [Draft 20](https://openid.net/specs/openid-4-verifiable-presentations-1_0-20.html) supported
+* [Draft 21](https://openid.net/specs/openid-4-verifiable-presentations-1_0-21.html) added features not supported
+* [Implementer Draft 3 (Draft 22)](https://openid.net/specs/openid-4-verifiable-presentations-1_0-22.html) partially supported
+    - remove client_id_scheme
+* [Draft 23](https://openid.net/specs/openid-4-verifiable-presentations-1_0-23.html) partially supported
+    - dc+sd-jwt
 
 Wallets support SIOPV2 specifications.
 
-- [Implementer Draft 1 (Draft 7)](https://openid.net/specs/openid-connect-self-issued-v2-1_0-ID1.html) supported
-- [Draft 13](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html) supported
+* [Implementer Draft 1 (Draft 7)](https://openid.net/specs/openid-connect-self-issued-v2-1_0-ID1.html) supported
+* [Draft 13](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html) supported
 
 ## OIDC4VP and SIOPV2 features
 
 Wallets support:
 
-- client_id_scheme as an attribute or as a prefix of client_id (draft 22),
-- request in value and request_uri,
-- presentation_definition and presentation_definition_uri,
-- direct_post and direct_post.jwt,
-- id_token, vp_token, id_token vp_token response_type,
-- client_metadata
-- signed response JARM
+* client_id_scheme as an attribute or as a prefix of client_id (draft 22),
+* request in value and request_uri,
+* presentation_definition and presentation_definition_uri,
+* direct_post and direct_post.jwt,
+* id_token, vp_token, id_token vp_token response_type,
+* client_metadata
+* signed response JARM
 
 Wallets do not support:
 
-- the Digital Credential Query Language (DCQL)
-- transaction data
-- request uri Method Post,
-- encrypted response,
-- openid federation 1.0.
+* the Digital Credential Query Language (DCQL)
+* transaction data
+* request uri Method Post,
+* encrypted response,
+* openid federation 1.0.
 
 ## Invocation schemes for verification
 
 Wallets support different invocation schemes:
 
-- openid://,
-- openid-vc://,
-- openid4vp://,
-- haip://,
-- siopv2://
-- https://app.altme.io/app/download/authorize,
-- https://app.talao.co/app/download/authorize
+* openid://,
+* openid-vc://,
+* openid4vp://,
+* haip://,
+* siopv2://
+* https://app.altme.io/app/download/authorize,
+* https://app.talao.co/app/download/authorize
 
 Those schemes can be displayed as QR code for wallet app scanner, smartphone camera or as a deeplink / universal link (a button in a html page for the smartphone browser).
 
@@ -60,28 +62,28 @@ For security reasons Talao wallets use Universal Links and App Links to redirect
 
 Wallet supports the following [client_id_scheme](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#name-verifier-metadata-managemen) of verifiers:
 
-- did : wallets resolve the DID Document to validate the request object signature, All standards DID methods are supported through an external instance of the DID resolver managed by Talao.
-- x509_san_dns : wallets get the public key from the last X509 certificate to validate the request object signature. Wallets use the dNSName Subject Alternative Name (SAN) to request consent from user to present the VC.
-- verifier_attestation: wallets validate the signature of the request object with the public key in the cnf of the verifier attestation,
-- redirect_uri: there is no validation of the request as the request object must not be signed.
+* did : wallets resolve the DID Document to validate the request object signature, All standards DID methods are supported through an external instance of the DID resolver managed by Talao.
+* x509_san_dns : wallets get the public key from the last X509 certificate to validate the request object signature. Wallets use the dNSName Subject Alternative Name (SAN) to request consent from user to present the VC.
+* verifier_attestation: wallets validate the signature of the request object with the public key in the cnf of the verifier attestation,
+* redirect_uri: there is no validation of the request as the request object must not be signed.
 
 ## Wallet metadata
 
 Wallet metadata are available "out of band".
 
-- Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
-- Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
+* Talao: [https://app.talao.co/wallet-issuer/.well-known/openid-configuration](https://app.talao.co/wallet-issuer/.well-known/openid-configuration)
+* Altme: [https://app.altme.io/wallet-issuer/.well-known/openid-configuration](https://app.altme.io/wallet-issuer/.well-known/openid-configuration)
 
 ## VP format and VC format
 
 Wallet supports:
 
-- VC DM 1.1
-- ldp_vp as and envelop of ldp_vc
-- jwt_vp as an envelop of jwt_vc and/or ldp_vc
-- jwt_vp_json as an envelop of jwt_vc_json and/or ldp_vc
-- jwt_vp_json-ld as an envelop of jwt_vc_json-ld and/or ldp_vc
-- Multiple VC in VP
+* VC DM 1.1
+* ldp_vp as and envelop of ldp_vc
+* jwt_vp as an envelop of jwt_vc and/or ldp_vc
+* jwt_vp_json as an envelop of jwt_vc_json and/or ldp_vc
+* jwt_vp_json-ld as an envelop of jwt_vc_json-ld and/or ldp_vc
+* Multiple VC in VP
 
 Multiple sd-jwt presentation is not supported.
 
@@ -268,6 +270,7 @@ Example with 2 credentials:
       }
     },
     {
+
       "id": "verifiablediploma",
       "format": "jwt_vp",
       "path": "$",
@@ -287,9 +290,9 @@ The presentation is done in two steps which are the choice of the credential the
 
 The credential contains 3 types of data:
 
-- The standards jwt attributes as iss, iat, vct,...that are systematically presented and not displayed to the user during the process,
-- The “disclosable” claims that are displayed and selectable (except for `limit_disclosure = required`),
-- Other claims defined in the jwt are displayed to the user and not selectable
+* The standards jwt attributes as iss, iat, vct,...that are systematically presented and not displayed to the user during the process,
+* The “disclosable” claims that are displayed and selectable (except for `limit_disclosure = required`),
+* Other claims defined in the jwt are displayed to the user and not selectable
 
 For data minimization purpose, in case of a presentation_definition including the `limit_disclosure = required` option, user can only accept or refuse to present the verifiable credential. The data set of the VC is limited to what is strictly required by the verifier.
 
@@ -303,13 +306,13 @@ To be done
 
 Wallets have been tested through different project implementations and interoperability events with most of the APIs and libs providers of the market. See below compatibility list with the date of the last tests.
 
-- **Lissi** : OK on March 2025
-- **Procivis**: OK on March 2025
-- **Sphereon:** OK on Jan 2024
-- **WaltId**: OK on March 2025, see below details
-- **Meeco**: OK on Jan 2024
-- **SICPA**: OK on March 2025
-- **Netcetera**: OK on May 2024
+* **Lissi** : OK on March 2025
+* **Procivis**: OK on March 2025
+* **Sphereon:** OK on Jan 2024
+* **WaltId**: OK on March 2025, see below details
+* **Meeco**: OK on Jan 2024
+* **SICPA**: OK on March 2025
+* **Netcetera**: OK on May 2024
 
 ## Waltid integration
 
@@ -528,19 +531,20 @@ The presentation submission decoded is:
 
 ```json
 {
-  "id": "2fd5df17-10e7-43ff-ae6c-bac1e5c2aeec",
-  "definition_id": "60f32879-3aa3-11ef-9ddc-93d3876329c1",
-  "descriptor_map": [
-    {
-      "id": "Insurance_for_natural_person_1",
-      "format": "jwt_vp_json",
-      "path": "$",
-      "path_nested": {
-        "id": "Insurance_for_natural_person_1",
-        "format": "jwt_vc_json",
-        "path": "$.vp.verifiableCredential[0]"
-      }
-    }
-  ]
+    "id":"2fd5df17-10e7-43ff-ae6c-bac1e5c2aeec",
+    "definition_id":"60f32879-3aa3-11ef-9ddc-93d3876329c1",
+    "descriptor_map":[
+        {
+            "id":"Insurance_for_natural_person_1",
+            "format":"jwt_vp_json",
+            "path":"$",
+            "path_nested":{
+                "id":"Insurance_for_natural_person_1",
+                "format":"jwt_vc_json",
+                "path":"$.vp.verifiableCredential[0]"
+            }
+        }
+    ]
 }
+
 ```

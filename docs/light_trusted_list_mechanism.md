@@ -1,4 +1,4 @@
-# Light Trusted List Mechanism for Issuers, Verifiers and Wallets in Small and Medium-Sized Ecosystems
+# Light Trusted List Mechanism
 
 Updated the 17th of July 2025.
 
@@ -260,6 +260,6 @@ Considerations
 - CRL : Certificate Revocation List
 - KID : Key Identifier used in DIDs or JWT headers
 
-**Version** : 1.5
+**Version** : 1.6
 **Status** : Draft
 **Maintainer** : Altme Identity & Compliance Team

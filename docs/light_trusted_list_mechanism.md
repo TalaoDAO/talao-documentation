@@ -1,14 +1,48 @@
 # Light Trusted List Mechanism
 
-Updated the 17th of July 2025.
+Updated the 21st of July, 2025
+
+**Version** : 1.9
+**Status** : Draft
+**Maintainer** : Altme Identity & Compliance Team
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Objectives](#objectives)
+3. [Use Cases for the Trusted List](#use-cases-for-the-trusted-list)
+   3.1 [Relying Parties Verify Attestations Issuers Identities and Capabilities](#1-relying-parties-verify-attestation-issuers-identities-and-capabilities)
+   3.2 [Wallets Verify Relying Parties Identities and Capabilities](#2-wallets-verify-relying-parties-identities-and-capabilities)
+   3.3 [Wallets Verify Issuers Identities and Capabilities](#3-wallets-verify-issuers-identities-and-capabilities)
+   3.4 [Issuers or Relying Parties Verify Wallets Instance Attestations](#4-issuers-or-relying-parties-verify-wallets-instance-attestations)
+4. [Ecosystem Roles and Responsibilities](#ecosystem-roles-and-responsibilities)
+   4.1 [Ecosystem Authority](#ecosystem-authority)
+   4.2 [Issuers and Verifiers](#issuers-and-verifiers)
+   4.3 [Wallets](#wallets)
+5. [User Trust Management Strategy](#user-trust-management-strategy)
+6. [Certificate Chain Validation](#certificate-chain-validation)
+7. [Compatibility with Other Standards](#compatibility-with-other-standards)
+8. [Components](#components)
+   8.1 [Trusted List URL](#1-trusted-list-url)
+   8.2 [Trusted List API (JSON Format)](#2-trusted-list-api-json-format)
+   8.3 [Field Descriptions](#3-field-descriptions)
+9. [Backend Management Interface](#backend-management-interface)
+10. [Error Handling](#error-handling)
+11. [Security Recommendations](#security-recommendations)
+12. [Example Trusted List URL](#example-trusted-list-url)
+13. [Signature Validation of the Trusted List](#signature-validation-of-the-trusted-list)
+14. [Revocation Mechanism](#revocation-mechanism)
+15. [Security Threat Modeling (Extension)](#security-threat-modeling-extension)
+16. [Glossary and References](#glossary-and-references)
+
 
 ## Overview
 
 This specification defines a simple and light trusted list mechanism. The trusted list is based on **standard Public Key Infrastructure (PKI)** and **X.509 certificates issued by recognized Certificate Authorities (CAs) and/or  Decentralzed Identifiers (DIDs)**. The motivation behind this approach is to provide a **standards-based solution** to establish a **trusted ecosystem of issuers and verifiers** for small or medium sized **ecosystems estimated below 20/30 entities**. The approach explicitly takes into account the OIDC4VC protocol suite, supporting use cases such as issuance and verification of VCs.
 
-This version of the specification also introduces **capability support** within the trusted model (e.g., what types of credentials or actions are trusted per entity) and **restricts trust anchor methods** to **just two mechanisms** : X.509 certificates and DIDs with kid key identifiers. This simplifies validation logic and implementation in constrained environments.
+This version of the specification also introduces **capability support** within the trusted model (e.g., what types of credentials or actions are trusted per entity) and **restricts trust anchor methods** to **just two mechanisms** : X.509 certificates and DIDs. This simplifies validation logic and implementation in constrained environments.
 
-Unlike the ETSI TS 119 612 specification that defines complex XML-based trusted lists for qualified trust service providers (QTSPs), this specification offers a significantly **simpler and JSON-based alternative**. The goal is to enable **easier implementation, parsing, and maintenance** , especially suitable for ecosystems that do not require the full compliance and overhead of eIDAS-qualified services. Compared to approaches like the EBSI Trust Framework or OpenID Federation, this model avoids dynamic resolution or layered delegation by focusing on two static verification methods: X.509 certificates and DID key identifiers (kid). It offers capability-based trust while keeping implementation minimal and predictable.
+Unlike the ETSI TS 119 612 specification that defines complex XML-based trusted lists for qualified trust service providers (QTSPs), this specification offers a significantly **simpler and JSON-based alternative**. The goal is to enable **easier implementation, parsing, and maintenance** , especially suitable for ecosystems that do not require the full compliance and overhead of eIDAS-qualified services. Compared to approaches like the EBSI Trust Framework or OpenID Federation, this model avoids dynamic resolution or layered delegation by focusing on two static verification methods: X.509 certificates and DIDs. It offers capability-based trust while keeping implementation minimal and predictable.
 
 Each wallet, issuer or verifier must retrieve and regularly update a list of trusted parties. This trusted list is provided by an ecosystem API specified by the wallet provider for wallet instances initialization. Each ecosystem must implement a compliant API to expose its trusted participants.
 
@@ -24,23 +58,27 @@ This specification is particularly targeted at **small to medium-sized ecosystem
 
 ## Use Cases for the Trusted List
 
-Trusted list defined in this specification supports a range of identity-related use cases across relying parties (issuers), verifiers, and wallet providers:
+The trusted list defined in this specification supports a range of **identity-related use cases** across relying parties (issuers), verifiers, and wallet providers. It acts as the **root of trust** for validating certificates, signatures, and metadata used in OIDC4VP, SD-JWT, and related protocols.
 
-### 1. Relying Parties Verify Attestations Issuers Identities and Capablities
+### 1. Relying Parties Verify Attestation Issuers’ Identities and Capabilities
 
-Trusted X.509 root certificates in the list are used to validate issuers that embed their signing  certificate chains (e.g., x5c) in formats such as SD-JWT or thought DIDs in other JWT/LD-based credentials.
+Trusted **X.509 root certificates** in the list are used to validate issuers that embed their signing certificate chains (e.g., `x5c` headers) in credential formats such as **SD-JWT** or through **DIDs** in JWT/LD-based credentials.
+This ensures that any issued Verifiable Credential (VC) or SD-JWT can be traced back to a recognized and trusted issuer.
 
-### 2. Wallets Verify Relying Parties Identities and Capabilities
+### 2. Wallets Verify Relying Parties’ Identities and Capabilities
 
-During an OIDC4VP flow, wallets use the list to verify the trustworthiness of verifier signed JWT authorization requests, using the public roots in the trusted list.
+During an **OIDC4VP flow**, wallets use the trusted list to validate the **authenticity of verifier-signed authorization requests (JWTs)**.
+The verifier’s signing key (e.g., specified in `client_id=x509_san_dns:<domain>`) must chain back to one of the **trusted root certificates** in the list, ensuring the verifier is a legitimate and authorized relying party.
 
-### 3. Wallets Verify Issuers Identities and Capabilities
+### 3. Wallets Verify Issuers’ Identities and Capabilities
 
-Issuer metadata may be signed as a jwt by issuers. Wallets as consumers of such metadata can verify Issuers identities through these signatures using the trusted list.
+Issuer metadata (e.g., issuer configuration endpoints or credential schemas) may be **signed as JWTs** by issuers.
+Wallets, as consumers of such metadata, can verify the **issuer’s identity and integrity of metadata** using the **trusted list of X.509 roots**.
 
-### 4. Issuers or Relying Parties Verify Wallets Instance Attestations
+### 4. Issuers or Relying Parties Verify Wallet Instance Attestations
 
-Wallet providers can issue wallet instance attestations (e.g., capabilities, compliance status) that other parties can validate against the trusted list entries.
+Wallet providers may issue **wallet instance attestations** (e.g., supported features, compliance level, security certifications).
+Issuers and relying parties can validate these attestations against entries in the **trusted list**, ensuring that only **compliant and certified wallets** can participate in sensitive operations like credential issuance or stablecoin transactions.
 
 ## Ecosystem Roles and Responsibilities
 
@@ -64,11 +102,11 @@ Issuers and verifiers are responsible for:
 ### Wallets
 
 - Fetch the trusted list from the configured URL
-- Parse and validate the list and root certificates or DID kid
+- Parse and validate the list and root certificates or DIDs
 - Filter valid issuers/verifiers by supported vcTypes
 - Store a local copy with timestamp
 - Trigger a refresh if the list is older than 24 hours
-- Check and verify the trusted chain or DID key ID (kid)
+- Check and verify the trusted chain or resolve DIDs
 - Manage user information and consent
 
 ## User Trust Management Strategy
@@ -83,7 +121,7 @@ Examples include:
 
 ## Certificate Chain Validation
 
-Wallets and verifiers MUST perform standard X.509 path validation using the root certificates listed in the trusted list. Intermediate certificates (e.g., those included via x5c) must be validated up to a trusted root using established PKI rules. If X.509 certificates are not used, wallets MAY use DID-based key identifiers (kid) for validation.
+Wallets and verifiers MUST perform standard X.509 path validation using the root certificates listed in the trusted list. Intermediate certificates (e.g., those included via x5c) must be validated up to a trusted root using established PKI rules. If X.509 certificates are not used, wallets MAY use DID-based key for validation.
 
 ## Compatibility with Other Standards
 
@@ -106,14 +144,14 @@ Each ecosystem must implement an HTTP(S) endpoint returning the following JSON s
 ```json
 
 {
-    "schemaVersion": "1.0",
     "ecosystem": "eu-wallet-network",
     "lastUpdated": "2025-07-15T12:00:00Z",
     "entities": [
         {
             "id": "https://example.com/issuer1",
             "name": "GovID Issuer A",
-            "description": "Issuer fr testing purpose",
+            "description": "Issuer for testing purpose",
+            "endpoint": "https://example.com/issuer1",
             "type": "issuer",
             "postalAddress": {
                 "streetAddress": "Piazzale Flaminio 1B",
@@ -124,16 +162,38 @@ Each ecosystem must implement an HTTP(S) endpoint returning the following JSON s
             "rootCertificates": [
                 "MIIB..."
             ],
-            "kids": [
-                "did:example:123#keys-1",
+            "electronicAddress": {
+                "uri": "mailto:leone.riello@infocert.it",
+                "lang": "en"
+            },
+            "vcTypes": [
+                "Pid",
+                "EmailPass"
+            ]
+        },
+        {
+            "id": "did:web:talao.co:example",
+            "name": "Talao Issuer",
+            "description": "Issuer for testing purpose",
+            "endpoint": "https://example.com/issuer2",
+            "type": "issuer",
+            "postalAddress": {
+                "streetAddress": "Piazzale Flaminio 1B",
+                "locality": "Rome",
+                "postalCode": "00196",
+                "countryName": "Italy"
+            },
+            "rootCertificates": [
+                "MIIB..."
             ],
             "electronicAddress": {
                 "uri": "mailto:leone.riello@infocert.it",
                 "lang": "en"
             },
             "vcTypes": [
-                "PersonIdentityCredential",
+                "Pid",
                 "AMLStatusCredential"
+                "EmailPass"
             ]
         },
         {
@@ -150,11 +210,8 @@ Each ecosystem must implement an HTTP(S) endpoint returning the following JSON s
             "rootCertificates": [
                 "MIIC..."
             ],
-            "kids": [
-                "did:example:456#keys-2"
-            ],
             "vcTypes": [
-                "PersonIdentityCredential"
+                "Pid"
             ]
         },
         {
@@ -162,19 +219,9 @@ Each ecosystem must implement an HTTP(S) endpoint returning the following JSON s
             "name": "Altme Wallet Provider",
             "description": "Wallet provider for Talao and Altme",
             "type": "wallet-provider",
-            "postalAddress": {
-                "streetAddress": "Piazzale Flaminio 1B",
-                "locality": "Rome",
-                "postalCode": "00196",
-                "countryName": "Italy"
-            },
             "rootCertificates": [
                 "MIID..."
-            ],
-            "kids": [            
-                "did:example:789#keys-3"
-            ],
-            "vcTypes": []
+            ]
         }
     ]
 }
@@ -182,30 +229,22 @@ Each ecosystem must implement an HTTP(S) endpoint returning the following JSON s
 
 ### 3. Field Descriptions
 
-Some fields in each entity are optional, depending on the trust method used:
-
-- If `id` is a DID, then the `kids` field is **mandatory**.
-- If `rootCertificates` are not present, validation relies solely on the provided kid.
-- Either `rootCertificates` or `kids` must be present, but both can coexist.
-
-The `electronicAddress` provides a URI (e.g., email or HTTPS address) and an optionallanguage tag.
-
-- `ecosystem` : Unique identifier for the issuing ecosystem or trust domain
-- `lastUpdated` : ISO timestamp for the last update
-- `entities` : Array of trusted issuers or verifiers
-- `id` : URI identifying the organization or its DID URL. In case of a verifier this is the `client_id` of the OIDC4VP authorization request.
-- `name` : Human-readable name of the entity
-- `description`: Description of the service offered
-- `type` : `issuer`, `verifier`, or `wallet-provider`
-- `postalAddress` : json object. The postalAddress field supports structured location data for better alignment with eIDAS ETSI TS 119 612. It includes:
-
-  - `streetAddress` : Street and civic number
-  - `locality` : City or town
-  - `postalCod`e : Zip/postal code
-  - `countryName` : Country of the entit
-- `rootCertificates` : Array of PEM-formatted X.509 root certificates (if applicable)
-- `kids` : Array of key identifiers (e.g., from DID document or thumbprint of a jwk) as alternative trust mechanism
-- `vcTypes` : Array of credential types (e.g., PersonIdentityCredential,AMLStatusCredential)
+- `ecosystem` : REQUIRED. Unique identifier for the issuing ecosystem or trust domain
+- `lastUpdated` : REQUIRED. ISO timestamp for the last update
+- `entities` : REQUIRED. Array of a json object defining an issuer, a verifier or a wallet-provider.
+  - `id` : REQUIRED. URI identifying the organization (URL or DID). It could be the `iss` of an sd-jwt, the subject of an x509 certificate or the `issuer` of a W3C VC. In case of a verifier this is the `client_id` of the OIDC4VP authorization request.
+  - `name` : Human-readable name of the entity
+  - `description`: Description of the service offered,
+  - `endpoint`: For an issuer it is the credential issuer URL. For a verifier this is where the wallet (holder) is redirected to start the presentation flow.
+  - `type` : REQUIRED.`issuer`, `verifier`, or `wallet-provider`
+  - `postalAddress` : json object. The postalAddress field supports structured location data for better alignment with eIDAS ETSI TS 119 612. It includes:
+    - `streetAddress` : Street and civic number
+    - `locality` : City or town
+    - `postalCod`e : Zip/postal code
+    - `countryName` : Country of the entity
+  - `electronicAddress` provides a URI (e.g., email or HTTPS address) and an optionallanguage tag.
+  - `rootCertificates` : REQUIRED if `id` is not a DID. Array of PEM-formatted X.509 root certificates
+  - `vcTypes` : REQUIRED for issuers and verifiers. Array of credential types supported or allowed to request(e.g., PersonIdentityCredential,AMLStatusCredential)
 
 ## Backend Management Interface
 
@@ -250,6 +289,42 @@ Considerations
 - Wallets must refresh the trusted list at least once every 24 hours
 - A local cache should be maintained for resilience in offline or degraded network scenarios
 
+
+
+## Security Threat Modeling (Extension)
+
+This section outlines potential threats to the trusted list mechanism, their impact, and possible mitigations. Some of these recommendations extend beyond the current scope of this specification but are valuable for future-proofing the ecosystem.
+
+### 1. Threats Against Trusted List Integrity
+
+- **Tampering with the Trusted List**  
+  *Threat:* An attacker could modify the list during transit or at rest, injecting unauthorized entities.  
+  *Mitigation:*  
+  - Sign the trusted list with a **JWS (JSON Web Signature)** or CMS signature.  
+  - Distribute only over **TLS 1.3** with strict server authentication (e.g., certificate pinning).
+
+- **Fake Trusted List (Endpoint Impersonation)**  
+  *Threat:* A malicious endpoint could serve a fake trusted list.  
+  *Mitigation:*  
+  - Use **DNSSEC** and **HTTPS with CA-pinned certificates**.  
+  - Hardcode the root signing key fingerprints in wallets.
+
+
+### 2. Threats Against Authenticity and Authorization
+
+- **Malicious Entity Insertion**  
+  *Threat:* A compromised backend might add fake issuers or merchants to the list.  
+  *Mitigation:*  
+  - Require **multi-signature approvals** for list updates.  
+  - Use a **public transparency log** (e.g., Merkle-tree-based, like Certificate Transparency).
+
+- **Key Compromise of Authority**  
+  *Threat:* If the ecosystem authority’s root signing key is compromised, the entire trust model collapses.  
+  *Mitigation:*  
+  - Use **Hardware Security Modules (HSMs)** to store signing keys.  
+  - Implement **key rotation** and backup secondary signing keys.
+
+
 ## Glossary and References
 
 - VC : Verifiable Credential
@@ -259,7 +334,3 @@ Considerations
 - PKI : Public Key Infrastructure
 - CRL : Certificate Revocation List
 - KID : Key Identifier used in DIDs or JWT headers
-
-**Version** : 1.6
-**Status** : Draft
-**Maintainer** : Altme Identity & Compliance Team

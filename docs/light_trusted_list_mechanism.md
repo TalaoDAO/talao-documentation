@@ -1,10 +1,11 @@
 # Light Trusted List Mechanism
 
-Updated the 21st of July, 2025
+Updated the 23rd of July, 2025
 
-**Version** : 1.9
-**Status** : Draft
-**Maintainer** : Altme Identity & Compliance Team
+- **Version** : 1.11
+- **date** : 23rd July 2025
+- **Status** : Draft
+- **Maintainer** : Altme Identity & Compliance Team
 
 ## Table of Contents
 
@@ -35,7 +36,6 @@ Updated the 21st of July, 2025
 15. [Security Threat Modeling (Extension)](#security-threat-modeling-extension)
 16. [Glossary and References](#glossary-and-references)
 
-
 ## Overview
 
 This specification defines a simple and light trusted list mechanism. The trusted list is based on **standard Public Key Infrastructure (PKI)** and **X.509 certificates issued by recognized Certificate Authorities (CAs) and/or  Decentralzed Identifiers (DIDs)**. The motivation behind this approach is to provide a **standards-based solution** to establish a **trusted ecosystem of issuers and verifiers** for small or medium sized **ecosystems estimated below 20/30 entities**. The approach explicitly takes into account the OIDC4VC protocol suite, supporting use cases such as issuance and verification of VCs.
@@ -62,23 +62,114 @@ The trusted list defined in this specification supports a range of **identity-re
 
 ### 1. Relying Parties Verify Attestation Issuers’ Identities and Capabilities
 
-Trusted **X.509 root certificates** in the list are used to validate issuers that embed their signing certificate chains (e.g., `x5c` headers) in credential formats such as **SD-JWT** or through **DIDs** in JWT/LD-based credentials.
-This ensures that any issued Verifiable Credential (VC) or SD-JWT can be traced back to a recognized and trusted issuer.
+Relying parties (e.g., merchants, service providers, or verifiers) must ensure that any **Verifiable Credential (VC)** or **SD-JWT** they receive is issued by a **recognized and trusted authority**. This validation is performed using the **trusted list** of root certificates and metadata, which provides the foundation for verifying issuer authenticity and capabilities.
+
+- **Use of X.509 Root Certificates**The trusted list contains **X.509 root certificates** that serve as the anchors of trust.When an issuer embeds its signing certificate chain (e.g., using an `x5c` header in JWTs or JWS), the relying party:
+
+  1. Extracts the certificate chain from the credential.
+  2. Validates the chain back to one of the trusted root certificates.
+  3. Ensures the certificate has not been revoked and complies with the trust policy.
+- **Support for DIDs (Decentralized Identifiers)**Some issuers use **DIDs** instead of or alongside traditional certificates (e.g., in JWT- or LD-based credentials).In such cases, the relying party checks:
+
+  - That the DID method is supported (e.g., `did:web`, `did:ebsi`, or `did:jwk`).
+  - That the DID document or verification key is signed or anchored to a trusted root or registry.
+- **Capability Validation**Beyond verifying the identity of the issuer, the relying party must confirm that the issuer is **authorized to issue specific credential types**.For example:
+
+  - A government agency listed in the trusted list may be authorized to issue **PID (Personal Identity Documents)** or **eIDAS credentials**.
+  - A financial services provider may only be authorized for **AML/KYC status attestations**.
+- **Credential Traceability**
+  By validating the full certificate chain and ensuring it maps to an entry in the trusted list, the relying party can **trace any credential back to its source issuer**.
+  This prevents the acceptance of credentials from unverified or rogue issuers.
+
+**Example Flow:**
+
+1. A merchant receives a user’s **identity SD-JWT VC** during a payment authorization.
+2. The merchant extracts the `x5c` chain from the VC header.
+3. The merchant checks that:
+   - The chain validates to a root CA in the trusted list.
+   - The issuer of the VC is authorized to issue **identity attributes**.
+4. If all checks pass, the merchant accepts the credential as **trustworthy**.
 
 ### 2. Wallets Verify Relying Parties’ Identities and Capabilities
 
-During an **OIDC4VP flow**, wallets use the trusted list to validate the **authenticity of verifier-signed authorization requests (JWTs)**.
-The verifier’s signing key (e.g., specified in `client_id=x509_san_dns:<domain>`) must chain back to one of the **trusted root certificates** in the list, ensuring the verifier is a legitimate and authorized relying party.
+During an **OIDC4VP flow**, wallets must ensure that the relying party (merchant, verifier, or service provider) requesting a presentation is **legitimate and authorized**. This involves several verification steps:
+
+- **JWT Signature Validation**The `authorization_request` is typically a signed JWT. The wallet validates:
+
+  - The **signature** using the `client_id` (e.g., `client_id=x509_san_dns:<domain>`) to extract the relying party’s certificate chain.
+  - That the signing certificate **chains back to one of the trusted root CAs** listed in the trusted list.
+- **Capability Check**The wallet checks the **capabilities** of the relying party as listed in the trusted list:
+
+  - Whether the verifier is authorized to request specific Verifiable Credential types (e.g., PID, AMLStatusCredential).
+  - Whether the relying party is flagged for **specific regulatory roles**, such as AML-compliant KYC verifiers.
+- **Domain Matching**
+  When `x509_san_dns` is used as the client identifier, the wallet ensures that the **Subject Alternative Name (SAN)** in the certificate matches the expected domain (e.g., `merchant.example.com`).
+
+**Example Flow:**
+
+1. The wallet fetches and parses the trusted list.
+2. On receiving an authorization request, the wallet extracts the certificate (`x5c` header).
+3. The wallet verifies the certificate chain and cross-references the entity in the trusted list to confirm:
+   - **Identity:** Valid x.509 root or DID.
+   - **Capabilities:** Authorization to request the required VC types.
 
 ### 3. Wallets Verify Issuers’ Identities and Capabilities
 
-Issuer metadata (e.g., issuer configuration endpoints or credential schemas) may be **signed as JWTs** by issuers.
-Wallets, as consumers of such metadata, can verify the **issuer’s identity and integrity of metadata** using the **trusted list of X.509 roots**.
+Wallets also validate **issuers of Verifiable Credentials (VCs)** or **SD-JWT VCs** to ensure that the data presented to users originates from recognized and trusted authorities. This process involves:
+
+- **Issuer Metadata Validation**Issuers may sign their metadata (e.g., OpenID configuration or credential schema) as JWTs. Wallets:
+
+  - Validate the **JWT signature** using the issuer’s certificate or DID.
+  - Confirm that the certificate **chains to a trusted root** listed in the trusted list.
+- **Credential Type Verification**The wallet ensures that the issuer is explicitly trusted for the credential type being presented.For example:
+
+  - A government authority listed in the trusted list can issue a **PID (Personal Identity Credential)**.
+  - A regulated KYC provider can issue an **AMLStatusCredential**.
+- **Issuer Endpoint Cross-Check**
+  The `issuer` field or endpoint in the credential is compared to entries in the trusted list to verify it matches the **registered URL or DID**.
+- **Data Integrity and Binding**For SD-JWT VCs:
+
+  - The wallet validates that all selective disclosure hashes align with the issuer’s signature.
+  - The chain of trust (issuer → root CA) is intact and matches the trusted list.
+
+**Example Use Case:**
+When a user imports a VC issued by "GovID Issuer A", the wallet:
+
+1. Fetches the issuer’s `x5c` or DID from the credential.
+2. Validates it against the trusted list (e.g., `https://example.com/issuer1`).
+3. Confirms that "GovID Issuer A" is permitted to issue a `Pid` VC type.
 
 ### 4. Issuers or Relying Parties Verify Wallet Instance Attestations
 
-Wallet providers may issue **wallet instance attestations** (e.g., supported features, compliance level, security certifications).
-Issuers and relying parties can validate these attestations against entries in the **trusted list**, ensuring that only **compliant and certified wallets** can participate in sensitive operations like credential issuance or stablecoin transactions.
+To maintain the integrity and security of the ecosystem, **issuers** (e.g., identity authorities or financial institutions) and **relying parties** (e.g., merchants, service providers) must ensure that only **certified and trusted wallets** are allowed to participate in sensitive processes like **credential issuance**, **user authentication**, or **stablecoin transactions**.
+
+- **Wallet Instance Attestations**Wallet providers may issue **attestation** describing:
+
+  - **Supported features** – e.g., OIDC4VP compatibility, SD-JWT selective disclosure support.
+  - **Compliance levels** – e.g., adherence to **EUDI Wallet** standards or MiCA/TFR requirements.
+  - **Security certifications** – e.g., wallet storage being protected by **secure hardware (HSMs, Trusted Execution Environments)** or audits against ISO 27001.
+- **Trusted List Validation**Issuers and relying parties verify that:
+
+  1. The wallet instance is listed in the **trusted list** maintained by the ecosystem.
+  2. The attestation’s signature or `x5c` certificate chain is **valid and traceable** to a trusted root.
+  3. The wallet’s **declared capabilities** match the **requirements for the requested operation** (e.g., ability to sign Key Binding JWTs for stablecoin transactions).
+- **Capability-Based Access Control**Wallet attestations allow issuers and verifiers to enforce **access policies**:
+
+  - A wallet without KYC/AML certification cannot initiate a regulated stablecoin transfer.
+  - A wallet that does not support selective disclosure may be blocked from presenting sensitive attributes.
+- **Example Flow:**
+
+  1. A merchant requests a stablecoin payment with KYC requirements.
+  2. The wallet provides a **wallet attestation**, signed by the wallet provider, listing its **compliance status and technical capabilities**.
+  3. The merchant validates the attestation against the trusted list to ensure the wallet:
+     - Is **certified** by an approved wallet provider.
+     - Meets **security and regulatory standards**.
+  4. If valid, the wallet is allowed to complete the **OIDC4VP flow** and perform the payment transaction.
+- **Benefits:**
+
+  - Protects against **rogue or uncertified wallets** attempting to bypass compliance.
+  - Ensures that all participants (wallets, issuers, merchants) adhere to **ecosystem security and privacy requirements**.
+  - Facilitates interoperability by providing **machine-readable wallet certifications**.
 
 ## Ecosystem Roles and Responsibilities
 
@@ -289,41 +380,31 @@ Considerations
 - Wallets must refresh the trusted list at least once every 24 hours
 - A local cache should be maintained for resilience in offline or degraded network scenarios
 
-
-
-## Security Threat Modeling (Extension)
+## Security Threat Modeling
 
 This section outlines potential threats to the trusted list mechanism, their impact, and possible mitigations. Some of these recommendations extend beyond the current scope of this specification but are valuable for future-proofing the ecosystem.
 
 ### 1. Threats Against Trusted List Integrity
 
-- **Tampering with the Trusted List**  
-  *Threat:* An attacker could modify the list during transit or at rest, injecting unauthorized entities.  
-  *Mitigation:*  
-  - Sign the trusted list with a **JWS (JSON Web Signature)** or CMS signature.  
+- **Tampering with the Trusted List***Threat:* An attacker could modify the list during transit or at rest, injecting unauthorized entities.*Mitigation:*
+
+  - Sign the trusted list with a **JWS (JSON Web Signature)** or CMS signature.
   - Distribute only over **TLS 1.3** with strict server authentication (e.g., certificate pinning).
+- **Fake Trusted List (Endpoint Impersonation)***Threat:* A malicious endpoint could serve a fake trusted list.*Mitigation:*
 
-- **Fake Trusted List (Endpoint Impersonation)**  
-  *Threat:* A malicious endpoint could serve a fake trusted list.  
-  *Mitigation:*  
-  - Use **DNSSEC** and **HTTPS with CA-pinned certificates**.  
+  - Use **DNSSEC** and **HTTPS with CA-pinned certificates**.
   - Hardcode the root signing key fingerprints in wallets.
-
 
 ### 2. Threats Against Authenticity and Authorization
 
-- **Malicious Entity Insertion**  
-  *Threat:* A compromised backend might add fake issuers or merchants to the list.  
-  *Mitigation:*  
-  - Require **multi-signature approvals** for list updates.  
+- **Malicious Entity Insertion***Threat:* A compromised backend might add fake issuers or merchants to the list.*Mitigation:*
+
+  - Require **multi-signature approvals** for list updates.
   - Use a **public transparency log** (e.g., Merkle-tree-based, like Certificate Transparency).
+- **Key Compromise of Authority***Threat:* If the ecosystem authority’s root signing key is compromised, the entire trust model collapses.*Mitigation:*
 
-- **Key Compromise of Authority**  
-  *Threat:* If the ecosystem authority’s root signing key is compromised, the entire trust model collapses.  
-  *Mitigation:*  
-  - Use **Hardware Security Modules (HSMs)** to store signing keys.  
+  - Use **Hardware Security Modules (HSMs)** to store signing keys.
   - Implement **key rotation** and backup secondary signing keys.
-
 
 ## Glossary and References
 

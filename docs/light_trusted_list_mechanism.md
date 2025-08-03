@@ -489,7 +489,7 @@ There are **multiple ways** to retrieve the trusted list associated with a DID o
 
 If you already know the `resourceURI`—for instance, from prior registration, metadata, or a signed reference in a Verifiable Credential (VC)—you can retrieve the corresponding Trusted List resource from a DID on the cheqd network using a resolver:
 
-[https://resolver.cheqd.net/1.0/identifiers/did:cheqd:testnet:6c905d9a-7e54-48cc-bee2-c093d621d24e/resources/9d996363-9a7f-48b2-85b3-0bea01c32615]()
+[https://resolver.cheqd.net/1.0/identifiers/did:cheqd:testnet:6c905d9a-7e54-48cc-bee2-c093d621d24e/resources/9d996363-9a7f-48b2-85b3-0bea01c32615](https://resolver.cheqd.net/1.0/identifiers/did:cheqd:testnet:6c905d9a-7e54-48cc-bee2-c093d621d24e/resources/9d996363-9a7f-48b2-85b3-0bea01c32615)
 
 This method is simple and ideal for static or well-known resource references.
 
@@ -497,7 +497,7 @@ This method is simple and ideal for static or well-known resource references.
 
 For instance if you don’t know the resource ID but want to retrieve **all resources of a given type** (e.g. `TrustRegistry`), you can query a DID with a `resourceType` parameter, as defined in [ADR-005](https://docs.cheqd.io/product/architecture/adr-list/adr-005-did-resolution-and-did-url-dereferencing):
 
-[https://resolver.cheqd.net/1.0/identifiers/did:cheqd:testnet:did-uuid?resourceType=TrustRegistry]()
+[https://resolver.cheqd.net/1.0/identifiers/did:cheqd:testnet:did-uuid?resourceType=TrustRegistry](https://resolver.cheqd.net/1.0/identifiers/did:cheqd:testnet:did-uuid?resourceType=TrustRegistry)
 
 This is useful when:
 

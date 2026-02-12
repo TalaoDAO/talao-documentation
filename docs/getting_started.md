@@ -1,6 +1,6 @@
 # Getting Started
 
-Updated the 12th of February 2026.
+Updated the 26th of October 2024.
 
 Download the Talao or Altme wallet from the Apple store or Google Play Store.
 

@@ -1,6 +1,6 @@
 # Wallet profiles
 
-Updated the 12th of December 2024.
+Updated the 13th of Februaary 2025.
 
 Users can access to wallet profiles through Settings/Wallet Profiles. This feature feature can be hidden in case of a specific wallet configuration through the Wallet Provider Backend.
 
@@ -11,13 +11,14 @@ Talao and Altme wallets can be directly downloaded from the Google or Apple stor
 As any smartphone app users can download either Altme or Talao wallet for their Apple smartphone or Android device. In this case users can only access the predefined embedded configurations. Right now there are 5 predefined configuration named "Profiles" and one named "Custom" to allow manual settings. Below the main features of the 4 embedded profiles of the wallet:
 
 
-| Profiles  | VC format                                      | OIDC4VCI | OIDC4VP | key                   | DID                            | Embedded issuer links                                                  |
-| :---------- | ------------------------------------------------ | ---------- | --------- | ----------------------- | -------------------------------- | ------------------------------------------------------------------------ |
-| Default   | ldp_vc, jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt | 13       | 20      | EdDSA                 | did:key                        | VerifiableId (ldp_vc), EmailPass (ldp_vc), PhoneProof, Over18 (ldp_vc) |
-| EBSI V3.x | jwt_vc                                         | 11       | 18      | P-256                 | did:key(EBSI)                  | IndividualVerifiableAttestation(jwt_vc)                                |
-| EBSI V4.0 | ldp_vc, jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt | 13       | 20      | P-256                 | did:key(EBSI)                  | VerifiableId (jwt_vc_json)                                             |
-| DIIP V3.0 | jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt         | 13       | 20      | P-256                 | did:jwk                        | Personal ID (vc+sd-jwt), Emailpass (vc+sd-jwt), Over18 (vc+sd-jwt)     |
-| Custom    | Any                                            | 11/13    | 20      | EdDSA/P-256/seckp256k | did:key/did:jwk/JWK thumbprint | None                                                                   |
+| Profiles      | VC format                                       | OIDC4VCI | OIDC4VP | key                          | DID                            | Embedded issuer links                                                  |
+| :-------------- | ------------------------------------------------- | ---------- | --------- | ------------------------------ | -------------------------------- | ------------------------------------------------------------------------ |
+| Default       | ldp_vc, jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt  | 13       | 20      | EdDSA                        | did:key                        | VerifiableId (ldp_vc), EmailPass (ldp_vc), PhoneProof, Over18 (ldp_vc) |
+| EBSI V3.x     | jwt_vc                                          | 11       | 18      | P-256                        | did:key(EBSI)                  | IndividualVerifiableAttestation(jwt_vc)                                |
+| DIIP V4.0     | json-ld, jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt | 13       | 20      | P-256                        | did:jwk                        | Personal ID (vc+sd-jwt), Emailpass (vc+sd-jwt), Over18 (vc+sd-jwt)     |
+| DIIP V3.0     | jwt_vc_json, jwt_vc_json-ld, vc+sd-jwt          | 13       | 20      | P-256                        | did:jwk                        | Personal ID (vc+sd-jwt), Emailpass (vc+sd-jwt), Over18 (vc+sd-jwt)     |
+| Inji by MOSIP | Any                                             | 13       | 20      | P-256, EdDSA/P-256/seckp256k | did:key/did:jwk                | University Card (fake issuer)                                          |
+| Custom        | Any                                             | 11/13    | 20      | EdDSA/P-256/seckp256k        | did:key/did:jwk/JWK thumbprint | None                                                                   |
 
 Advanced users can switch between the different profiles and even create their own custom profile. The wallets propose a lots of technical options for advanced users and developers.
 

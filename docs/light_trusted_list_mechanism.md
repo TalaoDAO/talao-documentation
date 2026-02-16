@@ -1,6 +1,6 @@
 # Light Trusted List Mechanism
 
-Updated the 21nd of August, 2025
+Updated the 13th of February, 2026
 
 ## Table of Contents
 

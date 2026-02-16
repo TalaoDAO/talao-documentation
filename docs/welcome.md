@@ -1,6 +1,6 @@
 # Welcome
 
-Updated the 1st of April 2025.
+Updated the 13th of February 2026.
 
 Here you will find the documentation concerning the use and integration of the Talao and Altme wallets. You will also find information concerning the use of the Wallet Provider Backend associated with these wallets.
 

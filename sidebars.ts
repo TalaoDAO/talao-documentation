@@ -56,7 +56,8 @@ const sidebars: SidebarsConfig = {
     },
     'vc_type',
     'light_trusted_list_mechanism',
-    'api'
+    'api',
+    'tezos4eudiw'
   ],
 };
 
